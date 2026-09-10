@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>SPARK QR Generator</title>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 30px 15px;
+      background: #0A0A0A;
+      color: #F7F4EB;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .subtitle {
+      color: #999;
+      margin-bottom: 35px;
+    }
+
+    .tracks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    .qr {
+      background: white;
+      padding: 10px;
+      width: fit-content;
+      margin: auto;
+    }
+
+    .final-section {
+      margin: 60px auto 30px;
+      max-width: 1000px;
+      border-top: 1px solid #333;
+      padding-top: 40px;
+    }
+
+    #finalQR {
+      background: white;
+      padding: 20px;
+      width: fit-content;
+      margin: 25px auto;
+    }
+
+    .pieces {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+
+    .piece {
+      background: white;
+      padding: 3px;
+    }
+
+    .piece img {
+      width: 100%;
+      display: block;
+    }
+
+    .note {
+      color: #7BE8F6;
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      .note {
+        color: black;
+      }
+
+      .final-section {
+        page-break-before: always;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>SPARK QR GENERATOR</h1>
+
+  <div class="subtitle">
+    8 TRACKS — 8 INDEPENDENT QR CODES
+  </div>
+
+  <div class="tracks" id="tracks"></div>
+
+  <div class="final-section">
+
+    <h1>FINAL QR</h1>
+
+    <div class="subtitle">
+      This QR opens the final reveal.
+    </div>
+
+    <div id="finalQR"></div>
+
+    <div class="note">
+      The QR above is divided into 8 real pieces below.<br>
+      Assemble all 8 pieces in a 4 × 2 grid to scan it.
+    </div>
+
+    <div class="pieces" id="pieces"></div>
+
+  </div>
+
+  <script>
+
+    const BASE =
+      "https://mazenelshebly.github.io/spark-community/";
+
+    const tracks = [
+      {
+        name: "WEB DEVELOPMENT",
+        file: "web.html"
+      },
+      {
+        name: "DATA ANALYSIS",
+        file: "data.html"
+      },
+      {
+        name: "CYBER SECURITY",
+        file: "cyber.html"
+      },
+      {
+        name: "BIOINFORMATICS",
+        file: "bioinformatics.html"
+      },
+      {
+        name: "MARKETING",
+        file: "marketing.html"
+      },
+      {
+        name: "HR",
+        file: "hr.html"
+      },
+      {
+        name: "LOGISTICS",
+        file: "logistics.html"
+      },
+      {
+        name: "GENERAL SKILLS",
+        file: "general-skills.html"
+      }
+    ];
+
+    const tracksContainer =
+      document.getElementById("tracks");
+
+    tracks.forEach(track => {
+
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const title = document.createElement("h2");
+      title.textContent = track.name;
+
+      const qr = document.createElement("div");
+      qr.className = "qr";
+
+      card.appendChild(title);
+      card.appendChild(qr);
+
+      tracksContainer.appendChild(card);
+
+      new QRCode(qr, {
+        text: BASE + track.file,
+        width: 180,
+        height: 180,
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+    });
+
+
+    /*
+      FINAL QR
+    */
+
+    const finalURL =
+      BASE + "final-reveal.html";
+
+    const finalQR =
+      document.getElementById("finalQR");
+
+    new QRCode(finalQR, {
+      text: finalURL,
+      width: 800,
+      height: 800,
+      correctLevel: QRCode.CorrectLevel.H
+    });
+
+
+    /*
+      Split FINAL QR into 8 real pieces
+      4 columns × 2 rows
+    */
+
+    setTimeout(() => {
+
+      const sourceCanvas =
+        finalQR.querySelector("canvas");
+
+      if (!sourceCanvas) {
+        alert("Final QR could not be generated.");
+        return;
+      }
+
+      const piecesContainer =
+        document.getElementById("pieces");
+
+      const width = sourceCanvas.width;
+      const height = sourceCanvas.height;
+
+      const pieceWidth = width / 4;
+      const pieceHeight = height / 2;
+
+      for (let row = 0; row < 2; row++) {
+
+        for (let col = 0; col < 4; col++) {
+
+          const canvas =
+            document.createElement("canvas");
+
+          canvas.width = pieceWidth;
+          canvas.height = pieceHeight;
+
+          const ctx = canvas.getContext("2d");
+
+          ctx.drawImage(
+            sourceCanvas,
+
+            col * pieceWidth,
+            row * pieceHeight,
+            pieceWidth,
+            pieceHeight,
+
+            0,
+            0,
+            pieceWidth,
+            pieceHeight
+          );
+
+          const wrapper =
+            document.createElement("div");
+
+          wrapper.className = "piece";
+
+          const img =
+            document.createElement("img");
+
+          img.src = canvas.toDataURL("image/png");
+
+          wrapper.appendChild(img);
+
+          piecesContainer.appendChild(wrapper);
+        }
+      }
+
+    }, 1000);
+
+  </script>
+
+</body>
+</html>
