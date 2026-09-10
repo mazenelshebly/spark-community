@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>BIOINFORMATICS | SPARK</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: #0A0A0A;
+      color: #F7F4EB;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .track {
+      color: #7BE8F6;
+      font-size: 13px;
+      letter-spacing: 4px;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: clamp(35px, 8vw, 65px);
+      margin-bottom: 20px;
+    }
+
+    .question {
+      color: #aaa;
+      font-size: 18px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .options {
+      display: grid;
+      gap: 12px;
+    }
+
+    button {
+      width: 100%;
+      padding: 18px;
+      background: #111;
+      color: #F7F4EB;
+      border: 1px solid #333;
+      border-radius: 8px;
+      font-size: 17px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      border-color: #7BE8F6;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .correct {
+      color: #7BE8F6;
+    }
+
+    .wrong {
+      color: #FF5A2A;
+    }
+
+    .clue {
+      margin-top: 15px;
+      font-size: 30px;
+      font-weight: bold;
+      color: #FF5A2A;
+      letter-spacing: 3px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <div class="track">TRACK 04 / BIOINFORMATICS</div>
+
+    <h1>READ THE CODE</h1>
+
+    <div class="question">
+      Which four bases are found in DNA?
+    </div>
+
+    <div class="options">
+
+      <button onclick="checkAnswer(this, true)">
+        A, T, G, C
+      </button>
+
+      <button onclick="checkAnswer(this, false)">
+        A, U, G, C
+      </button>
+
+      <button onclick="checkAnswer(this, false)">
+        A, T, U, C
+      </button>
+
+      <button onclick="checkAnswer(this, false)">
+        G, U, C, T
+      </button>
+
+    </div>
+
+    <div id="result"></div>
+
+  </div>
+
+  <script>
+    function checkAnswer(button, correct) {
+
+      const result = document.getElementById("result");
+
+      if (correct) {
+
+        result.innerHTML = `
+          <div class="correct">CORRECT.</div>
+          <div>YOUR CLUE IS:</div>
+          <div class="clue">BUILT</div>
+        `;
+
+        document.querySelectorAll("button").forEach(btn => {
+          btn.disabled = true;
+        });
+
+      } else {
+
+        result.innerHTML = `
+          <div class="wrong">NOT THIS ONE.</div>
+          <div>TRY AGAIN.</div>
+        `;
+
+      }
+    }
+  </script>
+
+</body>
+</html>
