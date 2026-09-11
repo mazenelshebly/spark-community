@@ -28,7 +28,7 @@ body{
 
 header{
   text-align:center;
-  margin-bottom:8mm;
+  margin-bottom:7mm;
 }
 
 h1{
@@ -38,103 +38,107 @@ h1{
 }
 
 .subtitle{
-  margin-top:8px;
+  margin-top:7px;
   color:#9BAEC2;
-  font-size:13px;
+  font-size:12px;
 }
 
 .board{
   display:grid;
   grid-template-columns:repeat(2,1fr);
-  gap:7mm;
+  gap:6mm;
 }
 
 .card{
   background:#081525;
   border:1px solid rgba(141,219,255,.16);
-  border-radius:14px;
-  padding:7mm;
-  min-height:82mm;
+  border-radius:12px;
+  padding:5mm;
+  min-height:78mm;
   display:flex;
   flex-direction:column;
   align-items:center;
-  justify-content:flex-start;
   text-align:center;
 }
 
 .track-number{
   color:#55B7FF;
-  font-size:11px;
+  font-size:10px;
   font-weight:bold;
   letter-spacing:2px;
 }
 
 .track-name{
   margin-top:4px;
-  font-size:18px;
+  font-size:17px;
   font-weight:800;
-  letter-spacing:1px;
+  letter-spacing:.7px;
 }
 
-.qr{
-  background:white;
-  padding:8px;
-  margin:6mm 0 4mm;
+.track-qr{
+  background:#fff;
+  padding:7px;
+  margin:4mm 0 3mm;
   border-radius:5px;
 }
 
-.qr img,
-.qr canvas{
+.track-qr canvas,
+.track-qr img{
   display:block;
 }
 
 .instruction{
   color:#9BAEC2;
-  font-size:10px;
-  line-height:1.5;
-  max-width:230px;
+  font-size:9px;
+  line-height:1.45;
 }
 
 .final-piece{
-  margin-top:5mm;
-  padding-top:4mm;
-  border-top:1px dashed rgba(141,219,255,.25);
   width:100%;
+  margin-top:4mm;
+  padding-top:3mm;
+  border-top:1px dashed rgba(141,219,255,.25);
 }
 
-.final-title{
+.final-label{
   color:#8DDBFF;
-  font-size:10px;
-  font-weight:bold;
-  letter-spacing:1px;
-  margin-bottom:3mm;
-}
-
-.final-box{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:35mm;
-  height:35mm;
-  background:white;
-  border:2px dashed #1687FF;
-  color:#1687FF;
   font-size:9px;
   font-weight:bold;
+  letter-spacing:1.2px;
+  margin-bottom:2mm;
+}
+
+.piece{
+  width:34mm;
+  height:34mm;
+  background:#fff;
+  border:2px dashed #1687FF;
+  margin:auto;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.piece canvas{
+  display:block;
+  width:100% !important;
+  height:100% !important;
+  image-rendering:pixelated;
 }
 
 .no-final{
   margin-top:auto;
   padding-top:5mm;
   color:#66798d;
-  font-size:9px;
+  font-size:8px;
   letter-spacing:.5px;
 }
 
-button{
+.print-button{
   display:block;
-  margin:10mm auto;
-  padding:13px 25px;
+  margin:12px auto;
+  padding:12px 24px;
   border:0;
   border-radius:8px;
   background:#1687FF;
@@ -144,17 +148,16 @@ button{
 }
 
 @media print{
+
   body{
     background:white;
   }
 
   .page{
     margin:0;
-    width:210mm;
-    min-height:297mm;
   }
 
-  button{
+  .print-button{
     display:none;
   }
 
@@ -167,12 +170,15 @@ button{
 
 <body>
 
-<button onclick="window.print()">PRINT / SAVE PDF</button>
+<button class="print-button" onclick="window.print()">
+PRINT / SAVE PDF
+</button>
 
 <div class="page">
 
 <header>
   <h1>SPARK</h1>
+
   <div class="subtitle">
     8 Tracks · 8 Challenges · 6 Final Pieces · 1 Final QR
   </div>
@@ -182,95 +188,109 @@ button{
 
 </div>
 
+
 <script>
 
 const BASE_URL =
 "https://mazenelshebly.github.io/spark-community/";
+
+
+/*
+==================================================
+TRACKS
+==================================================
+
+final:true
+= participates in the Final QR
+
+final:false
+= normal challenge only
+*/
 
 const tracks = [
 
   {
     id:"web",
     name:"WEB DEVELOPMENT",
-    url:"web.html",
+    file:"web.html",
     final:true
   },
 
   {
     id:"data",
     name:"DATA ANALYSIS",
-    url:"data.html",
+    file:"data.html",
     final:true
   },
 
   {
     id:"cyber",
     name:"CYBER SECURITY",
-    url:"cyber.html",
+    file:"cyber.html",
     final:true
   },
 
   {
     id:"bioinformatics",
     name:"BIOINFORMATICS",
-    url:"bioinformatics.html",
+    file:"bioinformatics.html",
     final:true
   },
 
   {
     id:"marketing",
     name:"MARKETING",
-    url:"marketing.html",
+    file:"marketing.html",
     final:false
   },
 
   {
     id:"hr",
     name:"HR",
-    url:"hr.html",
+    file:"hr.html",
     final:true
   },
 
   {
     id:"logistics",
     name:"LOGISTICS",
-    url:"logistics.html",
+    file:"logistics.html",
     final:true
   },
 
   {
     id:"general-skills",
     name:"GENERAL SKILLS",
-    url:"general-skills.html",
+    file:"general-skills.html",
     final:false
   }
 
 ];
 
-const board = document.getElementById("board");
 
 /*
-  Final QR destination.
-  The six final pieces represent ONE QR:
-  
-  01 | 02 | 03
-  04 | 05 | 06
+==================================================
+CREATE 8 CARDS
+==================================================
 */
 
-const finalUrl =
-BASE_URL + "final-reveal.html";
+const board =
+document.getElementById("board");
 
 
-// Create cards
 tracks.forEach((track,index)=>{
 
-  const card = document.createElement("div");
-  card.className = "card";
+  const card =
+  document.createElement("div");
+
+  card.className="card";
 
   const number =
-    String(index + 1).padStart(2,"0");
+  String(index+1).padStart(2,"0");
+
 
   card.innerHTML = `
+
     <div class="track-number">
       TRACK ${number}
     </div>
@@ -279,7 +299,10 @@ tracks.forEach((track,index)=>{
       ${track.name}
     </div>
 
-    <div class="qr" id="qr-${track.id}"></div>
+    <div
+      class="track-qr"
+      id="qr-${track.id}">
+    </div>
 
     <div class="instruction">
       SCAN THIS QR<br>
@@ -289,23 +312,26 @@ tracks.forEach((track,index)=>{
 
     ${
       track.final
+
       ?
+
       `
       <div class="final-piece">
 
-        <div class="final-title">
+        <div class="final-label">
           FINAL QR PIECE
         </div>
 
         <div
-          class="final-box"
+          class="piece"
           id="piece-${track.id}">
-          PIECE
         </div>
 
       </div>
       `
+
       :
+
       `
       <div class="no-final">
         CHALLENGE ONLY<br>
@@ -316,155 +342,331 @@ tracks.forEach((track,index)=>{
 
   `;
 
+
   board.appendChild(card);
 
 
-  // Generate complete Track QR
+  /*
+  Track QR
+  */
+
   new QRCode(
-    document.getElementById(`qr-${track.id}`),
+    document.getElementById(
+      `qr-${track.id}`
+    ),
     {
-      text:BASE_URL + track.url,
-      width:150,
-      height:150,
-      correctLevel:QRCode.CorrectLevel.H
+      text:BASE_URL + track.file,
+
+      width:145,
+      height:145,
+
+      colorDark:"#000000",
+      colorLight:"#ffffff",
+
+      correctLevel:
+        QRCode.CorrectLevel.H
     }
   );
 
 });
 
 
-// --------------------------------------------------
-// FINAL QR PIECES
-// --------------------------------------------------
-
 /*
-  We create one large final QR image and divide it
-  into six visual pieces.
+==================================================
+FINAL QR
+==================================================
 
-  The pieces are assigned ONLY to the six final tracks.
+The six participating tracks receive
+one piece each.
+
+Final arrangement:
+
+01 | 02 | 03
+04 | 05 | 06
+
+Final destination:
+final-reveal.html
 */
 
-const finalCanvas = document.createElement("canvas");
+const finalUrl =
+BASE_URL + "final-reveal.html";
 
-const FINAL_SIZE = 900;
 
-finalCanvas.width = FINAL_SIZE;
-finalCanvas.height = FINAL_SIZE;
+/*
+Create hidden master QR.
+*/
 
-const finalQRContainer =
+const hiddenQR =
 document.createElement("div");
 
-finalQRContainer.style.position="absolute";
-finalQRContainer.style.left="-99999px";
+hiddenQR.style.position="fixed";
+hiddenQR.style.left="-10000px";
+hiddenQR.style.top="-10000px";
 
-document.body.appendChild(finalQRContainer);
+document.body.appendChild(hiddenQR);
+
+
+const MASTER_SIZE=900;
+
 
 new QRCode(
-  finalQRContainer,
+  hiddenQR,
   {
     text:finalUrl,
-    width:FINAL_SIZE,
-    height:FINAL_SIZE,
-    correctLevel:QRCode.CorrectLevel.H
+
+    width:MASTER_SIZE,
+    height:MASTER_SIZE,
+
+    colorDark:"#000000",
+    colorLight:"#ffffff",
+
+    correctLevel:
+      QRCode.CorrectLevel.H
   }
 );
 
 
-// Wait until QR image is generated
-setTimeout(()=>{
+/*
+==================================================
+WAIT FOR QR TO EXIST
+==================================================
+*/
 
-  const img =
-    finalQRContainer.querySelector("img");
+function createFinalPieces(){
 
-  if(!img){
-    console.error("Final QR image not generated.");
+  const canvas =
+    hiddenQR.querySelector("canvas");
+
+  const image =
+    hiddenQR.querySelector("img");
+
+
+  /*
+  QRCode.js can produce canvas OR image.
+  */
+
+  let source = null;
+
+
+  if(canvas){
+
+    source=canvas;
+
+  }
+
+  else if(
+    image &&
+    image.complete &&
+    image.naturalWidth>0
+  ){
+
+    source=image;
+
+  }
+
+
+  /*
+  If QR isn't ready yet,
+  try again.
+  */
+
+  if(!source){
+
+    setTimeout(
+      createFinalPieces,
+      100
+    );
+
     return;
   }
 
+
+  /*
+  Create master canvas.
+  */
+
+  const master =
+    document.createElement("canvas");
+
+  master.width=MASTER_SIZE;
+  master.height=MASTER_SIZE;
+
+
   const ctx =
-    finalCanvas.getContext("2d");
+    master.getContext("2d");
+
+
+  ctx.imageSmoothingEnabled=false;
+
+
+  /*
+  White background.
+  */
 
   ctx.fillStyle="#ffffff";
+
   ctx.fillRect(
     0,
     0,
-    FINAL_SIZE,
-    FINAL_SIZE
-  );
-
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    FINAL_SIZE,
-    FINAL_SIZE
+    MASTER_SIZE,
+    MASTER_SIZE
   );
 
 
   /*
-    3 columns × 2 rows
+  Draw complete Final QR.
   */
 
-  const pieceSize = FINAL_SIZE / 3;
+  ctx.drawImage(
+    source,
+    0,
+    0,
+    MASTER_SIZE,
+    MASTER_SIZE
+  );
+
+
+  /*
+  Six participating tracks.
+  */
 
   const finalTracks =
-  tracks.filter(t=>t.final);
-
-  finalTracks.forEach((track,i)=>{
-
-    const piece =
-      document.getElementById(
-        `piece-${track.id}`
-      );
-
-    if(!piece) return;
-
-    const col = i % 3;
-    const row = Math.floor(i / 3);
-
-    const pieceCanvas =
-      document.createElement("canvas");
-
-    pieceCanvas.width = pieceSize;
-    pieceCanvas.height = pieceSize;
-
-    const pieceCtx =
-      pieceCanvas.getContext("2d");
-
-    pieceCtx.drawImage(
-      finalCanvas,
-
-      col * pieceSize,
-      row * pieceSize,
-      pieceSize,
-      pieceSize,
-
-      0,
-      0,
-      pieceSize,
-      pieceSize
+    tracks.filter(
+      track=>track.final
     );
 
 
-    const pieceImg =
-      document.createElement("img");
+  /*
+  Each piece is:
 
-    pieceImg.src =
-      pieceCanvas.toDataURL("image/png");
+  300 × 450
 
-    pieceImg.style.width="35mm";
-    pieceImg.style.height="35mm";
-    pieceImg.style.display="block";
+  because the QR is divided into:
 
-    piece.innerHTML="";
-    piece.appendChild(pieceImg);
+  3 columns
+  2 rows
+  */
 
-  });
+  const pieceWidth =
+    MASTER_SIZE/3;
+
+  const pieceHeight =
+    MASTER_SIZE/2;
 
 
-  finalQRContainer.remove();
+  finalTracks.forEach(
+    (track,index)=>{
 
-},500);
+
+      const target =
+        document.getElementById(
+          `piece-${track.id}`
+        );
+
+
+      if(!target)return;
+
+
+      /*
+      Position:
+
+      0 = top-left
+      1 = top-middle
+      2 = top-right
+      3 = bottom-left
+      4 = bottom-middle
+      5 = bottom-right
+      */
+
+      const column =
+        index%3;
+
+      const row =
+        Math.floor(index/3);
+
+
+      /*
+      Piece canvas.
+      */
+
+      const pieceCanvas =
+        document.createElement("canvas");
+
+
+      pieceCanvas.width=
+        pieceWidth;
+
+      pieceCanvas.height=
+        pieceHeight;
+
+
+      const pieceCtx =
+        pieceCanvas.getContext("2d");
+
+
+      pieceCtx.imageSmoothingEnabled=false;
+
+
+      /*
+      Copy exact section
+      from the master QR.
+      */
+
+      pieceCtx.drawImage(
+
+        master,
+
+        column*pieceWidth,
+        row*pieceHeight,
+
+        pieceWidth,
+        pieceHeight,
+
+        0,
+        0,
+
+        pieceWidth,
+        pieceHeight
+
+      );
+
+
+      /*
+      Put the piece into the card.
+      */
+
+      target.innerHTML="";
+
+      target.appendChild(
+        pieceCanvas
+      );
+
+    }
+  );
+
+
+  /*
+  Remove hidden QR.
+  */
+
+  hiddenQR.remove();
+
+}
+
+
+/*
+Start after page has loaded.
+*/
+
+window.addEventListener(
+  "load",
+  ()=>{
+    setTimeout(
+      createFinalPieces,
+      500
+    );
+  }
+);
 
 </script>
 
