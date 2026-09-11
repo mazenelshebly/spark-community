@@ -1,773 +1,983 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SPARK — QR Print Board</title>
+
+<title>SPARK — Six-Piece QR Puzzle</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
+
 *{
-  box-sizing:border-box;
-  margin:0;
-  padding:0;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-  background:#080d15;
-  color:#f5faff;
-  font-family:Arial,Helvetica,sans-serif;
+    background:#0b1018;
+    color:#f5faff;
+    font-family:Arial,Helvetica,sans-serif;
 }
 
-/* =========================
+
+/* =========================================
    CONTROL BAR
-========================= */
+========================================= */
 
 .controls{
-  position:sticky;
-  top:0;
-  z-index:100;
-  background:#050a12;
-  border-bottom:1px solid rgba(85,183,255,.2);
-  padding:14px 20px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:15px;
+    width:100%;
+    padding:16px 24px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#050a12;
+
+    border-bottom:
+        1px solid rgba(85,183,255,.20);
 }
 
-.controls h1{
-  font-size:16px;
-  letter-spacing:2px;
+.title{
+    font-size:16px;
+    font-weight:900;
+
+    letter-spacing:2px;
 }
 
-.controls p{
-  color:#8fa5ba;
-  font-size:12px;
-  margin-top:4px;
+.subtitle{
+    margin-top:5px;
+
+    color:#8fa5ba;
+
+    font-size:11px;
 }
 
 .print-btn{
-  border:0;
-  background:#1687ff;
-  color:white;
-  padding:12px 22px;
-  border-radius:8px;
-  font-weight:800;
-  letter-spacing:1px;
-  cursor:pointer;
+    border:0;
+
+    border-radius:8px;
+
+    padding:12px 20px;
+
+    background:#1687ff;
+
+    color:white;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    cursor:pointer;
 }
 
 .print-btn:hover{
-  background:#55b7ff;
+    background:#55b7ff;
 }
 
-/* =========================
-   A4 PRINT AREA
-========================= */
+
+/* =========================================
+   A4 SHEET
+========================================= */
 
 .sheet{
-  width:210mm;
-  min-height:297mm;
-  margin:25px auto;
-  padding:7mm;
 
-  background:#050a12;
-
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  grid-template-rows:repeat(2,1fr);
-
-  gap:3mm;
-}
-
-/* =========================
-   CARD
-========================= */
-
-.card{
-  position:relative;
-  overflow:hidden;
-
-  border:1px solid rgba(85,183,255,.28);
-  border-radius:4px;
-
-  background:
-    radial-gradient(
-      circle at 50% 35%,
-      rgba(22,135,255,.13),
-      transparent 55%
-    ),
-    #081525;
-
-  padding:4mm;
-
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  min-width:0;
-}
-
-/* subtle technical lines */
-
-.card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent 49.5%,
-      rgba(141,219,255,.035) 50%,
-      transparent 50.5%
-    ),
-    linear-gradient(
-      transparent 49.5%,
-      rgba(141,219,255,.035) 50%,
-      transparent 50.5%
-    );
-  pointer-events:none;
-}
-
-/* =========================
-   CARD HEADER
-========================= */
-
-.card-number{
-  align-self:flex-start;
-
-  font-size:8px;
-  font-weight:900;
-  color:#55b7ff;
-
-  letter-spacing:2px;
-}
-
-.track-name{
-  margin-top:2mm;
-
-  font-size:10px;
-  font-weight:900;
-
-  letter-spacing:1px;
-  text-align:center;
-
-  color:#f5faff;
-}
-
-.track-sub{
-  margin-top:1mm;
-
-  font-size:6px;
-  letter-spacing:1px;
-
-  color:#8fa5ba;
-}
-
-/* =========================
-   SMALL QR
-========================= */
-
-.challenge-label{
-  margin-top:3mm;
-
-  font-size:5px;
-  font-weight:800;
-
-  letter-spacing:1.3px;
-  color:#55b7ff;
-}
-
-.challenge-qr{
-  width:22mm;
-  height:22mm;
-
-  background:white;
-
-  margin-top:1.5mm;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:1mm;
-}
-
-.challenge-qr canvas,
-.challenge-qr img{
-  width:100% !important;
-  height:100% !important;
-}
-
-/* =========================
-   FINAL QR TILE
-========================= */
-
-.final-label{
-  margin-top:auto;
-
-  font-size:5px;
-  font-weight:800;
-
-  letter-spacing:1.2px;
-
-  color:#55b7ff;
-}
-
-.final-tile{
-  width:31mm;
-  height:31mm;
-
-  background:white;
-
-  margin-top:1.5mm;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  padding:0;
-}
-
-.final-tile canvas,
-.final-tile img{
-  width:100%;
-  height:100%;
-  display:block;
-}
-
-.tile-number{
-  margin-top:1mm;
-
-  font-size:5px;
-  font-weight:900;
-
-  letter-spacing:1px;
-
-  color:#9db3c8;
-}
-
-/* =========================
-   PRINT INFO
-========================= */
-
-.info{
-  position:absolute;
-
-  bottom:2mm;
-  left:0;
-  right:0;
-
-  text-align:center;
-
-  font-size:4px;
-  letter-spacing:.7px;
-
-  color:#60758a;
-}
-
-/* =========================
-   SCREEN ONLY
-========================= */
-
-@media screen and (max-width:900px){
-
-  .sheet{
-    transform-origin:top center;
-    margin:15px auto;
-  }
-
-  .controls{
-    position:relative;
-  }
-}
-
-/* =========================
-   PRINT
-========================= */
-
-@media print{
-
-  @page{
-    size:A4 portrait;
-    margin:0;
-  }
-
-  body{
-    background:white;
-  }
-
-  .controls{
-    display:none;
-  }
-
-  .sheet{
-    margin:0;
     width:210mm;
     height:297mm;
-    min-height:297mm;
+
+    margin:20px auto;
 
     padding:7mm;
 
     background:#050a12;
 
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    grid-template-rows:
+        repeat(2,1fr);
+
     gap:3mm;
-
-    page-break-after:avoid;
-  }
-
-  .card{
-    break-inside:avoid;
-  }
 }
+
+
+/* =========================================
+   CARD
+========================================= */
+
+.card{
+
+    position:relative;
+
+    background:
+        radial-gradient(
+            circle at 50% 15%,
+            rgba(22,135,255,.16),
+            transparent 55%
+        ),
+        #081525;
+
+    border:
+        1px solid rgba(85,183,255,.30);
+
+    border-radius:4px;
+
+    padding:4mm;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    overflow:hidden;
+}
+
+
+/* =========================================
+   CORNERS
+========================================= */
+
+.corner{
+
+    position:absolute;
+
+    width:4mm;
+    height:4mm;
+
+    border-color:#55b7ff;
+}
+
+.c1{
+
+    top:1.5mm;
+    right:1.5mm;
+
+    border-top:1px solid;
+    border-right:1px solid;
+}
+
+.c2{
+
+    bottom:1.5mm;
+    left:1.5mm;
+
+    border-bottom:1px solid;
+    border-left:1px solid;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.number{
+
+    align-self:flex-start;
+
+    color:#55b7ff;
+
+    font-size:7px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.track{
+
+    margin-top:1.5mm;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:.8px;
+
+    text-align:center;
+}
+
+.type{
+
+    margin-top:1mm;
+
+    color:#8fa5ba;
+
+    font-size:5px;
+
+    letter-spacing:1.2px;
+}
+
+
+/* =========================================
+   TRACK QR
+========================================= */
+
+.track-label{
+
+    margin-top:3.5mm;
+
+    color:#55b7ff;
+
+    font-size:5px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    text-align:center;
+}
+
+.track-qr{
+
+    width:32mm;
+    height:32mm;
+
+    margin-top:1.5mm;
+
+    padding:1.5mm;
+
+    background:#ffffff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.track-qr canvas,
+.track-qr img{
+
+    width:100% !important;
+    height:100% !important;
+
+    display:block;
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.divider{
+
+    width:85%;
+
+    height:1px;
+
+    margin-top:3mm;
+
+    background:
+        rgba(141,219,255,.18);
+}
+
+
+/* =========================================
+   FINAL PIECE AREA
+========================================= */
+
+.piece-title{
+
+    margin-top:2.5mm;
+
+    color:#55b7ff;
+
+    font-size:5px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+
+    text-align:center;
+}
+
+.piece-wrap{
+
+    position:relative;
+
+    width:34mm;
+    height:34mm;
+
+    margin-top:1.5mm;
+
+    padding:1.5mm;
+
+    background:#ffffff;
+
+    border:
+        1.5px dashed #1687ff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.piece-wrap canvas{
+
+    width:100%;
+    height:100%;
+
+    display:block;
+}
+
+
+/* =========================================
+   CUT LABEL
+========================================= */
+
+.cut-label{
+
+    position:absolute;
+
+    right:-1px;
+    bottom:-1px;
+
+    padding:
+        1mm
+        1.5mm;
+
+    background:#1687ff;
+
+    color:#ffffff;
+
+    font-size:4px;
+
+    font-weight:900;
+
+    letter-spacing:.8px;
+}
+
+
+/* =========================================
+   INSTRUCTIONS
+========================================= */
+
+.instruction{
+
+    margin-top:1.5mm;
+
+    color:#f5faff;
+
+    font-size:4.8px;
+
+    font-weight:900;
+
+    letter-spacing:.7px;
+
+    text-align:center;
+}
+
+.sub-instruction{
+
+    margin-top:.8mm;
+
+    color:#8fa5ba;
+
+    font-size:4.3px;
+
+    letter-spacing:.5px;
+
+    text-align:center;
+}
+
+
+/* =========================================
+   PRINT
+========================================= */
+
+@media print{
+
+    @page{
+
+        size:A4 portrait;
+
+        margin:0;
+    }
+
+    body{
+
+        background:white;
+    }
+
+    .controls{
+
+        display:none;
+    }
+
+    .sheet{
+
+        width:210mm;
+        height:297mm;
+
+        margin:0;
+
+        padding:7mm;
+
+        background:#050a12;
+    }
+
+    .card{
+
+        break-inside:avoid;
+    }
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media screen and (max-width:800px){
+
+    .controls{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:12px;
+    }
+
+    .sheet{
+
+        transform-origin:
+            top center;
+
+        margin-left:50%;
+
+        transform:
+            translateX(-50%)
+            scale(.65);
+
+        margin-top:20px;
+
+        margin-bottom:-100px;
+    }
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- =========================
+
+<!-- =========================================
      CONTROL BAR
-========================= -->
+========================================= -->
 
 <div class="controls">
 
-  <div>
-    <h1>SPARK — QR PRINT BOARD</h1>
-    <p>8 Tracks · 8 Challenges · 1 Final QR</p>
-  </div>
+    <div>
 
-  <button class="print-btn" onclick="window.print()">
-    PRINT / SAVE PDF
-  </button>
+        <div class="title">
+            SPARK — SIX-PIECE QR PUZZLE
+        </div>
+
+        <div class="subtitle">
+            6 Tracks · 6 Challenges · 6 Puzzle Pieces · 1 Final QR
+        </div>
+
+    </div>
+
+    <button
+        class="print-btn"
+        onclick="window.print()">
+
+        PRINT / SAVE PDF
+
+    </button>
 
 </div>
 
 
-<!-- =========================
-     PRINT SHEET
-========================= -->
 
-<div class="sheet" id="sheet"></div>
+<!-- =========================================
+     SHEET
+========================================= -->
+
+<div
+    class="sheet"
+    id="sheet">
+</div>
+
 
 
 <script>
 
-/* ==========================================
-   BASIC SETTINGS
-========================================== */
+
+/* =========================================
+   BASE URL
+========================================= */
 
 const BASE_URL =
 "https://mazenelshebly.github.io/spark-community/";
+
+
+/* =========================================
+   FINAL URL
+========================================= */
 
 const FINAL_URL =
 BASE_URL + "final-reveal.html";
 
 
-/* ==========================================
-   TRACK DATA
-========================================== */
+/* =========================================
+   SIX TRACKS
+========================================= */
 
 const tracks = [
 
-  {
-    number:"01",
-    name:"WEB DEVELOPMENT",
-    short:"WEB",
-    url:BASE_URL+"web.html"
-  },
+    {
+        number:"01",
+        name:"WEB DEVELOPMENT",
+        url:BASE_URL + "web.html"
+    },
 
-  {
-    number:"02",
-    name:"DATA ANALYSIS",
-    short:"DATA",
-    url:BASE_URL+"data.html"
-  },
+    {
+        number:"02",
+        name:"DATA ANALYSIS",
+        url:BASE_URL + "data.html"
+    },
 
-  {
-    number:"03",
-    name:"CYBER SECURITY",
-    short:"CYBER",
-    url:BASE_URL+"cyber.html"
-  },
+    {
+        number:"03",
+        name:"CYBER SECURITY",
+        url:BASE_URL + "cyber.html"
+    },
 
-  {
-    number:"04",
-    name:"BIOINFORMATICS",
-    short:"BIOINFORMATICS",
-    url:BASE_URL+"bioinformatics.html"
-  },
+    {
+        number:"04",
+        name:"BIOINFORMATICS",
+        url:BASE_URL + "bioinformatics.html"
+    },
 
-  {
-    number:"05",
-    name:"MARKETING",
-    short:"MARKETING",
-    url:BASE_URL+"marketing.html"
-  },
+    {
+        number:"05",
+        name:"HR",
+        url:BASE_URL + "hr.html"
+    },
 
-  {
-    number:"06",
-    name:"HR",
-    short:"HR",
-    url:BASE_URL+"hr.html"
-  },
-
-  {
-    number:"07",
-    name:"LOGISTICS",
-    short:"LOGISTICS",
-    url:BASE_URL+"logistics.html"
-  },
-
-  {
-    number:"08",
-    name:"GENERAL SKILLS",
-    short:"GENERAL SKILLS",
-    url:BASE_URL+"general-skills.html"
-  }
+    {
+        number:"06",
+        name:"LOGISTICS",
+        url:BASE_URL + "logistics.html"
+    }
 
 ];
 
 
-/* ==========================================
-   CREATE FINAL QR
-========================================== */
+/* =========================================
+   HIDDEN FINAL QR GENERATOR
+========================================= */
 
-const finalQRHolder = document.createElement("div");
+const generator =
+document.createElement("div");
 
-finalQRHolder.style.position = "absolute";
-finalQRHolder.style.left = "-99999px";
-finalQRHolder.style.top = "0";
+generator.style.position =
+"absolute";
 
-document.body.appendChild(finalQRHolder);
+generator.style.left =
+"-10000px";
 
+generator.style.top =
+"0";
 
-/*
-   Large QR.
-   1000 × 1000 gives enough resolution
-   for the 8 physical pieces.
-*/
+generator.style.width =
+"1200px";
 
-new QRCode(finalQRHolder,{
-  text:FINAL_URL,
+generator.style.height =
+"1200px";
 
-  width:1000,
-  height:1000,
-
-  colorDark:"#000000",
-  colorLight:"#ffffff",
-
-  correctLevel:QRCode.CorrectLevel.H
-});
+document.body.appendChild(generator);
 
 
-/* ==========================================
-   WAIT FOR QR GENERATION
-========================================== */
+/* =========================================
+   GENERATE FINAL QR
+========================================= */
+
+new QRCode(
+
+    generator,
+
+    {
+
+        text:FINAL_URL,
+
+        width:1200,
+
+        height:1200,
+
+        colorDark:"#000000",
+
+        colorLight:"#ffffff",
+
+        correctLevel:
+            QRCode.CorrectLevel.H
+
+    }
+
+);
+
+
+/* =========================================
+   WAIT FOR FINAL QR
+========================================= */
 
 setTimeout(() => {
 
-  const qrCanvas =
-    finalQRHolder.querySelector("canvas");
 
-  const qrImage =
-    finalQRHolder.querySelector("img");
+    const source =
+        generator.querySelector("canvas");
 
 
-  let sourceCanvas =
-    document.createElement("canvas");
+    if(!source){
 
-  sourceCanvas.width=1000;
-  sourceCanvas.height=1000;
+        console.error(
+            "Final QR could not be generated."
+        );
 
-  let ctx =
-    sourceCanvas.getContext("2d");
-
-
-  /*
-     If QRCode.js generated a canvas,
-     use it directly.
-  */
-
-  if(qrCanvas){
-
-    ctx.drawImage(
-      qrCanvas,
-      0,
-      0,
-      1000,
-      1000
-    );
-
-    buildCards(sourceCanvas);
-
-  }
+        return;
+    }
 
 
-  /*
-     Fallback if QRCode.js generated an image.
-  */
-
-  else if(qrImage){
-
-    const img = new Image();
-
-    img.onload = () => {
-
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        1000,
-        1000
-      );
-
-      buildCards(sourceCanvas);
-
-    };
-
-    img.src = qrImage.src;
-
-  }
-
-},800);
+    const sheet =
+        document.getElementById("sheet");
 
 
-/* ==========================================
-   BUILD 8 CARDS
-========================================== */
+    /* =====================================
+       FINAL QR GRID
 
-function buildCards(finalCanvas){
+       3 columns × 2 rows
 
-  const sheet =
-    document.getElementById("sheet");
+       01 02 03
+       04 05 06
+    ===================================== */
 
-
-  /*
-     Final QR arrangement:
-
-     01 | 02 | 03 | 04
-     05 | 06 | 07 | 08
-
-     Each tile is exactly 1/4 width
-     and 1/2 height of the full QR.
-  */
-
-  const tileWidth = 250;
-  const tileHeight = 500;
+    const pieceSize =
+        400;
 
 
-  tracks.forEach((track,index)=>{
-
-    const card =
-      document.createElement("div");
-
-    card.className="card";
+    tracks.forEach(
+        (track,index) => {
 
 
-    /* ======================================
-       CARD HEADER
-    ====================================== */
+        /* =================================
+           CARD
+        ================================= */
 
-    const number =
-      document.createElement("div");
+        const card =
+            document.createElement("div");
 
-    number.className="card-number";
-
-    number.textContent =
-      "PIECE " + track.number;
+        card.className =
+            "card";
 
 
-    const name =
-      document.createElement("div");
+        /* =================================
+           CORNERS
+        ================================= */
 
-    name.className="track-name";
+        const c1 =
+            document.createElement("div");
 
-    name.textContent =
-      track.name;
-
-
-    const sub =
-      document.createElement("div");
-
-    sub.className="track-sub";
-
-    sub.textContent =
-      "TRACK CHALLENGE";
+        c1.className =
+            "corner c1";
 
 
-    /* ======================================
-       SMALL CHALLENGE QR
-    ====================================== */
+        const c2 =
+            document.createElement("div");
 
-    const challengeLabel =
-      document.createElement("div");
-
-    challengeLabel.className =
-      "challenge-label";
-
-    challengeLabel.textContent =
-      "SCAN TO DISCOVER YOUR CLUE";
+        c2.className =
+            "corner c2";
 
 
-    const challengeQR =
-      document.createElement("div");
+        /* =================================
+           TRACK NUMBER
+        ================================= */
 
-    challengeQR.className =
-      "challenge-qr";
+        const number =
+            document.createElement("div");
+
+        number.className =
+            "number";
+
+        number.textContent =
+            "TRACK " +
+            track.number;
 
 
-    new QRCode(challengeQR,{
+        /* =================================
+           TRACK NAME
+        ================================= */
 
-      text:track.url,
+        const trackName =
+            document.createElement("div");
 
-      width:180,
-      height:180,
+        trackName.className =
+            "track";
 
-      colorDark:"#000000",
-      colorLight:"#ffffff",
+        trackName.textContent =
+            track.name;
 
-      correctLevel:
-        QRCode.CorrectLevel.M
+
+        /* =================================
+           TYPE
+        ================================= */
+
+        const type =
+            document.createElement("div");
+
+        type.className =
+            "type";
+
+        type.textContent =
+            "TRACK CHALLENGE";
+
+
+        /* =================================
+           TRACK LABEL
+        ================================= */
+
+        const trackLabel =
+            document.createElement("div");
+
+        trackLabel.className =
+            "track-label";
+
+        trackLabel.textContent =
+            "SCAN YOUR TRACK FIRST";
+
+
+        /* =================================
+           TRACK QR
+        ================================= */
+
+        const trackQR =
+            document.createElement("div");
+
+        trackQR.className =
+            "track-qr";
+
+
+        new QRCode(
+
+            trackQR,
+
+            {
+
+                text:track.url,
+
+                width:500,
+
+                height:500,
+
+                colorDark:"#000000",
+
+                colorLight:"#ffffff",
+
+                correctLevel:
+                    QRCode.CorrectLevel.H
+
+            }
+
+        );
+
+
+        /* =================================
+           DIVIDER
+        ================================= */
+
+        const divider =
+            document.createElement("div");
+
+        divider.className =
+            "divider";
+
+
+        /* =================================
+           PIECE TITLE
+        ================================= */
+
+        const pieceTitle =
+            document.createElement("div");
+
+        pieceTitle.className =
+            "piece-title";
+
+        pieceTitle.textContent =
+            "FINAL QR PIECE " +
+            track.number;
+
+
+        /* =================================
+           FINAL PIECE
+        ================================= */
+
+        const pieceWrap =
+            document.createElement("div");
+
+        pieceWrap.className =
+            "piece-wrap";
+
+
+        const pieceCanvas =
+            document.createElement("canvas");
+
+        pieceCanvas.width =
+            pieceSize;
+
+        pieceCanvas.height =
+            pieceSize;
+
+
+        const ctx =
+            pieceCanvas.getContext("2d");
+
+
+        /* =================================
+           FINAL QR POSITION
+
+           3 × 2
+        ================================= */
+
+        const column =
+            index % 3;
+
+        const row =
+            Math.floor(index / 3);
+
+
+        /* =================================
+           CROP FINAL QR
+        ================================= */
+
+        ctx.drawImage(
+
+            source,
+
+            column * pieceSize,
+
+            row * pieceSize,
+
+            pieceSize,
+
+            pieceSize,
+
+            0,
+
+            0,
+
+            pieceSize,
+
+            pieceSize
+
+        );
+
+
+        pieceWrap.appendChild(
+            pieceCanvas
+        );
+
+
+        /* =================================
+           CUT LABEL
+        ================================= */
+
+        const cutLabel =
+            document.createElement("div");
+
+        cutLabel.className =
+            "cut-label";
+
+        cutLabel.textContent =
+            "CUT";
+
+
+        pieceWrap.appendChild(
+            cutLabel
+        );
+
+
+        /* =================================
+           MAIN INSTRUCTION
+        ================================= */
+
+        const instruction =
+            document.createElement("div");
+
+        instruction.className =
+            "instruction";
+
+        instruction.textContent =
+            "SCAN → SOLVE → CUT → ASSEMBLE";
+
+
+        /* =================================
+           SECOND INSTRUCTION
+        ================================= */
+
+        const subInstruction =
+            document.createElement("div");
+
+        subInstruction.className =
+            "sub-instruction";
+
+        subInstruction.textContent =
+            "Keep your piece. Assemble 01 → 06.";
+
+
+        /* =================================
+           BUILD CARD
+        ================================= */
+
+        card.appendChild(c1);
+        card.appendChild(c2);
+
+        card.appendChild(number);
+
+        card.appendChild(trackName);
+
+        card.appendChild(type);
+
+        card.appendChild(trackLabel);
+
+        card.appendChild(trackQR);
+
+        card.appendChild(divider);
+
+        card.appendChild(pieceTitle);
+
+        card.appendChild(pieceWrap);
+
+        card.appendChild(instruction);
+
+        card.appendChild(subInstruction);
+
+
+        sheet.appendChild(card);
 
     });
 
 
-    /* ======================================
-       FINAL QR TILE
-    ====================================== */
+    /* =====================================
+       REMOVE GENERATOR
+    ===================================== */
 
-    const finalLabel =
-      document.createElement("div");
-
-    finalLabel.className =
-      "final-label";
-
-    finalLabel.textContent =
-      "FINAL QR — PIECE " + track.number;
+    generator.remove();
 
 
-    const finalTile =
-      document.createElement("div");
+},1000);
 
-    finalTile.className =
-      "final-tile";
-
-
-    /*
-       Determine tile coordinates.
-
-       index:
-       0 1 2 3
-       4 5 6 7
-    */
-
-    const col =
-      index % 4;
-
-    const row =
-      Math.floor(index / 4);
-
-
-    const tileCanvas =
-      document.createElement("canvas");
-
-    tileCanvas.width =
-      tileWidth;
-
-    tileCanvas.height =
-      tileHeight;
-
-
-    const tileCtx =
-      tileCanvas.getContext("2d");
-
-
-    tileCtx.drawImage(
-
-      finalCanvas,
-
-      col * tileWidth,
-      row * tileHeight,
-
-      tileWidth,
-      tileHeight,
-
-      0,
-      0,
-
-      tileWidth,
-      tileHeight
-
-    );
-
-
-    finalTile.appendChild(tileCanvas);
-
-
-    /* ======================================
-       TILE NUMBER
-    ====================================== */
-
-    const tileNumber =
-      document.createElement("div");
-
-    tileNumber.className =
-      "tile-number";
-
-    tileNumber.textContent =
-      "ASSEMBLE 01 → 08";
-
-
-    /* ======================================
-       INFO
-    ====================================== */
-
-    const info =
-      document.createElement("div");
-
-    info.className="info";
-
-    info.textContent =
-      "BCU-Obour Branch · SPARK";
-
-
-    /* ======================================
-       ADD EVERYTHING
-    ====================================== */
-
-    card.appendChild(number);
-    card.appendChild(name);
-    card.appendChild(sub);
-
-    card.appendChild(challengeLabel);
-    card.appendChild(challengeQR);
-
-    card.appendChild(finalLabel);
-    card.appendChild(finalTile);
-
-    card.appendChild(tileNumber);
-    card.appendChild(info);
-
-    sheet.appendChild(card);
-
-  });
-
-}
-
-
-/* ==========================================
-   REMOVE GENERATOR AFTER USE
-========================================== */
-
-setTimeout(()=>{
-
-  if(finalQRHolder){
-    finalQRHolder.remove();
-  }
-
-},3000);
 
 </script>
 
