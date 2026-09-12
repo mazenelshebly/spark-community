@@ -4,17 +4,14 @@
 <head>
 
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>BCU-Obour Branch | Final Reveal</title>
-
 
 <style>
 
 /* =========================================================
-   ORIGINAL CSS
+   ORIGINAL WEBSITE
 ========================================================= */
 
 :root {
@@ -44,7 +41,6 @@ body {
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
 }
-
 
 /* =========================
    VIDEO INTRO
@@ -81,7 +77,6 @@ body {
 
     pointer-events: none;
 }
-
 
 /* =========================
    TAP HINT
@@ -120,7 +115,6 @@ body {
     opacity: 1;
 }
 
-
 /* =========================
    EXPLORE
 ========================= */
@@ -144,8 +138,6 @@ body {
     transition: .7s ease;
 
     text-align: center;
-
-    cursor: pointer;
 }
 
 #explore.show {
@@ -190,7 +182,6 @@ body {
 
 }
 
-
 /* =========================
    MAIN WEBSITE
 ========================= */
@@ -203,7 +194,6 @@ body {
 .section {
     padding: 90px 7%;
 }
-
 
 /* =========================
    HERO
@@ -275,7 +265,6 @@ body {
     color: var(--muted);
 }
 
-
 /* =========================
    FINAL MESSAGE
 ========================= */
@@ -318,7 +307,6 @@ body {
 .message h2 span {
     color: var(--blue-light);
 }
-
 
 /* =========================
    TRACKS
@@ -417,7 +405,6 @@ body {
     font-weight: 800;
 }
 
-
 /* =========================
    WHAT AWAITS
 ========================= */
@@ -472,7 +459,6 @@ body {
     line-height: 1.6;
 }
 
-
 /* =========================
    JOIN
 ========================= */
@@ -512,7 +498,6 @@ body {
         );
 
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
 }
 
@@ -564,7 +549,6 @@ body {
     transform:
         translateY(-3px);
 }
-
 
 /* =========================
    SOCIAL
@@ -635,101 +619,85 @@ body {
         rgba(22,135,255,.18);
 }
 
-
 /* =========================================================
-   NAME FORM
+   NAME INPUT
+   بديل FORM فقط
 ========================================================= */
 
 .nameForm {
-
     display: flex;
+    gap: 8px;
+    align-items: center;
+}
 
-    width: 330px;
+.nameInput {
 
-    height: 49px;
+    width: 150px;
+
+    padding: 15px 18px;
 
     border:
         1px solid var(--line);
 
+    outline: none;
+
     background:
         rgba(8,21,37,.7);
+
+    color:
+        var(--white);
+
+    font-size: 14px;
+
+    font-family: Arial, Helvetica, sans-serif;
 
     transition: .3s ease;
 }
 
-.nameForm:focus-within {
+.nameInput::placeholder {
+    color: var(--muted);
+}
+
+.nameInput:focus {
 
     border-color:
         var(--blue-light);
 
     box-shadow:
-        0 0 25px
+        0 0 20px
         rgba(22,135,255,.15);
 }
 
-.nameForm input {
+.nameSubmit {
 
-    flex: 1;
+    padding: 15px 20px;
 
-    min-width: 0;
-
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    color: var(--white);
-
-    padding:
-        0 15px;
-
-    font-size: 11px;
-
-    letter-spacing: 1.5px;
-
-    text-transform: uppercase;
-}
-
-.nameForm input::placeholder {
-
-    color:
-        var(--muted);
-
-    opacity:
-        .9;
-}
-
-.nameForm button {
-
-    width: 55px;
-
-    border: none;
-
-    border-left:
-        1px solid var(--line);
-
-    background: transparent;
-
-    color:
-        var(--blue-light);
-
-    font-size: 24px;
-
-    cursor: pointer;
-
-    transition: .3s ease;
-}
-
-.nameForm button:hover {
+    border:
+        1px solid var(--blue-light);
 
     background:
         var(--blue);
 
     color:
         white;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    letter-spacing: 1px;
+
+    transition: .3s ease;
 }
 
+.nameSubmit:hover {
+
+    background:
+        var(--blue-light);
+
+    color:
+        var(--black);
+}
 
 /* =========================
    FOOTER
@@ -772,194 +740,6 @@ footer p {
         12px;
 }
 
-
-/* =========================================================
-   THANK YOU SCREEN
-========================================================= */
-
-#thankYouScreen {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-
-    height: 100vh;
-
-    height: 100svh;
-
-    background: #000;
-
-    z-index: 99998;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    text-align: center;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-
-    transition:
-        opacity .7s ease,
-        visibility .7s ease;
-}
-
-#thankYouScreen.active {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-.thankYouSmall {
-
-    color:
-        var(--blue-light);
-
-    font-size: 11px;
-
-    letter-spacing: 5px;
-
-    margin-bottom: 25px;
-}
-
-.thankYouTitle {
-
-    font-size:
-        clamp(55px, 12vw, 150px);
-
-    line-height: .9;
-
-    letter-spacing: -5px;
-}
-
-.thankYouSub {
-
-    margin-top: 25px;
-
-    color:
-        var(--muted);
-
-    font-size: 12px;
-
-    letter-spacing: 3px;
-}
-
-
-/* =========================================================
-   LOVE RAIN
-========================================================= */
-
-#loveRainScreen {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw;
-
-    height: 100vh;
-
-    height: 100svh;
-
-    background: #000;
-
-    z-index: 99999;
-
-    overflow: hidden;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    pointer-events: none;
-}
-
-#loveRainScreen.active {
-
-    opacity: 1;
-
-    visibility: visible;
-
-    pointer-events: auto;
-}
-
-#loveCanvas {
-
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-
-    height: 100%;
-
-    display: block;
-}
-
-.loveFinal {
-
-    position: absolute;
-
-    inset: 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    opacity: 0;
-
-    transition:
-        opacity 1.5s ease;
-
-    pointer-events: none;
-}
-
-.loveFinal.show {
-
-    opacity: 1;
-}
-
-.loveFinalText {
-
-    font-size:
-        clamp(28px, 6vw, 70px);
-
-    font-weight: 800;
-
-    color: white;
-
-    text-align: center;
-
-    text-shadow:
-        0 0 10px rgba(255,255,255,.9),
-        0 0 25px rgba(255,80,170,.8),
-        0 0 50px rgba(255,80,170,.5);
-}
-
-.loveFinalText span {
-
-    color: #FFD76A;
-
-    text-shadow:
-        0 0 10px rgba(255,215,106,.9),
-        0 0 25px rgba(255,180,50,.8),
-        0 0 50px rgba(255,160,40,.5);
-}
-
-
 /* =========================
    MOBILE
 ========================= */
@@ -988,11 +768,6 @@ footer p {
 
         letter-spacing:
             -2px;
-    }
-
-    .nameForm {
-
-        width: 100%;
     }
 
 }
@@ -1025,11 +800,95 @@ footer p {
     }
 
     .nameForm {
-
-        width:
-            100%;
+        width: 100%;
     }
 
+    .nameInput {
+        flex: 1;
+        width: auto;
+    }
+}
+
+
+/* =========================================================
+   SECOND SCREEN
+   LOVE RAIN
+========================================================= */
+
+#loveScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99999;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #050505;
+
+    overflow: hidden;
+}
+
+#loveCanvas {
+
+    display: block;
+
+    width: 100vw;
+
+    height: 56.25vw;
+
+    max-width: 177.78vh;
+
+    max-height: 100vh;
+
+    background: #050505;
+}
+
+
+/* =========================================================
+   THANK YOU SCREEN
+========================================================= */
+
+#thankYouScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 99998;
+
+    display: none;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(22,135,255,.12),
+            transparent 50%
+        ),
+        #050A12;
+
+    text-align: center;
+}
+
+#thankYouScreen h1 {
+
+    font-size:
+        clamp(50px, 10vw, 130px);
+
+    letter-spacing:
+        -4px;
+
+    color:
+        var(--white);
 }
 
 </style>
@@ -1041,7 +900,7 @@ footer p {
 
 
 <!-- =========================================================
-     VIDEO INTRO
+     ORIGINAL VIDEO INTRO
 ========================================================= -->
 
 <section id="videoIntro">
@@ -1094,7 +953,7 @@ footer p {
 
 
 <!-- =========================================================
-     WEBSITE
+     ORIGINAL WEBSITE
 ========================================================= -->
 
 <main id="website">
@@ -1112,7 +971,6 @@ footer p {
 
         </div>
 
-
         <h1>
 
             8 TRACKS.<br>
@@ -1120,7 +978,6 @@ footer p {
             <span>1 COMMUNITY.</span>
 
         </h1>
-
 
         <p>
 
@@ -1140,10 +997,10 @@ footer p {
 
     <h2>
 
-        THE FUTURE IS BUILT BY
+        BUILD TOGETHER
 
         <span>
-            PEOPLE WHO CONNECT.
+            GROW TOGETHER.
         </span>
 
     </h2>
@@ -1158,11 +1015,15 @@ footer p {
     <div class="tracksHeader">
 
         <h2>
+
             THE TRACKS.
+
         </h2>
 
         <p>
+
             Eight paths. One connected community.
+
         </p>
 
     </div>
@@ -1285,7 +1146,9 @@ footer p {
 <section class="awaits section">
 
     <h2>
+
         WHAT AWAITS YOU.
+
     </h2>
 
 
@@ -1366,7 +1229,9 @@ footer p {
 <section class="join section">
 
     <h2>
+
         READY?
+
     </h2>
 
 
@@ -1397,7 +1262,9 @@ footer p {
 <section class="social section">
 
     <h2>
+
         STAY CONNECTED.
+
     </h2>
 
 
@@ -1438,29 +1305,30 @@ footer p {
 
 
         <!-- =================================================
-             NAME INPUT
+             FORM WAS HERE
+             NOW NAME INPUT
         ================================================== -->
 
         <form
-            id="nameForm"
             class="nameForm"
+            id="nameForm"
         >
 
             <input
-                id="nameInput"
                 type="text"
-                placeholder="WRITE YOUR FIRST NAME ONLY"
+                id="nameInput"
+                class="nameInput"
+                placeholder="Enter your name"
                 autocomplete="off"
-                spellcheck="false"
-                maxlength="30"
+                required
             >
 
             <button
                 type="submit"
-                aria-label="Submit"
+                class="nameSubmit"
             >
 
-                →
+                ENTER
 
             </button>
 
@@ -1482,10 +1350,9 @@ footer p {
 
     </p>
 
-
     <p>
 
-        BUILD TOGETHER GROW TOGETHER.
+        THE FUTURE IS BUILT BY PEOPLE WHO CONNECT.
 
     </p>
 
@@ -1496,33 +1363,104 @@ footer p {
 
 
 <!-- =========================================================
+     LOVE RAIN SCREEN
+========================================================= -->
+
+<div id="loveScreen">
+
+    <canvas id="loveCanvas"></canvas>
+
+</div>
+
+
+<!-- =========================================================
      THANK YOU SCREEN
 ========================================================= -->
 
 <div id="thankYouScreen">
 
-    <div>
+    <h1>Thank you</h1>
 
-        <div class="thankYouSmall">
-
-            RESPONSE RECEIVED
-
-        </div>
+</div>
 
 
-        <div class="thankYouTitle">
+<script>
 
-            THANK YOU.
+/* =========================================================
+   ORIGINAL VIDEO CODE
+========================================================= */
 
-        </div>
+const video =
+    document.getElementById("openingVideo");
+
+const videoIntro =
+    document.getElementById("videoIntro");
+
+const explore =
+    document.getElementById("explore");
+
+const tapHint =
+    document.getElementById("tapHint");
 
 
-        <div class="thankYouSub">
+/* =========================
+   AUTOPLAY
+========================= */
 
-            SEE YOU INSIDE THE COMMUNITY.
+video.play().catch(() => {
 
-        </div>
+    tapHint.style.opacity = "1";
 
-    </div>
+    tapHint.style.pointerEvents = "auto";
 
-</
+});
+
+
+/* =========================
+   FULLSCREEN
+========================= */
+
+async function enterFullscreen() {
+
+    try {
+
+        if (video.requestFullscreen) {
+
+            await video.requestFullscreen();
+
+        }
+
+        else if (video.webkitEnterFullscreen) {
+
+            video.webkitEnterFullscreen();
+
+        }
+
+        else if (video.parentElement.requestFullscreen) {
+
+            await video.parentElement.requestFullscreen();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Fullscreen requires user interaction on this browser."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   FIRST TAP
+========================= */
+
+videoIntro.addEventListener("click", () => {
+
+    enterFullscreen();
+
+    tapHint
