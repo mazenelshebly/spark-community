@@ -1,28 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BCU — BCU</title>
+<title>BCU-Obour Branch | Final Reveal</title>
 
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    background: #050A12;
-    color: #F5FAFF;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow-x: hidden;
-}
 
 :root {
     --black: #050A12;
@@ -35,994 +21,1573 @@ body {
     --line: rgba(141,219,255,.16);
 }
 
-/* =========================================================
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
+
+
+/* =========================
    VIDEO INTRO
-========================================================= */
+========================= */
 
 #videoIntro {
-    position: fixed;
-    inset: 0;
-    z-index: 9999;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
     background: #000;
     overflow: hidden;
-    transition:
-        opacity 1s ease,
-        visibility 1s ease;
 }
 
-#videoIntro.hidden {
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-}
-
-#introVideo {
-    position: absolute;
-    inset: 0;
+#openingVideo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
+    background: #000;
 }
 
 .videoOverlay {
     position: absolute;
     inset: 0;
+
     background:
         linear-gradient(
-            180deg,
-            rgba(0,0,0,.2),
-            rgba(0,0,0,.5)
+            to bottom,
+            rgba(2,8,18,.18),
+            rgba(2,8,18,.03) 48%,
+            rgba(2,8,18,.72)
         );
+
     pointer-events: none;
 }
 
-.tapHint {
+
+/* =========================
+   TAP HINT
+========================= */
+
+#tapHint {
     position: absolute;
     left: 50%;
-    bottom: 50px;
+    bottom: 32px;
     transform: translateX(-50%);
-    color: rgba(255,255,255,.65);
-    font-size: 10px;
-    letter-spacing: 4px;
+
+    z-index: 5;
+
+    padding: 12px 20px;
+
+    border: 1px solid rgba(141,219,255,.35);
+
+    background: rgba(5,10,18,.60);
+
+    backdrop-filter: blur(12px);
+
+    color: var(--white);
+
+    font-size: 11px;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    animation: pulse 2s infinite;
+
+    opacity: 0;
+
+    transition: .5s ease;
+
+    pointer-events: none;
 }
 
-@keyframes pulse {
+#videoIntro.videoReady #tapHint {
+    opacity: 1;
+}
+
+
+/* =========================
+   EXPLORE
+========================= */
+
+#explore {
+    position: absolute;
+
+    bottom: 35px;
+    left: 50%;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    z-index: 10;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transition: .7s ease;
+
+    text-align: center;
+}
+
+#explore.show {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+    pointer-events: auto;
+}
+
+.exploreText {
+    color: var(--white);
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.arrow {
+    color: var(--blue-light);
+
+    font-size: 24px;
+
+    animation: bounce 1.4s infinite;
+}
+
+@keyframes bounce {
+
     0%,100% {
-        opacity: .35;
+        transform: translateY(0);
     }
 
     50% {
-        opacity: 1;
+        transform: translateY(8px);
     }
+
 }
 
-#exploreBtn {
-    position: absolute;
-    left: 50%;
-    bottom: 90px;
-    transform: translateX(-50%);
-    padding: 15px 28px;
-    border: 1px solid rgba(255,255,255,.35);
-    background: rgba(0,0,0,.3);
-    color: white;
-    font-size: 11px;
-    font-weight: bold;
-    letter-spacing: 4px;
-    cursor: pointer;
-    backdrop-filter: blur(10px);
-    transition: .3s ease;
-}
 
-#exploreBtn:hover {
-    background: white;
-    color: black;
-}
-
-/* =========================================================
-   WEBSITE
-========================================================= */
+/* =========================
+   MAIN WEBSITE
+========================= */
 
 #website {
-    position: relative;
-    min-height: 100vh;
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(22,135,255,.10),
-            transparent 35%
-        ),
-        #050A12;
+    background: var(--black);
+    color: var(--white);
 }
 
 .section {
-    width: min(1100px, calc(100% - 40px));
-    margin: auto;
+    padding: 90px 7%;
 }
 
-/* =========================================================
+
+/* =========================
    HERO
-========================================================= */
+========================= */
 
 .hero {
-    min-height: 100vh;
+    min-height: 90vh;
+
     display: flex;
-    flex-direction: column;
+
+    align-items: center;
+
     justify-content: center;
-    padding: 80px 0;
-    position: relative;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(22,135,255,.16),
+            transparent 42%
+        ),
+
+        var(--black);
 }
 
-.heroTop {
-    color: var(--blue-light);
-    font-size: 11px;
+.heroInner {
+    max-width: 1000px;
+}
+
+.smallTitle {
+
+    font-size: 12px;
+
     letter-spacing: 5px;
-    font-weight: bold;
-    margin-bottom: 30px;
+
+    text-transform: uppercase;
+
+    color: var(--blue-light);
+
+    margin-bottom: 25px;
 }
 
 .hero h1 {
-    font-size: clamp(65px, 13vw, 170px);
-    line-height: .82;
-    letter-spacing: -8px;
-    max-width: 1000px;
-    text-transform: none;
-}
 
-.hero h1 span {
-    color: var(--blue-light);
-}
+    font-size:
+        clamp(50px, 9vw, 120px);
 
-.heroSub {
-    margin-top: 45px;
-    max-width: 650px;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.8;
-    letter-spacing: .5px;
-}
+    line-height: .9;
 
-.heroLine {
-    position: absolute;
-    bottom: 50px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background: var(--line);
-}
+    font-weight: 900;
 
-/* =========================================================
-   MESSAGE
-========================================================= */
-
-.message {
-    padding: 150px 0;
-    border-top: 1px solid var(--line);
-}
-
-.messageLabel {
-    color: var(--blue-light);
-    font-size: 10px;
-    letter-spacing: 5px;
-    margin-bottom: 35px;
-}
-
-.message h2 {
-    max-width: 900px;
-    font-size: clamp(40px, 7vw, 90px);
-    line-height: .98;
     letter-spacing: -4px;
 }
 
-.message p {
-    margin-top: 45px;
-    max-width: 700px;
+.hero h1 span {
+    color: var(--blue);
+}
+
+.hero p {
+
+    margin-top: 30px;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
     color: var(--muted);
-    font-size: 15px;
-    line-height: 1.9;
 }
 
-/* =========================================================
+
+/* =========================
+   FINAL MESSAGE
+========================= */
+
+.message {
+
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(22,135,255,.09),
+            transparent 48%
+        ),
+
+        var(--black);
+}
+
+.message h2 {
+
+    max-width: 1000px;
+
+    font-size:
+        clamp(38px, 7vw, 90px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+}
+
+.message h2 span {
+    color: var(--blue-light);
+}
+
+
+/* =========================
    TRACKS
-========================================================= */
-
-.tracks {
-    padding: 100px 0 150px;
-}
+========================= */
 
 .tracksHeader {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    margin-bottom: 50px;
-    gap: 30px;
+    margin-bottom: 45px;
 }
 
 .tracksHeader h2 {
-    font-size: clamp(45px, 8vw, 100px);
-    letter-spacing: -5px;
-    line-height: .85;
+
+    font-size:
+        clamp(40px, 6vw, 70px);
+
+    line-height: 1;
 }
 
-.tracksHeader span {
-    color: var(--blue-light);
-    font-size: 10px;
-    letter-spacing: 4px;
+.tracksHeader p {
+
+    margin-top: 15px;
+
+    color: var(--muted);
 }
 
 .trackGrid {
+
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    border-top: 1px solid var(--line);
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
 }
 
 .track {
-    min-height: 180px;
-    padding: 35px;
-    border-bottom: 1px solid var(--line);
-    transition: .35s ease;
-    position: relative;
-    overflow: hidden;
-}
 
-.track:nth-child(odd) {
-    border-right: 1px solid var(--line);
-}
+    min-height: 190px;
 
-.trackNumber {
-    color: var(--blue-light);
-    font-size: 10px;
-    letter-spacing: 3px;
-    margin-bottom: 35px;
-}
+    background:
 
-.track h3 {
-    font-size: clamp(25px, 3vw, 40px);
-    letter-spacing: -1px;
-}
+        linear-gradient(
+            145deg,
+            rgba(22,135,255,.10),
+            rgba(8,21,37,.92)
+        );
 
-.track p {
-    margin-top: 15px;
-    color: var(--muted);
-    font-size: 12px;
-    line-height: 1.6;
-}
+    border:
+        1px solid var(--line);
 
-.track::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    background: var(--blue-light);
-    bottom: 0;
-    left: 0;
-    transition: .4s ease;
+    color: var(--white);
+
+    padding: 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    transition: .3s ease;
 }
 
 .track:hover {
-    background: rgba(22,135,255,.05);
+
+    border-color:
+        rgba(85,183,255,.65);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(22,135,255,.22),
+            rgba(8,21,37,.98)
+        );
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,80,180,.18);
 }
 
-.track:hover::after {
-    width: 100%;
+.trackNumber {
+
+    font-size: 12px;
+
+    color: var(--blue-light);
+
+    opacity: .8;
 }
 
-/* =========================================================
-   AWAITS
-========================================================= */
+.trackName {
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   WHAT AWAITS
+========================= */
 
 .awaits {
-    padding: 150px 0;
-    border-top: 1px solid var(--line);
+
+    background:
+        var(--deep-blue);
+
+    color: var(--white);
 }
 
 .awaits h2 {
-    font-size: clamp(50px, 9vw, 110px);
-    letter-spacing: -6px;
-    line-height: .85;
+
+    font-size:
+        clamp(40px, 6vw, 75px);
+
+    margin-bottom: 50px;
 }
 
-.awaitList {
-    margin-top: 80px;
-    border-top: 1px solid var(--line);
+.awaitsGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
 }
 
-.awaitItem {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    padding: 30px 0;
-    border-bottom: 1px solid var(--line);
+.awaitsItem {
+
+    border-top:
+        1px solid var(--line);
+
+    padding-top: 20px;
 }
 
-.awaitNumber {
+.awaitsItem h3 {
+
     color: var(--blue-light);
-    font-size: 11px;
-    letter-spacing: 3px;
+
+    font-size: 23px;
+
+    margin-bottom: 12px;
 }
 
-.awaitItem h3 {
-    font-size: 22px;
-}
+.awaitsItem p {
 
-.awaitItem p {
-    margin-left: auto;
-    max-width: 400px;
     color: var(--muted);
-    font-size: 12px;
+
     line-height: 1.6;
 }
 
-/* =========================================================
+
+/* =========================
    JOIN
-========================================================= */
+========================= */
 
 .join {
-    padding: 170px 0;
-    text-align: center;
-    border-top: 1px solid var(--line);
-}
 
-.joinLabel {
-    color: var(--blue-light);
-    font-size: 10px;
-    letter-spacing: 5px;
-    margin-bottom: 35px;
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(85,183,255,.18),
+            transparent 45%
+        ),
+
+        #07111F;
+
+    color: var(--white);
+
+    text-align: center;
 }
 
 .join h2 {
-    font-size: clamp(55px, 11vw, 140px);
-    letter-spacing: -8px;
+
+    font-size:
+        clamp(60px, 12vw, 150px);
+
     line-height: .8;
+
+    letter-spacing: -5px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--white),
+            var(--blue-light)
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
 }
 
 .join p {
-    margin: 40px auto 0;
+
+    margin: 30px auto;
+
     max-width: 550px;
+
+    line-height: 1.6;
+
     color: var(--muted);
-    line-height: 1.8;
-    font-size: 13px;
 }
 
-/* =========================================================
+.joinButton {
+
+    display: inline-block;
+
+    padding: 17px 35px;
+
+    background: var(--blue);
+
+    color: white;
+
+    border:
+        1px solid var(--blue-light);
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    transition: .3s ease;
+
+    box-shadow:
+        0 10px 35px
+        rgba(22,135,255,.20);
+}
+
+.joinButton:hover {
+
+    background:
+        var(--blue-light);
+
+    color:
+        var(--black);
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================
    SOCIAL
-========================================================= */
+========================= */
 
 .social {
-    padding: 100px 0 140px;
-    border-top: 1px solid var(--line);
+
+    background:
+        #050A12;
+
+    text-align: center;
 }
 
 .social h2 {
-    font-size: 12px;
-    letter-spacing: 5px;
-    color: var(--blue-light);
+
+    font-size:
+        clamp(38px, 6vw, 70px);
+
     margin-bottom: 40px;
 }
 
 .socialLinks {
+
     display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
     flex-wrap: wrap;
-    gap: 10px;
+
+    gap: 12px;
 }
 
-.socialLinks > a {
-    height: 49px;
-    padding: 0 22px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid var(--line);
-    color: var(--white);
+.socialLinks a {
+
+    display: inline-block;
+
+    padding: 15px 25px;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(8,21,37,.7);
+
+    color:
+        var(--white);
+
     text-decoration: none;
-    font-size: 10px;
+
     font-weight: bold;
-    letter-spacing: 3px;
+
     transition: .3s ease;
 }
 
-.socialLinks > a:hover {
-    border-color: var(--blue-light);
-    background: rgba(22,135,255,.1);
+.socialLinks a:hover {
+
+    background:
+        var(--blue);
+
+    border-color:
+        var(--blue-light);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(22,135,255,.18);
 }
 
-/* =========================================================
+
+/* =========================
    NAME INPUT
-========================================================= */
+========================= */
 
 .nameForm {
+
     display: flex;
+
     height: 49px;
-    border: 1px solid var(--line);
-    background: rgba(8,21,37,.7);
+
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(8,21,37,.7);
+
     transition: .3s ease;
 }
 
 .nameForm:focus-within {
-    border-color: var(--blue-light);
+
+    border-color:
+        var(--blue-light);
+
     box-shadow:
-        0 0 25px rgba(22,135,255,.15);
+        0 10px 30px
+        rgba(22,135,255,.12);
 }
 
 .nameForm input {
-    width: 280px;
+
+    width: 290px;
+
     border: none;
+
     outline: none;
+
     background: transparent;
+
     color: var(--white);
+
     padding: 0 16px;
-    font-family: Arial, Helvetica, sans-serif;
+
+    font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
     font-size: 11px;
+
     font-weight: bold;
+
     letter-spacing: 2px;
+
     text-transform: uppercase;
 }
 
 .nameForm input::placeholder {
-    color: #7890A8;
-    opacity: 1;
+
+    color:
+        var(--muted);
+
+    opacity: .75;
 }
 
 .nameForm button {
+
     width: 55px;
+
     border: none;
-    border-left: 1px solid var(--line);
+
+    border-left:
+        1px solid var(--line);
+
     background: transparent;
-    color: var(--blue-light);
+
+    color:
+        var(--blue-light);
+
     font-size: 23px;
+
     cursor: pointer;
-    transition: .25s ease;
+
+    transition: .3s ease;
 }
 
 .nameForm button:hover {
-    background: var(--blue);
-    color: white;
+
+    background:
+        var(--blue);
+
+    color:
+        white;
 }
 
-/* =========================================================
+
+/* =========================
    FOOTER
-========================================================= */
+========================= */
 
 footer {
-    width: min(1100px, calc(100% - 40px));
-    margin: auto;
-    padding: 30px 0 45px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: space-between;
-    color: #63788E;
-    font-size: 9px;
-    letter-spacing: 3px;
+
+    background:
+        #03070D;
+
+    color:
+        var(--white);
+
+    padding:
+        30px 7%;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+    flex-wrap:
+        wrap;
+
+    border-top:
+        1px solid
+        rgba(141,219,255,.08);
 }
 
-/* =========================================================
+footer p {
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+}
+
+
+/* =========================
    THANK YOU SCREEN
-========================================================= */
+========================= */
 
 #thankYouScreen {
+
     position: fixed;
+
     inset: 0;
-    z-index: 10000;
-    background: #03070D;
+
+    z-index: 9998;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     text-align: center;
+
+    background:
+        #03070D;
+
     opacity: 0;
+
     visibility: hidden;
+
     pointer-events: none;
-    transition: opacity .8s ease;
+
+    transition:
+        opacity .8s ease,
+        visibility .8s ease;
 }
 
 #thankYouScreen.active {
+
     opacity: 1;
+
     visibility: visible;
+
     pointer-events: auto;
 }
 
 .thankYouInner {
+
     padding: 30px;
 }
 
 .thankYouSmall {
-    color: var(--blue-light);
+
+    color:
+        var(--blue-light);
+
     font-size: 11px;
-    letter-spacing: 6px;
+
+    letter-spacing: 5px;
+
     margin-bottom: 25px;
 }
 
 .thankYouInner h1 {
-    font-size: clamp(60px, 13vw, 170px);
+
+    font-size:
+        clamp(55px, 12vw, 150px);
+
     line-height: .85;
-    letter-spacing: -7px;
+
+    letter-spacing: -5px;
 }
 
 .thankYouInner p {
-    margin-top: 30px;
-    color: var(--muted);
-    font-size: 13px;
-    letter-spacing: 2px;
+
+    margin-top: 25px;
+
+    color:
+        var(--muted);
+
+    font-size: 12px;
+
+    letter-spacing: 3px;
 }
 
-/* =========================================================
+
+/* =========================
    LOVE RAIN
-========================================================= */
+========================= */
 
 #loveRainScreen {
+
     position: fixed;
+
     inset: 0;
-    z-index: 20000;
+
+    z-index: 99999;
+
     background: #000;
+
     display: none;
+
     overflow: hidden;
 }
 
 #loveRainScreen.active {
+
     display: block;
 }
 
 #loveCanvas {
+
     position: absolute;
+
     inset: 0;
+
     width: 100%;
+
     height: 100%;
+
     display: block;
 }
 
 .loveFinal {
+
     position: absolute;
+
     inset: 0;
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     pointer-events: none;
+
     opacity: 0;
-    transition: opacity 1.5s ease;
+
+    transition:
+        opacity 1.5s ease;
 }
 
 .loveFinal.show {
+
     opacity: 1;
 }
 
 .loveFinalText {
-    position: relative;
-    margin-top: 2%;
-    color: #fff;
-    font-family: Georgia, serif;
-    font-size: clamp(22px, 4vw, 55px);
-    letter-spacing: 1px;
+
+    color: white;
+
+    font-family:
+        Georgia,
+        serif;
+
+    font-size:
+        clamp(25px, 5vw, 60px);
+
     text-align: center;
+
+    letter-spacing: 1px;
+
     text-shadow:
-        0 0 5px #fff,
-        0 0 15px #fff,
-        0 0 35px rgba(255,210,80,.9);
+        0 0 5px white,
+        0 0 15px white,
+        0 0 30px rgba(255,100,180,.9);
 }
 
 .loveFinalText span {
+
     color: #FFD86A;
+
+    text-shadow:
+        0 0 5px #FFD86A,
+        0 0 15px #FFD86A,
+        0 0 30px rgba(255,216,106,.8);
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 800px) {
 
-    .hero h1 {
-        letter-spacing: -5px;
-        font-size: clamp(55px, 12vw, 110px);
-    }
-
     .trackGrid {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    .track:nth-child(odd) {
-        border-right: none;
+    .awaitsGrid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
     }
 
-    .awaitItem {
-        align-items: flex-start;
-        flex-direction: column;
-        gap: 12px;
+    .section {
+
+        padding:
+            70px 6%;
     }
 
-    .awaitItem p {
-        margin-left: 0;
-    }
+    .hero h1 {
 
-    .socialLinks {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .socialLinks > a {
-        width: 100%;
-    }
-
-    .nameForm {
-        width: 100%;
+        letter-spacing:
+            -2px;
     }
 
     .nameForm input {
-        width: 100%;
+
+        width: 250px;
     }
 
-    footer {
-        flex-direction: column;
-        gap: 15px;
-    }
 }
+
 
 @media (max-width: 500px) {
 
-    .section {
-        width: calc(100% - 30px);
-    }
+    .trackGrid,
+    .awaitsGrid {
 
-    .hero {
-        padding: 60px 0;
-    }
-
-    .hero h1 {
-        font-size: 58px;
-        letter-spacing: -4px;
-    }
-
-    .message,
-    .tracks,
-    .awaits,
-    .join {
-        padding: 100px 0;
+        grid-template-columns:
+            1fr;
     }
 
     .track {
-        padding: 25px;
+
+        min-height:
+            150px;
     }
 
-    .join h2 {
-        letter-spacing: -5px;
+    .socialLinks {
+
+        flex-direction:
+            column;
+    }
+
+    .socialLinks a,
+    .nameForm {
+
+        width:
+            100%;
     }
 
     .nameForm input {
-        font-size: 9px;
-        letter-spacing: 1.5px;
+
+        width:
+            100%;
     }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- =======================================================
+
+<!-- =========================
      VIDEO INTRO
-======================================================= -->
+========================= -->
 
-<div id="videoIntro">
+<section id="videoIntro">
 
-    <video
-        id="introVideo"
-        autoplay
-        muted
-        playsinline
-        preload="auto"
+<video
+    id="openingVideo"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+>
+
+    <source
+        src="video/opening.mp4"
+        type="video/mp4"
     >
-        <source src="video/opening.mp4" type="video/mp4">
-    </video>
 
-    <div class="videoOverlay"></div>
+    Your browser does not support HTML5 video.
 
-    <div class="tapHint">
-        TAP TO ENTER
-    </div>
+</video>
 
-    <button id="exploreBtn">
-        ENTER
-    </button>
+
+<div class="videoOverlay"></div>
+
+
+<div id="tapHint">
+
+    TAP TO ENTER FULLSCREEN
 
 </div>
 
 
-<!-- =======================================================
+<div id="explore">
+
+    <div class="exploreText">
+
+        Explore the community
+
+    </div>
+
+    <div class="arrow">
+
+        ↓
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
      WEBSITE
-======================================================= -->
+========================= -->
 
 <main id="website">
 
-    <!-- HERO -->
 
-    <section class="hero section">
+<!-- HERO -->
 
-        <div class="heroTop">
-            BCU — OBOUR BRANCH
+<section class="hero section">
+
+    <div class="heroInner">
+
+
+        <div class="smallTitle">
+
+            BCU-Obour Branch
+
         </div>
+
 
         <h1>
-            Bright Code Union<span>.</span>
+
+            8 TRACKS.<br>
+
+            <span>1 COMMUNITY.</span>
+
         </h1>
 
-        <p class="heroSub">
-            A community built for people who want to learn,
-            create, collaborate and turn ideas into something real.
-        </p>
-
-        <div class="heroLine"></div>
-
-    </section>
-
-
-    <!-- MESSAGE -->
-
-    <section class="message section">
-
-        <div class="messageLabel">
-            THIS IS MORE THAN A COMMUNITY.
-        </div>
-
-        <h2>
-            YOU DON'T JUST JOIN.
-            <br>
-            YOU <span style="color:#55B7FF;">BUILD.</span>
-        </h2>
 
         <p>
-            BCU is a space where different minds meet.
-            Different skills connect.
-            And every track becomes another way to create
-            something bigger together.
+
+            You found the final piece.
+            Now discover what comes next.
+
         </p>
 
-    </section>
+
+    </div>
+
+</section>
 
 
-    <!-- TRACKS -->
 
-    <section class="tracks section">
+<!-- FINAL MESSAGE -->
 
-        <div class="tracksHeader">
+<section class="message section">
 
-            <h2>
-                TRACKS.
-            </h2>
+    <h2>
 
-            <span>
-                FIND YOUR DIRECTION
+        THE FUTURE IS BUILT BY
+
+        <span>
+            PEOPLE WHO CONNECT.
+        </span>
+
+    </h2>
+
+</section>
+
+
+
+<!-- TRACKS -->
+
+<section class="section">
+
+
+    <div class="tracksHeader">
+
+        <h2>
+
+            THE TRACKS.
+
+        </h2>
+
+
+        <p>
+
+            Eight paths. One connected community.
+
+        </p>
+
+    </div>
+
+
+
+    <div class="trackGrid">
+
+
+        <div class="track">
+
+            <span class="trackNumber">
+                01
+            </span>
+
+            <span class="trackName">
+                WEB DEVELOPMENT
             </span>
 
         </div>
 
-        <div class="trackGrid">
 
-            <div class="track">
-                <div class="trackNumber">01</div>
-                <h3>WEB DEVELOPMENT</h3>
-                <p>
-                    Build modern websites and digital experiences
-                    from idea to deployment.
-                </p>
-            </div>
+        <div class="track">
 
-            <div class="track">
-                <div class="trackNumber">02</div>
-                <h3>DATA ANALYSIS</h3>
-                <p>
-                    Turn raw information into insights,
-                    decisions and stories.
-                </p>
-            </div>
+            <span class="trackNumber">
+                02
+            </span>
 
-            <div class="track">
-                <div class="trackNumber">03</div>
-                <h3>CYBER SECURITY</h3>
-                <p>
-                    Understand digital security and
-                    build a stronger online world.
-                </p>
-            </div>
-
-            <div class="track">
-                <div class="trackNumber">04</div>
-                <h3>BIOINFORMATICS</h3>
-                <p>
-                    Explore the intersection between
-                    biology, data and computation.
-                </p>
-            </div>
-
-            <div class="track">
-                <div class="trackNumber">05</div>
-                <h3>MARKETING</h3>
-                <p>
-                    Learn how ideas become brands,
-                    campaigns and communities.
-                </p>
-            </div>
-
-            <div class="track">
-                <div class="trackNumber">06</div>
-                <h3>HR</h3>
-                <p>
-                    Develop people, culture and the systems
-                    behind successful teams.
-                </p>
-            </div>
-
-            <div class="track">
-                <div class="trackNumber">07</div>
-                <h3>LOGISTICS</h3>
-                <p>
-                    Learn how planning, operations and
-                    coordination turn complexity into flow.
-                </p>
-            </div>
-
-            <div class="track">
-                <div class="trackNumber">08</div>
-                <h3>GENERAL SKILLS</h3>
-                <p>
-                    Communication, teamwork, leadership
-                    and everything between the lines.
-                </p>
-            </div>
+            <span class="trackName">
+                DATA ANALYSIS
+            </span>
 
         </div>
 
-    </section>
 
+        <div class="track">
 
-    <!-- WHAT AWAITS -->
+            <span class="trackNumber">
+                03
+            </span>
 
-    <section class="awaits section">
-
-        <h2>
-            WHAT<br>
-            AWAITS.
-        </h2>
-
-        <div class="awaitList">
-
-            <div class="awaitItem">
-                <div class="awaitNumber">01</div>
-                <h3>LEARN</h3>
-                <p>
-                    Knowledge that actually moves with you.
-                </p>
-            </div>
-
-            <div class="awaitItem">
-                <div class="awaitNumber">02</div>
-                <h3>BUILD</h3>
-                <p>
-                    Projects that turn theory into experience.
-                </p>
-            </div>
-
-            <div class="awaitItem">
-                <div class="awaitNumber">03</div>
-                <h3>CONNECT</h3>
-                <p>
-                    Meet people who are moving in the same direction.
-                </p>
-            </div>
-
-            <div class="awaitItem">
-                <div class="awaitNumber">04</div>
-                <h3>GROW</h3>
-                <p>
-                    Become better than the version of yourself
-                    that started here.
-                </p>
-            </div>
+            <span class="trackName">
+                CYBER SECURITY
+            </span>
 
         </div>
 
-    </section>
 
+        <div class="track">
 
-    <!-- JOIN -->
+            <span class="trackNumber">
+                04
+            </span>
 
-    <section class="join section">
+            <span class="trackName">
+                BIOINFORMATICS
+            </span>
 
-        <div class="joinLabel">
-            YOUR NEXT CHAPTER
         </div>
 
-        <h2>
-            JOIN<br>
-            THE<br>
-            COMMUNITY.
-        </h2>
 
-        <p>
-            One community.
-            Different minds.
-            Endless possibilities.
-        </p>
+        <div class="track">
 
-    </section>
+            <span class="trackNumber">
+                05
+            </span>
+
+            <span class="trackName">
+                MARKETING
+            </span>
+
+        </div>
 
 
-    <!-- SOCIAL -->
+        <div class="track">
 
-    <section class="social section">
+            <span class="trackNumber">
+                06
+            </span>
 
-        <h2>
-            STAY CONNECTED.
-        </h2>
+            <span class="trackName">
+                HR
+            </span>
 
-        <div class="socialLinks">
+        </div>
 
-            <a
-                href="https://www.instagram.com/brightcodeunion?stkn=MXh1emtqd2xzaGtvbg=="
-                target="_blank"
-                rel="noopener noreferrer"
+
+        <div class="track">
+
+            <span class="trackNumber">
+                07
+            </span>
+
+            <span class="trackName">
+                LOGISTICS
+            </span>
+
+        </div>
+
+
+        <div class="track">
+
+            <span class="trackNumber">
+                08
+            </span>
+
+            <span class="trackName">
+                GENERAL SKILLS
+            </span>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- WHAT AWAITS -->
+
+<section class="awaits section">
+
+
+    <h2>
+
+        WHAT AWAITS YOU.
+
+    </h2>
+
+
+    <div class="awaitsGrid">
+
+
+        <div class="awaitsItem">
+
+            <h3>
+                WORKSHOPS
+            </h3>
+
+            <p>
+
+                Practical sessions designed
+                to turn knowledge into real skills.
+
+            </p>
+
+        </div>
+
+
+        <div class="awaitsItem">
+
+            <h3>
+                CHALLENGES
+            </h3>
+
+            <p>
+
+                Test yourself, compete
+                and push your limits.
+
+            </p>
+
+        </div>
+
+
+        <div class="awaitsItem">
+
+            <h3>
+                PROJECTS
+            </h3>
+
+            <p>
+
+                Build things that actually
+                connect you to the real world.
+
+            </p>
+
+        </div>
+
+
+        <div class="awaitsItem">
+
+            <h3>
+                COMMUNITY
+            </h3>
+
+            <p>
+
+                Meet people, exchange ideas
+                and grow together.
+
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- JOIN -->
+
+<section class="join section">
+
+
+    <h2>
+
+        READY?
+
+    </h2>
+
+
+    <p>
+
+        Your next skill starts here.
+        Join the community and discover your path.
+
+    </p>
+
+
+    <a
+        class="joinButton"
+        href="https://www.facebook.com/share/1CRonkPQkN/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
+
+        JOIN THE COMMUNITY
+
+    </a>
+
+
+</section>
+
+
+
+<!-- SOCIAL -->
+
+<section class="social section">
+
+
+    <h2>
+
+        STAY CONNECTED.
+
+    </h2>
+
+
+    <div class="socialLinks">
+
+
+        <a
+            href="https://www.instagram.com/brightcodeunion?stkn=MXh1emtqd2xzaGtvbg=="
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            INSTAGRAM
+
+        </a>
+
+
+        <a
+            href="https://www.facebook.com/share/1CRonkPQkN/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            FACEBOOK
+
+        </a>
+
+
+        <a
+            href="https://www.linkedin.com/company/bright-code-union/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+
+            LINKEDIN
+
+        </a>
+
+
+        <!-- FORM REPLACED WITH NAME INPUT -->
+
+        <form
+            id="nameForm"
+            class="nameForm"
+        >
+
+            <input
+                id="nameInput"
+                type="text"
+                placeholder="WRITE YOUR FIRST NAME ONLY"
+                autocomplete="off"
+                autocapitalize="words"
+                spellcheck="false"
+                maxlength="30"
+                required
             >
-                INSTAGRAM
-            </a>
 
-            <a
-                href="https://www.facebook.com/share/1CRonkPQkN/"
-                target="_blank"
-                rel="noopener noreferrer"
+            <button
+                type="submit"
+                aria-label="Submit"
             >
-                FACEBOOK
-            </a>
 
-            <a
-                href="https://www.linkedin.com/company/bright-code-union/"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                LINKEDIN
-            </a>
+                →
 
-            <!-- DIRECT NAME INPUT -->
+            </button>
 
-            <form id="nameForm" class="nameForm">
-
-                <input
-                    id="nameInput"
-                    type="text"
-                    placeholder="WRITE YOUR FIRST NAME ONLY"
-                    autocomplete="off"
-                    autocapitalize="words"
-                    spellcheck="false"
-                    maxlength="30"
-                    required
-                >
-
-                <button
-                    type="submit"
-                    aria-label="Submit name"
-                >
-                    →
-                </button>
-
-            </form>
-
-        </div>
-
-    </section>
+        </form>
 
 
-    <!-- FOOTER -->
+    </div>
 
-    <footer>
+</section>
 
-        <span>
-            BCU — OBOUR
-        </span>
 
-        <span>
-            © 2026
-        </span>
 
-    </footer>
+<!-- FOOTER -->
+
+<footer>
+
+
+    <p>
+
+        BCU-Obour Branch
+
+    </p>
+
+
+    <p>
+
+        THE FUTURE IS BUILT BY PEOPLE WHO CONNECT.
+
+    </p>
+
+
+</footer>
 
 </main>
 
 
-<!-- =======================================================
+<!-- =========================
      THANK YOU SCREEN
-====================
+========================= -->
+
+<div id="thankYouScreen">
+
+    <div class="thankYouInner">
+
+        <div class="thankYouSmall">
+
+            RESPONSE RECEIVED
+
+        </div>
+
+        <h1>
+
+            THANK YOU.
+
+        </h1>
+
+        <p>
+
+            YOUR RESPONSE HAS BEEN RECORDED.
+
+        </p>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     LOVE RAIN SCREEN
+========================= -->
+
+<div id="loveRainScreen">
+
+    <canvas id="loveCanvas"></canvas>
+
+    <div class="loveFinal">
+
+        <div class="loveFinalText">
+
+            I love you <span>saher</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+const video =
+    document.getElementById("openingVideo");
+
+const videoIntro =
+    document.getElementById("videoIntro");
+
+const explore =
+    document.getElementById("explore");
+
+const tapHint =
+    document.getElementById("tapHint");
+
+
+/* =========================
+   AUTOPLAY
+========================= */
+
+video.play().catch(() => {
+
+    tapHint.style.opacity = "1";
+
+    tapHint.style.pointerEvents = "auto";
+
+});
+
+
+
+/* ========
