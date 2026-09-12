@@ -1,112 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>WEB DEVELOPMENT | SPARK</title>
-/* ================================
-   SPARK DYNAMIC SYSTEM
-================================ */
-
-#spark-stage {
-    position: fixed;
-    right: 6vw;
-    bottom: 4vh;
-
-    width: 190px;
-    height: 240px;
-
-    z-index: 20;
-    pointer-events: none;
-}
-
-#spark-character {
-    position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    object-fit: contain;
-
-    filter:
-        drop-shadow(0 0 12px rgba(123,232,246,.25));
-
-    transform-origin: center bottom;
-
-    animation: sparkIdle 3s ease-in-out infinite;
-}
-
-#spark-glow {
-    position: absolute;
-
-    width: 130px;
-    height: 130px;
-
-    left: 30px;
-    bottom: 15px;
-
-    border-radius: 50%;
-
-    background: rgba(123,232,246,.13);
-
-    filter: blur(35px);
-
-    animation: sparkGlow 2.5s ease-in-out infinite;
-}
-
-#spark-canvas {
-    position: fixed;
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    pointer-events: none;
-
-    z-index: 10;
-}
-
-@keyframes sparkIdle {
-
-    0%, 100% {
-        transform: translateY(0) rotate(-1deg);
-    }
-
-    50% {
-        transform: translateY(-10px) rotate(1deg);
-    }
-
-}
-
-@keyframes sparkGlow {
-
-    0%, 100% {
-        transform: scale(.8);
-        opacity: .35;
-    }
-
-    50% {
-        transform: scale(1.15);
-        opacity: .8;
-    }
-
-}
-
-/* Mobile */
-
-@media (max-width: 700px) {
-
-    #spark-stage {
-        width: 110px;
-        height: 145px;
-
-        right: 10px;
-        bottom: 10px;
-    }
-
-}
-  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>WEB DEVELOPMENT | SPARK</title>  <style>
     * {
       box-sizing: border-box;
       margin: 0;
@@ -118,9 +12,11 @@
       background: #0A0A0A;
       color: #F7F4EB;
       font-family: Arial, sans-serif;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       padding: 25px;
     }
 
@@ -128,6 +24,9 @@
       width: 100%;
       max-width: 700px;
       text-align: center;
+
+      position: relative;
+      z-index: 30;
     }
 
     .track {
@@ -157,16 +56,25 @@
     button {
       width: 100%;
       padding: 18px;
+
       background: #111;
       color: #F7F4EB;
+
       border: 1px solid #333;
       border-radius: 8px;
+
       font-size: 16px;
       cursor: pointer;
+
+      transition: 0.2s ease;
     }
 
     button:hover {
       border-color: #7BE8F6;
+    }
+
+    button:disabled {
+      cursor: default;
     }
 
     #result {
@@ -190,56 +98,176 @@
       color: #FF5A2A;
       letter-spacing: 3px;
     }
-  </style>
-</head>
-<div id="spark-stage">
-    <div id="spark-glow"></div>
 
-    <img
-        id="spark-character"
-        src="assets/spark-web.png"
-        alt="SPARK Web Development"
-    >
+
+    /* ================================
+       SPARK CHARACTER
+    ================================ */
+
+    #spark-stage {
+      position: fixed;
+
+      right: 6vw;
+      bottom: 4vh;
+
+      width: 190px;
+      height: 240px;
+
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    #spark-character {
+      position: absolute;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      filter:
+        drop-shadow(0 0 12px rgba(123, 232, 246, 0.25));
+
+      transform-origin: center bottom;
+
+      animation: sparkIdle 3s ease-in-out infinite;
+    }
+
+    #spark-glow {
+      position: absolute;
+
+      width: 130px;
+      height: 130px;
+
+      left: 30px;
+      bottom: 15px;
+
+      border-radius: 50%;
+
+      background: rgba(123, 232, 246, 0.13);
+
+      filter: blur(35px);
+
+      animation: sparkGlow 2.5s ease-in-out infinite;
+    }
+
+
+    /* ================================
+       SPARK CANVAS
+    ================================ */
+
+    #spark-canvas {
+      position: fixed;
+
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      pointer-events: none;
+
+      z-index: 10;
+    }
+
+
+    /* ================================
+       ANIMATIONS
+    ================================ */
+
+    @keyframes sparkIdle {
+
+      0%,
+      100% {
+        transform: translateY(0) rotate(-1deg);
+      }
+
+      50% {
+        transform: translateY(-10px) rotate(1deg);
+      }
+
+    }
+
+    @keyframes sparkGlow {
+
+      0%,
+      100% {
+        transform: scale(0.8);
+        opacity: 0.35;
+      }
+
+      50% {
+        transform: scale(1.15);
+        opacity: 0.8;
+      }
+
+    }
+
+
+    /* ================================
+       MOBILE
+    ================================ */
+
+    @media (max-width: 700px) {
+
+      #spark-stage {
+        width: 110px;
+        height: 145px;
+
+        right: 10px;
+        bottom: 10px;
+      }
+
+    }
+  </style></head><body>  <!-- SPARK CHARACTER -->  <div id="spark-stage"><div id="spark-glow"></div>
+
+<img
+  id="spark-character"
+  src="assets/spark-web.png"
+  alt="SPARK Web Development"
+>
+
+  </div>  <!-- SPARK PARTICLES --><canvas id="spark-canvas"></canvas>
+
+  <!-- MAIN CONTENT -->  <div class="box"><div class="track">
+  TRACK 01 / WEB DEVELOPMENT
 </div>
 
-<canvas id="spark-canvas"></canvas>
-<body>
+<h1>
+  THE FIRST CLUE
+</h1>
 
-  <div class="box">
+<div class="question">
+  Which layer controls the structure of a webpage?
+</div>
 
-    <div class="track">TRACK 01 / WEB DEVELOPMENT</div>
+<div class="options">
 
-    <h1>THE FIRST CLUE</h1>
+  <button onclick="checkAnswer(this, false)">
+    CSS
+  </button>
 
-    <div class="question">
-      Which layer controls the structure of a webpage?
-    </div>
+  <button onclick="checkAnswer(this, true)">
+    HTML
+  </button>
 
-    <div class="options">
+  <button onclick="checkAnswer(this, false)">
+    JavaScript
+  </button>
 
-      <button onclick="checkAnswer(this, false)">
-        CSS
-      </button>
+  <button onclick="checkAnswer(this, false)">
+    SQL
+  </button>
 
-      <button onclick="checkAnswer(this, true)">
-        HTML
-      </button>
+</div>
 
-      <button onclick="checkAnswer(this, false)">
-        JavaScript
-      </button>
+<div id="result"></div>
 
-      <button onclick="checkAnswer(this, false)">
-        SQL
-      </button>
+  </div>  <script>
 
-    </div>
+    /* =========================================
+       ANSWER SYSTEM
+    ========================================= */
 
-    <div id="result"></div>
-
-  </div>
-
-  <script>
     function checkAnswer(button, correct) {
 
       const result = document.getElementById("result");
@@ -264,57 +292,72 @@
         `;
 
       }
+
     }
-  </script>
-/* =========================================
-   SPARK PARTICLE ENGINE
-========================================= */
-
-const canvas = document.getElementById("spark-canvas");
-const ctx = canvas.getContext("2d");
-
-let width;
-let height;
-
-function resizeSparkCanvas() {
-
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-
-}
-
-resizeSparkCanvas();
-
-window.addEventListener("resize", resizeSparkCanvas);
 
 
-/* Mouse */
+    /* =========================================
+       SPARK PARTICLE ENGINE
+    ========================================= */
 
-const sparkMouse = {
-    x: width / 2,
-    y: height / 2
-};
+    const canvas = document.getElementById("spark-canvas");
+    const ctx = canvas.getContext("2d");
 
-
-/* Particles */
-
-const sparkParticles = [];
-
-const codeSymbols = [
-    "</>",
-    "{ }",
-    "01",
-    "[]",
-    "&&",
-    ";",
-    "/>",
-    "<>"
-];
+    let width;
+    let height;
 
 
-for (let i = 0; i < 55; i++) {
+    /* Canvas Size */
 
-    sparkParticles.push({
+    function resizeSparkCanvas() {
+
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+
+    }
+
+    resizeSparkCanvas();
+
+    window.addEventListener("resize", resizeSparkCanvas);
+
+
+    /* Mouse */
+
+    const sparkMouse = {
+
+      x: window.innerWidth / 2,
+      y: window.innerHeight / 2
+
+    };
+
+
+    window.addEventListener("mousemove", function (event) {
+
+      sparkMouse.x = event.clientX;
+      sparkMouse.y = event.clientY;
+
+    });
+
+
+    /* Particles */
+
+    const sparkParticles = [];
+
+    const codeSymbols = [
+      "</>",
+      "{ }",
+      "01",
+      "[]",
+      "&&",
+      ";",
+      "/>",
+      "<>"
+    ];
+
+
+    for (let i = 0; i < 55; i++) {
+
+      sparkParticles.push({
 
         x: Math.random() * width,
         y: Math.random() * height,
@@ -325,56 +368,58 @@ for (let i = 0; i < 55; i++) {
         size: Math.random() * 10 + 8,
 
         symbol:
-            codeSymbols[
-                Math.floor(
-                    Math.random() * codeSymbols.length
-                )
-            ],
+          codeSymbols[
+            Math.floor(
+              Math.random() * codeSymbols.length
+            )
+          ],
 
-        opacity: Math.random() * 0.35 + 0.05
+        opacity:
+          Math.random() * 0.35 + 0.05
 
-    });
+      });
 
-}
-
-
-/* Mouse interaction */
-
-window.addEventListener("mousemove", function(event) {
-
-    sparkMouse.x = event.clientX;
-    sparkMouse.y = event.clientY;
-
-});
+    }
 
 
-/* Animation */
+    /* Animation */
 
-function animateSpark() {
+    function animateSpark() {
 
-    ctx.clearRect(0, 0, width, height);
+      ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+      );
 
-    sparkParticles.forEach(p => {
 
-        const dx = sparkMouse.x - p.x;
-        const dy = sparkMouse.y - p.y;
+      sparkParticles.forEach(p => {
+
+        const dx =
+          sparkMouse.x - p.x;
+
+        const dy =
+          sparkMouse.y - p.y;
 
         const distance =
-            Math.sqrt(dx * dx + dy * dy);
+          Math.sqrt(
+            dx * dx +
+            dy * dy
+          );
 
 
-        /*
-           Particles slightly
-           react to cursor
-        */
+        /* Mouse interaction */
 
         if (distance < 180) {
 
-            p.x += dx * 0.001;
-            p.y += dy * 0.001;
+          p.x += dx * 0.001;
+          p.y += dy * 0.001;
 
         }
 
+
+        /* Movement */
 
         p.x += p.vx;
         p.y += p.vy;
@@ -382,17 +427,21 @@ function animateSpark() {
 
         /* Screen wrapping */
 
-        if (p.x < -50)
-            p.x = width + 50;
+        if (p.x < -50) {
+          p.x = width + 50;
+        }
 
-        if (p.x > width + 50)
-            p.x = -50;
+        if (p.x > width + 50) {
+          p.x = -50;
+        }
 
-        if (p.y < -50)
-            p.y = height + 50;
+        if (p.y < -50) {
+          p.y = height + 50;
+        }
 
-        if (p.y > height + 50)
-            p.y = -50;
+        if (p.y > height + 50) {
+          p.y = -50;
+        }
 
 
         /* Draw */
@@ -400,24 +449,30 @@ function animateSpark() {
         ctx.globalAlpha = p.opacity;
 
         ctx.font =
-            `${p.size}px monospace`;
+          `${p.size}px monospace`;
 
-        ctx.fillStyle = "#7BE8F6";
+        ctx.fillStyle =
+          "#7BE8F6";
 
         ctx.fillText(
-            p.symbol,
-            p.x,
-            p.y
+          p.symbol,
+          p.x,
+          p.y
         );
 
-    });
+      });
 
-    ctx.globalAlpha = 1;
 
-    requestAnimationFrame(animateSpark);
+      ctx.globalAlpha = 1;
 
-}
+      requestAnimationFrame(
+        animateSpark
+      );
 
-animateSpark();
-</body>
+    }
+
+
+    animateSpark();
+
+  </script></body>
 </html>
