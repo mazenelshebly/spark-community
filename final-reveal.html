@@ -37,9 +37,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    VIDEO INTRO
-========================= */
+========================================================= */
 
 #videoIntro {
     position: relative;
@@ -74,9 +74,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    TAP HINT
-========================= */
+========================================================= */
 
 #tapHint {
     position: absolute;
@@ -112,9 +112,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    EXPLORE
-========================= */
+========================================================= */
 
 #explore {
     position: absolute;
@@ -180,9 +180,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    MAIN WEBSITE
-========================= */
+========================================================= */
 
 #website {
     background: var(--black);
@@ -194,9 +194,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    HERO
-========================= */
+========================================================= */
 
 .hero {
     min-height: 90vh;
@@ -265,9 +265,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    FINAL MESSAGE
-========================= */
+========================================================= */
 
 .message {
 
@@ -309,9 +309,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    TRACKS
-========================= */
+========================================================= */
 
 .tracksHeader {
     margin-bottom: 45px;
@@ -407,9 +407,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    WHAT AWAITS
-========================= */
+========================================================= */
 
 .awaits {
 
@@ -462,9 +462,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    JOIN
-========================= */
+========================================================= */
 
 .join {
 
@@ -555,9 +555,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    SOCIAL
-========================= */
+========================================================= */
 
 .social {
 
@@ -627,9 +627,9 @@ body {
 }
 
 
-/* =========================
-   NAME FORM
-========================= */
+/* =========================================================
+   NAME INPUT
+========================================================= */
 
 .nameForm {
 
@@ -734,9 +734,9 @@ body {
 }
 
 
-/* =========================
+/* =========================================================
    FOOTER
-========================= */
+========================================================= */
 
 footer {
 
@@ -776,9 +776,9 @@ footer p {
 }
 
 
-/* =========================
-   THANK YOU SCREEN
-========================= */
+/* =========================================================
+   THANK YOU
+========================================================= */
 
 #thankYouScreen {
 
@@ -786,7 +786,13 @@ footer p {
 
     inset: 0;
 
-    z-index: 9999;
+    width: 100vw;
+
+    height: 100vh;
+
+    height: 100svh;
+
+    z-index: 99999;
 
     display: flex;
 
@@ -796,8 +802,7 @@ footer p {
 
     text-align: center;
 
-    background:
-        #000;
+    background: #000;
 
     opacity: 0;
 
@@ -806,7 +811,8 @@ footer p {
     pointer-events: none;
 
     transition:
-        opacity .8s ease;
+        opacity .7s ease,
+        visibility .7s ease;
 }
 
 #thankYouScreen.active {
@@ -858,9 +864,9 @@ footer p {
 }
 
 
-/* =========================
-   LOVE RAIN
-========================= */
+/* =========================================================
+   LOVE RAIN SCREEN
+========================================================= */
 
 #loveRainScreen {
 
@@ -868,10 +874,15 @@ footer p {
 
     inset: 0;
 
-    z-index: 10000;
+    width: 100vw;
 
-    background:
-        #000;
+    height: 100vh;
+
+    height: 100svh;
+
+    z-index: 100000;
+
+    background: #000;
 
     overflow: hidden;
 
@@ -903,8 +914,7 @@ footer p {
 
     display: block;
 
-    background:
-        #000;
+    background: #000;
 }
 
 .loveFinal {
@@ -966,9 +976,9 @@ footer p {
 }
 
 
-/* =========================
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 800px) {
 
@@ -1042,9 +1052,9 @@ footer p {
 <body>
 
 
-<!-- =========================
+<!-- =========================================================
      VIDEO INTRO
-========================= -->
+========================================================= -->
 
 <section id="videoIntro">
 
@@ -1053,6 +1063,7 @@ footer p {
         autoplay
         muted
         playsinline
+        webkit-playsinline
         preload="auto"
     >
 
@@ -1092,9 +1103,9 @@ footer p {
 </section>
 
 
-<!-- =========================
-     WEBSITE
-========================= -->
+<!-- =========================================================
+     MAIN WEBSITE
+========================================================= -->
 
 <main id="website">
 
@@ -1155,123 +1166,55 @@ footer p {
     <div class="tracksHeader">
 
         <h2>
-
             THE TRACKS.
-
         </h2>
 
         <p>
-
             Eight paths. One connected community.
-
         </p>
 
     </div>
 
     <div class="trackGrid">
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                01
-            </span>
-
-            <span class="trackName">
-                WEB DEVELOPMENT
-            </span>
-
+            <span class="trackNumber">01</span>
+            <span class="trackName">WEB DEVELOPMENT</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                02
-            </span>
-
-            <span class="trackName">
-                DATA ANALYSIS
-            </span>
-
+            <span class="trackNumber">02</span>
+            <span class="trackName">DATA ANALYSIS</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                03
-            </span>
-
-            <span class="trackName">
-                CYBER SECURITY
-            </span>
-
+            <span class="trackNumber">03</span>
+            <span class="trackName">CYBER SECURITY</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                04
-            </span>
-
-            <span class="trackName">
-                BIOINFORMATICS
-            </span>
-
+            <span class="trackNumber">04</span>
+            <span class="trackName">BIOINFORMATICS</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                05
-            </span>
-
-            <span class="trackName">
-                MARKETING
-            </span>
-
+            <span class="trackNumber">05</span>
+            <span class="trackName">MARKETING</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                06
-            </span>
-
-            <span class="trackName">
-                HR
-            </span>
-
+            <span class="trackNumber">06</span>
+            <span class="trackName">HR</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                07
-            </span>
-
-            <span class="trackName">
-                LOGISTICS
-            </span>
-
+            <span class="trackNumber">07</span>
+            <span class="trackName">LOGISTICS</span>
         </div>
 
-
         <div class="track">
-
-            <span class="trackNumber">
-                08
-            </span>
-
-            <span class="trackName">
-                GENERAL SKILLS
-            </span>
-
+            <span class="trackNumber">08</span>
+            <span class="trackName">GENERAL SKILLS</span>
         </div>
 
     </div>
@@ -1284,13 +1227,10 @@ footer p {
 <section class="awaits section">
 
     <h2>
-
         WHAT AWAITS YOU.
-
     </h2>
 
     <div class="awaitsGrid">
-
 
         <div class="awaitsItem">
 
@@ -1299,14 +1239,11 @@ footer p {
             </h3>
 
             <p>
-
                 Practical sessions designed
                 to turn knowledge into real skills.
-
             </p>
 
         </div>
-
 
         <div class="awaitsItem">
 
@@ -1315,14 +1252,11 @@ footer p {
             </h3>
 
             <p>
-
                 Test yourself, compete
                 and push your limits.
-
             </p>
 
         </div>
-
 
         <div class="awaitsItem">
 
@@ -1331,14 +1265,11 @@ footer p {
             </h3>
 
             <p>
-
                 Build things that actually
                 connect you to the real world.
-
             </p>
 
         </div>
-
 
         <div class="awaitsItem">
 
@@ -1347,10 +1278,8 @@ footer p {
             </h3>
 
             <p>
-
                 Meet people, exchange ideas
                 and grow together.
-
             </p>
 
         </div>
@@ -1365,16 +1294,12 @@ footer p {
 <section class="join section">
 
     <h2>
-
         READY?
-
     </h2>
 
     <p>
-
         Your next skill starts here.
         Join the community and discover your path.
-
     </p>
 
     <a
@@ -1383,9 +1308,7 @@ footer p {
         target="_blank"
         rel="noopener noreferrer"
     >
-
         JOIN THE COMMUNITY
-
     </a>
 
 </section>
@@ -1396,55 +1319,42 @@ footer p {
 <section class="social section">
 
     <h2>
-
         STAY CONNECTED.
-
     </h2>
 
     <div class="socialLinks">
-
 
         <a
             href="https://www.instagram.com/brightcodeunion?stkn=MXh1emtqd2xzaGtvbg=="
             target="_blank"
             rel="noopener noreferrer"
         >
-
             INSTAGRAM
-
         </a>
-
 
         <a
             href="https://www.facebook.com/share/1CRonkPQkN/"
             target="_blank"
             rel="noopener noreferrer"
         >
-
             FACEBOOK
-
         </a>
-
 
         <a
             href="https://www.linkedin.com/company/bright-code-union/"
             target="_blank"
             rel="noopener noreferrer"
         >
-
             LINKEDIN
-
         </a>
 
 
-        <!-- =========================
-             NAME INPUT
-        ========================= -->
+        <!-- NAME INPUT -->
 
         <form
             id="nameForm"
             class="nameForm"
-            onsubmit="return false;"
+            novalidate
         >
 
             <input
@@ -1458,13 +1368,11 @@ footer p {
             >
 
             <button
-                type="button"
+                type="submit"
                 id="nameSubmit"
                 aria-label="Submit"
             >
-
                 →
-
             </button>
 
         </form>
@@ -1479,15 +1387,11 @@ footer p {
 <footer>
 
     <p>
-
         BCU-Obour Branch
-
     </p>
 
     <p>
-
-        THE FUTURE IS BUILT BY PEOPLE WHO CONNECT.
-
+        BUILD TOGETHER GROW TOGETHER.
     </p>
 
 </footer>
@@ -1495,59 +1399,6 @@ footer p {
 </main>
 
 
-<!-- =========================
+<!-- =========================================================
      THANK YOU SCREEN
-========================= -->
-
-<div id="thankYouScreen">
-
-    <div class="thankYouInner">
-
-        <div class="thankYouSmall">
-
-            RESPONSE RECEIVED
-
-        </div>
-
-        <h1>
-
-            THANK YOU.
-
-        </h1>
-
-        <p>
-
-            YOUR RESPONSE HAS BEEN RECORDED.
-
-        </p>
-
-    </div>
-
-</div>
-
-
-<!-- =========================
-     LOVE RAIN SCREEN
-========================= -->
-
-<div id="loveRainScreen">
-
-    <canvas id="loveCanvas"></canvas>
-
-    <div class="loveFinal">
-
-        <div class="loveFinalText">
-
-            I love you <span>saher</span>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<script>
-
-
-/* =============================================
+=====================================
