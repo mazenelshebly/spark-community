@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -630,12 +628,16 @@ body {
 
 
 /* =========================
-   NAME INPUT
+   NAME FORM
 ========================= */
 
 .nameForm {
 
     display: flex;
+
+    align-items: center;
+
+    width: min(100%, 330px);
 
     height: 49px;
 
@@ -654,13 +656,20 @@ body {
         var(--blue-light);
 
     box-shadow:
-        0 10px 30px
-        rgba(22,135,255,.12);
+        0 0 25px
+        rgba(22,135,255,.15);
 }
 
 .nameForm input {
 
-    width: 290px;
+    flex: 1;
+
+    min-width: 0;
+
+    height: 100%;
+
+    padding:
+        0 15px;
 
     border: none;
 
@@ -670,8 +679,6 @@ body {
 
     color: var(--white);
 
-    padding: 0 16px;
-
     font-family:
         Arial,
         Helvetica,
@@ -679,9 +686,7 @@ body {
 
     font-size: 11px;
 
-    font-weight: bold;
-
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 
     text-transform: uppercase;
 }
@@ -691,24 +696,28 @@ body {
     color:
         var(--muted);
 
-    opacity: .75;
+    opacity:
+        .85;
 }
 
 .nameForm button {
 
-    width: 55px;
+    width: 52px;
+
+    height: 100%;
 
     border: none;
 
     border-left:
         1px solid var(--line);
 
-    background: transparent;
+    background:
+        transparent;
 
     color:
         var(--blue-light);
 
-    font-size: 23px;
+    font-size: 24px;
 
     cursor: pointer;
 
@@ -777,7 +786,7 @@ footer p {
 
     inset: 0;
 
-    z-index: 9998;
+    z-index: 9999;
 
     display: flex;
 
@@ -788,7 +797,7 @@ footer p {
     text-align: center;
 
     background:
-        #03070D;
+        #000;
 
     opacity: 0;
 
@@ -797,8 +806,7 @@ footer p {
     pointer-events: none;
 
     transition:
-        opacity .8s ease,
-        visibility .8s ease;
+        opacity .8s ease;
 }
 
 #thankYouScreen.active {
@@ -832,7 +840,7 @@ footer p {
     font-size:
         clamp(55px, 12vw, 150px);
 
-    line-height: .85;
+    line-height: .9;
 
     letter-spacing: -5px;
 }
@@ -860,18 +868,27 @@ footer p {
 
     inset: 0;
 
-    z-index: 99999;
+    z-index: 10000;
 
-    background: #000;
-
-    display: none;
+    background:
+        #000;
 
     overflow: hidden;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
 }
 
 #loveRainScreen.active {
 
-    display: block;
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
 }
 
 #loveCanvas {
@@ -885,6 +902,9 @@ footer p {
     height: 100%;
 
     display: block;
+
+    background:
+        #000;
 }
 
 .loveFinal {
@@ -899,12 +919,14 @@ footer p {
 
     justify-content: center;
 
-    pointer-events: none;
+    text-align: center;
 
     opacity: 0;
 
     transition:
         opacity 1.5s ease;
+
+    pointer-events: none;
 }
 
 .loveFinal.show {
@@ -914,33 +936,33 @@ footer p {
 
 .loveFinalText {
 
-    color: white;
-
-    font-family:
-        Georgia,
-        serif;
+    color:
+        white;
 
     font-size:
-        clamp(25px, 5vw, 60px);
+        clamp(28px, 6vw, 70px);
 
-    text-align: center;
+    font-weight:
+        800;
 
-    letter-spacing: 1px;
+    letter-spacing:
+        2px;
 
     text-shadow:
-        0 0 5px white,
-        0 0 15px white,
-        0 0 30px rgba(255,100,180,.9);
+        0 0 10px rgba(255,255,255,.8),
+        0 0 25px rgba(255,100,180,.7),
+        0 0 55px rgba(255,100,180,.45);
 }
 
 .loveFinalText span {
 
-    color: #FFD86A;
+    color:
+        #FFD76A;
 
     text-shadow:
-        0 0 5px #FFD86A,
-        0 0 15px #FFD86A,
-        0 0 30px rgba(255,216,106,.8);
+        0 0 10px rgba(255,215,106,.9),
+        0 0 25px rgba(255,180,60,.7),
+        0 0 50px rgba(255,160,40,.45);
 }
 
 
@@ -974,11 +996,6 @@ footer p {
             -2px;
     }
 
-    .nameForm input {
-
-        width: 250px;
-    }
-
 }
 
 
@@ -1001,16 +1018,17 @@ footer p {
 
         flex-direction:
             column;
+
+        width: 100%;
     }
 
-    .socialLinks a,
-    .nameForm {
+    .socialLinks a {
 
         width:
             100%;
     }
 
-    .nameForm input {
+    .nameForm {
 
         width:
             100%;
@@ -1019,9 +1037,7 @@ footer p {
 }
 
 </style>
-
 </head>
-
 
 <body>
 
@@ -1032,49 +1048,46 @@ footer p {
 
 <section id="videoIntro">
 
-<video
-    id="openingVideo"
-    autoplay
-    muted
-    playsinline
-    preload="auto"
->
-
-    <source
-        src="video/opening.mp4"
-        type="video/mp4"
+    <video
+        id="openingVideo"
+        autoplay
+        muted
+        playsinline
+        preload="auto"
     >
 
-    Your browser does not support HTML5 video.
+        <source
+            src="video/opening.mp4"
+            type="video/mp4"
+        >
 
-</video>
+        Your browser does not support HTML5 video.
 
+    </video>
 
-<div class="videoOverlay"></div>
+    <div class="videoOverlay"></div>
 
+    <div id="tapHint">
 
-<div id="tapHint">
-
-    TAP TO ENTER FULLSCREEN
-
-</div>
-
-
-<div id="explore">
-
-    <div class="exploreText">
-
-        Explore the community
+        TAP TO ENTER FULLSCREEN
 
     </div>
 
-    <div class="arrow">
+    <div id="explore">
 
-        ↓
+        <div class="exploreText">
+
+            Explore the community
+
+        </div>
+
+        <div class="arrow">
+
+            ↓
+
+        </div>
 
     </div>
-
-</div>
 
 </section>
 
@@ -1092,13 +1105,11 @@ footer p {
 
     <div class="heroInner">
 
-
         <div class="smallTitle">
 
             BCU-Obour Branch
 
         </div>
-
 
         <h1>
 
@@ -1108,7 +1119,6 @@ footer p {
 
         </h1>
 
-
         <p>
 
             You found the final piece.
@@ -1116,11 +1126,9 @@ footer p {
 
         </p>
 
-
     </div>
 
 </section>
-
 
 
 <!-- FINAL MESSAGE -->
@@ -1140,11 +1148,9 @@ footer p {
 </section>
 
 
-
 <!-- TRACKS -->
 
 <section class="section">
-
 
     <div class="tracksHeader">
 
@@ -1154,7 +1160,6 @@ footer p {
 
         </h2>
 
-
         <p>
 
             Eight paths. One connected community.
@@ -1162,8 +1167,6 @@ footer p {
         </p>
 
     </div>
-
-
 
     <div class="trackGrid">
 
@@ -1271,24 +1274,20 @@ footer p {
 
         </div>
 
-
     </div>
 
 </section>
-
 
 
 <!-- WHAT AWAITS -->
 
 <section class="awaits section">
 
-
     <h2>
 
         WHAT AWAITS YOU.
 
     </h2>
-
 
     <div class="awaitsGrid">
 
@@ -1356,17 +1355,14 @@ footer p {
 
         </div>
 
-
     </div>
 
 </section>
 
 
-
 <!-- JOIN -->
 
 <section class="join section">
-
 
     <h2>
 
@@ -1374,14 +1370,12 @@ footer p {
 
     </h2>
 
-
     <p>
 
         Your next skill starts here.
         Join the community and discover your path.
 
     </p>
-
 
     <a
         class="joinButton"
@@ -1394,22 +1388,18 @@ footer p {
 
     </a>
 
-
 </section>
-
 
 
 <!-- SOCIAL -->
 
 <section class="social section">
 
-
     <h2>
 
         STAY CONNECTED.
 
     </h2>
-
 
     <div class="socialLinks">
 
@@ -1447,11 +1437,14 @@ footer p {
         </a>
 
 
-        <!-- FORM REPLACED WITH NAME INPUT -->
+        <!-- =========================
+             NAME INPUT
+        ========================= -->
 
         <form
             id="nameForm"
             class="nameForm"
+            onsubmit="return false;"
         >
 
             <input
@@ -1462,11 +1455,11 @@ footer p {
                 autocapitalize="words"
                 spellcheck="false"
                 maxlength="30"
-                required
             >
 
             <button
-                type="submit"
+                type="button"
+                id="nameSubmit"
                 aria-label="Submit"
             >
 
@@ -1476,17 +1469,14 @@ footer p {
 
         </form>
 
-
     </div>
 
 </section>
 
 
-
 <!-- FOOTER -->
 
 <footer>
-
 
     <p>
 
@@ -1494,13 +1484,11 @@ footer p {
 
     </p>
 
-
     <p>
 
         THE FUTURE IS BUILT BY PEOPLE WHO CONNECT.
 
     </p>
-
 
 </footer>
 
@@ -1559,35 +1547,7 @@ footer p {
 </div>
 
 
-
 <script>
 
 
-const video =
-    document.getElementById("openingVideo");
-
-const videoIntro =
-    document.getElementById("videoIntro");
-
-const explore =
-    document.getElementById("explore");
-
-const tapHint =
-    document.getElementById("tapHint");
-
-
-/* =========================
-   AUTOPLAY
-========================= */
-
-video.play().catch(() => {
-
-    tapHint.style.opacity = "1";
-
-    tapHint.style.pointerEvents = "auto";
-
-});
-
-
-
-/* ========
+/* =============================================
