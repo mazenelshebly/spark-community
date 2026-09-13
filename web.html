@@ -1,0 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WEB DEVELOPMENT | SPARK</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+
+  background: #0A0A0A;
+  color: #F7F4EB;
+
+  font-family: Arial, sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 25px;
+
+  overflow: hidden;
+}
+
+
+/* =================================
+   MAIN CONTENT
+================================= */
+
+.box {
+  width: 100%;
+  max-width: 700px;
+
+  text-align: center;
+
+  position: relative;
+  z-index: 30;
+}
+
+.track {
+  color: #7BE8F6;
+
+  font-size: 13px;
+  letter-spacing: 4px;
+
+  margin-bottom: 25px;
+}
+
+h1 {
+  font-size: clamp(35px, 8vw, 65px);
+
+  margin-bottom: 20px;
+}
+
+.question {
+  color: #aaa;
+
+  font-size: 18px;
+  line-height: 1.6;
+
+  margin-bottom: 30px;
+
+  position: relative;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+}
+
+button {
+  width: 100%;
+
+  padding: 18px;
+
+  background: #111;
+
+  color: #F7F4EB;
+
+  border: 1px solid #333;
+
+  border-radius: 8px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  transition:
+    border-color .2s ease,
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+button:hover {
+  border-color: #7BE8F6;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 0 15px rgba(123,232,246,.08);
+}
+
+button:disabled {
+  cursor: default;
+  transform: none;
+}
+
+#result {
+  margin-top: 30px;
+
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.correct {
+  color: #7BE8F6;
+}
+
+.wrong {
+  color: #FF5A2A;
+}
+
+
+/* =================================
+   NEON BUILD CLUE
+================================= */
+
+.clue {
+  display: inline-block;
+
+  position: relative;
+
+  margin-top: 15px;
+
+  padding: 8px 24px;
+
+  min-width: 150px;
+
+  background: #071A3D;
+
+  color: #FFFFFF;
+
+  border: 1px solid #FFFFFF;
+
+  border-radius: 6px;
+
+  font-size: 30px;
+
+  font-weight: 900;
+
+  letter-spacing: 5px;
+
+  -webkit-text-stroke: .6px #FFFFFF;
+
+  text-shadow:
+    0 0 4px #FFFFFF,
+    0 0 9px #FFFFFF,
+    0 0 18px #7BE8F6,
+    0 0 30px rgba(123,232,246,.8);
+
+  box-shadow:
+    0 0 4px #FFFFFF,
+    0 0 10px #FFFFFF,
+    0 0 20px rgba(123,232,246,.7),
+    inset 0 0 12px rgba(123,232,246,.22);
+
+  animation:
+    buildReveal .8s cubic-bezier(.2,.8,.2,1) both,
+    buildPulse 2s ease-in-out .8s infinite;
+}
+
+.clue::after {
+  content: "";
+
+  position: absolute;
+
+  left: 15%;
+  right: 15%;
+
+  bottom: -5px;
+
+  height: 1px;
+
+  background: #FFFFFF;
+
+  box-shadow:
+    0 0 5px #FFFFFF,
+    0 0 12px #7BE8F6;
+
+  opacity: .9;
+}
+
+@keyframes buildReveal {
+
+  0% {
+    opacity: 0;
+
+    transform:
+      scale(.55)
+      translateY(12px);
+
+    filter: blur(12px);
+  }
+
+  45% {
+    opacity: 1;
+
+    transform:
+      scale(1.12)
+      translateY(0);
+
+    filter: blur(0);
+  }
+
+  70% {
+    transform: scale(.96);
+  }
+
+  100% {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+}
+
+@keyframes buildPulse {
+
+  0%, 100% {
+
+    box-shadow:
+      0 0 4px #FFFFFF,
+      0 0 10px #FFFFFF,
+      0 0 20px rgba(123,232,246,.7),
+      inset 0 0 12px rgba(123,232,246,.22);
+  }
+
+  50% {
+
+    box-shadow:
+      0 0 7px #FFFFFF,
+      0 0 18px #FFFFFF,
+      0 0 35px rgba(123,232,246,.95),
+      inset 0 0 20px rgba(123,232,246,.35);
+  }
+}
+
+
+/* =================================
+   ORIGINAL SPARK
+================================= */
+
+#spark-stage {
+
+  position: fixed;
+
+  right: 6vw;
+  bottom: 4vh;
+
+  width: 190px;
+  height: 240px;
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  transition:
+    transform .35s ease;
+}
+
+#spark-character {
+
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  filter:
+    drop-shadow(
+      0 0 12px
+      rgba(123,232,246,.25)
+    );
+
+  transform-origin: center bottom;
+
+  animation:
+    sparkIdle 3s ease-in-out infinite;
+}
+
+#spark-glow {
+
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  left: 30px;
+  bottom: 15px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(123,232,246,.13);
+
+  filter: blur(35px);
+
+  animation:
+    sparkGlow 2.5s ease-in-out infinite;
+}
+
+
+/* =================================
+   ORIGINAL SPARK ANIMATIONS
+================================= */
+
+@keyframes sparkIdle {
+
+  0%,100% {
+    transform:
+      translateY(0)
+      rotate(-1deg);
+  }
+
+  50% {
+    transform:
+      translateY(-10px)
+      rotate(1deg);
+  }
+}
+
+@keyframes sparkGlow {
+
+  0%,100% {
+    transform: scale(.8);
+    opacity: .35;
+  }
+
+  50% {
+    transform: scale(1.15);
+    opacity: .8;
+  }
+}
+
+
+/* =================================
+   POPUP SPARK
+================================= */
+
+#reaction-layer {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 100;
+
+  pointer-events: none;
+
+  display: none;
+}
+
+
+/*
+   نقطة ظهور الـSpark
+   موجودة تقريبًا في منتصف السؤال
+*/
+
+.reaction-spark {
+
+  position: absolute;
+
+  width: 170px;
+  height: 210px;
+
+  object-fit: contain;
+
+  left: 50%;
+  top: 47%;
+
+  transform:
+    translate(-50%, -50%)
+    scale(.15);
+
+  opacity: 0;
+
+  filter:
+    drop-shadow(
+      0 0 15px
+      rgba(123,232,246,.65)
+    );
+}
+
+
+/* =================================
+   HAPPY POPUP
+================================= */
+
+#reaction-layer.happy {
+  display: block;
+}
+
+#reaction-layer.happy .reaction-spark {
+
+  animation:
+    happyPopup 5s ease forwards;
+}
+
+@keyframes happyPopup {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.15)
+      rotate(-8deg);
+
+    filter:
+      blur(10px)
+      drop-shadow(
+        0 0 5px
+        rgba(123,232,246,.2)
+      );
+  }
+
+  10% {
+
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.08)
+      rotate(4deg);
+
+    filter:
+      blur(0)
+      drop-shadow(
+        0 0 30px
+        rgba(123,232,246,.9)
+      );
+  }
+
+  18% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(.96)
+      rotate(-3deg);
+  }
+
+  30% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(0);
+  }
+
+  75% {
+
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(0);
+  }
+
+  90% {
+
+    opacity: .7;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.92);
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.7)
+      translateY(-20px);
+
+    filter: blur(7px);
+  }
+}
+
+
+/* =================================
+   ANGRY POPUP
+================================= */
+
+#reaction-layer.angry {
+  display: block;
+}
+
+#reaction-layer.angry .reaction-spark {
+
+  animation:
+    angryPopup 5s ease forwards;
+
+  filter:
+    drop-shadow(
+      0 0 20px
+      rgba(255,90,42,.8)
+    );
+}
+
+@keyframes angryPopup {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.15)
+      rotate(0);
+
+    filter:
+      blur(10px)
+      drop-shadow(
+        0 0 5px
+        rgba(255,90,42,.2)
+      );
+  }
+
+  8% {
+
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1.1)
+      rotate(-5deg);
+
+    filter:
+      blur(0)
+      drop-shadow(
+        0 0 35px
+        rgba(255,90,42,.95)
+      );
+  }
+
+  16% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(.96)
+      rotate(5deg);
+  }
+
+  24% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(-3deg);
+  }
+
+  32% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(3deg);
+  }
+
+  40% {
+
+    transform:
+      translate(-50%, -50%)
+      scale(1)
+      rotate(0);
+  }
+
+  75% {
+
+    opacity: 1;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  90% {
+
+    opacity: .65;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.92);
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.7)
+      translateY(20px);
+
+    filter: blur(7px);
+  }
+}
+
+
+/* =================================
+   REACTION PARTICLES
+================================= */
+
+.reaction-particle {
+
+  position: fixed;
+
+  left: 50%;
+  top: 47%;
+
+  pointer-events: none;
+
+  z-index: 101;
+
+  opacity: 0;
+
+  font-size: 22px;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* ❤️ HEARTS */
+
+#reaction-layer.happy .heart {
+
+  animation:
+    heartFloat var(--duration) ease-out forwards;
+
+  animation-delay: var(--delay);
+}
+
+@keyframes heartFloat {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.2)
+      rotate(0deg);
+  }
+
+  12% {
+
+    opacity: 1;
+
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      scale(1);
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate(
+        calc(-50% + var(--x2)),
+        calc(-50% + var(--y2))
+      )
+      scale(.55)
+      rotate(var(--rotation));
+  }
+}
+
+
+/* 🔥 FIRE */
+
+#reaction-layer.angry .fire {
+
+  animation:
+    fireFloat var(--duration) ease-out forwards;
+
+  animation-delay: var(--delay);
+}
+
+@keyframes fireFloat {
+
+  0% {
+
+    opacity: 0;
+
+    transform:
+      translate(-50%, -50%)
+      scale(.2);
+  }
+
+  10% {
+
+    opacity: 1;
+
+    transform:
+      translate(
+        calc(-50% + var(--x)),
+        calc(-50% + var(--y))
+      )
+      scale(1);
+  }
+
+  55% {
+
+    opacity: 1;
+
+    transform:
+      translate(
+        calc(-50% + var(--x2)),
+        calc(-50% + var(--y2))
+      )
+      scale(1.15)
+      rotate(var(--rotation));
+  }
+
+  100% {
+
+    opacity: 0;
+
+    transform:
+      translate(
+        calc(-50% + var(--x3)),
+        calc(-50% + var(--y3))
+      )
+      scale(.45)
+      rotate(var(--rotation2));
+  }
+}
+
+
+/* =================================
+   CANVAS
+================================= */
+
+#spark-canvas {
+
+  position: fixed;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  z-index: 10;
+}
+
+
+/* =================================
+   SCREEN FLASH
+================================= */
+
+#screen-flash {
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 15;
+
+  opacity: 0;
+}
+
+#screen-flash.error {
+
+  background:
+    rgba(255,60,40,.12);
+
+  animation:
+    errorFlash .45s ease-out;
+}
+
+@keyframes errorFlash {
+
+  0% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* =================================
+   MOBILE
+================================= */
+
+@media (max-width:700px) {
+
+  #spark-stage {
+
+    width: 110px;
+    height: 145px;
+
+    right: 10px;
+    bottom: 10px;
+  }
+
+  .clue {
+
+    font-size: 25px;
+
+    padding:
+      7px 18px;
+  }
+
+  .reaction-spark {
+
+    width: 135px;
+    height: 170px;
+
+    top: 45%;
+  }
+
+  .reaction-particle {
+
+    font-size: 19px;
+  }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================
+     ORIGINAL SPARK
+================================= -->
+
+<div id="spark-stage">
+
+  <div id="spark-glow"></div>
+
+  <img
+    id="spark-character"
+    src="assets/spark-web.png"
+    alt="SPARK Web Development"
+  >
+
+</div>
+
+
+<!-- =================================
+     REACTION LAYER
+================================= -->
+
+<div id="reaction-layer">
+
+  <img
+    id="reaction-spark"
+    class="reaction-spark"
+    src=""
+    alt="Spark reaction"
+  >
+
+</div>
+
+
+<!-- CANVAS -->
+
+<canvas id="spark-canvas"></canvas>
+
+
+<!-- ERROR FLASH -->
+
+<div id="screen-flash"></div>
+
+
+<!-- =================================
+     QUESTION
+================================= -->
+
+<div class="box">
+
+  <div class="track">
+    TRACK 01 / WEB DEVELOPMENT
+  </div>
+
+
+  <h1>
+    THE FIRST CLUE
+  </h1>
+
+
+  <div class="question">
+    Which layer controls the structure of a webpage?
+  </div>
+
+
+  <div class="options">
+
+    <button onclick="checkAnswer(this, false)">
+      CSS
+    </button>
+
+    <button onclick="checkAnswer(this, true)">
+      HTML
+    </button>
+
+    <button onclick="checkAnswer(this, false)">
+      JavaScript
+    </button>
+
+    <button onclick="checkAnswer(this, false)">
+      SQL
+    </button>
+
+  </div>
+
+
+  <div id="result"></div>
+
+</div>
+
+
+<script>
+
+
+/* =========================================
+   ELEMENTS
+========================================= */
+
+const canvas =
+  document.getElementById("spark-canvas");
+
+const ctx =
+  canvas.getContext("2d");
+
+const sparkStage =
+  document.getElementById("spark-stage");
+
+const screenFlash =
+  document.getElementById("screen-flash");
+
+const reactionLayer =
+  document.getElementById("reaction-layer");
+
+const reactionSpark =
+  document.getElementById("reaction-spark");
+
+
+let width;
+let height;
+
+
+/* =========================================
+   CANVAS SIZE
+========================================= */
+
+function resizeSparkCanvas() {
+
+  width =
+    canvas.width =
+    window.innerWidth;
+
+  height =
+    canvas.height =
+    window.innerHeight;
+}
+
+
+resizeSparkCanvas();
+
+
+window.addEventListener(
+  "resize",
+  resizeSparkCanvas
+);
+
+
+/* =========================================
+   MOUSE
+========================================= */
+
+const sparkMouse = {
+
+  x:
+    window.innerWidth / 2,
+
+  y:
+    window.innerHeight / 2
+};
+
+
+window.addEventListener(
+  "mousemove",
+  function(event) {
+
+    sparkMouse.x =
+      event.clientX;
+
+    sparkMouse.y =
+      event.clientY;
+
+  }
+);
+
+
+/* =========================================
+   PARTICLES
+========================================= */
+
+const sparkParticles = [];
+
+
+const codeSymbols = [
+
+  "</>",
+  "{ }",
+  "01",
+  "[]",
+  "&&",
+  ";",
+  "/>",
+  "<>",
+  "HTML",
+  "CSS",
+  "JS"
+
+];
+
+
+for (
+  let i = 0;
+  i < 75;
+  i++
+) {
+
+  sparkParticles.push({
+
+    x:
+      Math.random() * width,
+
+    y:
+      Math.random() * height,
+
+    vx:
+      (Math.random() - .5) * .25,
+
+    vy:
+      (Math.random() - .5) * .25,
+
+    size:
+      Math.random() * 10 + 8,
+
+    symbol:
+      codeSymbols[
+        Math.floor(
+          Math.random() *
+          codeSymbols.length
+        )
+      ],
+
+    opacity:
+      Math.random() * .35 + .05,
+
+    baseOpacity:
+      Math.random() * .35 + .05,
+
+    color:
+      "#7BE8F6"
+
+  });
+
+}
+
+
+/* =========================================
+   PARTICLE COLOR
+========================================= */
+
+function setParticlesColor(color) {
+
+  sparkParticles.forEach(
+    p => {
+
+      p.color = color;
+
+    }
+  );
+}
+
+
+/* =========================================
+   RESET PARTICLES
+========================================= */
+
+function resetParticlesColor() {
+
+  sparkParticles.forEach(
+    p => {
+
+      p.color =
+        "#7BE8F6";
+
+      p.opacity =
+        p.baseOpacity;
+
+    }
+  );
+}
+
+
+/* =========================================
+   HAPPY PARTICLE ANIMATION
+========================================= */
+
+function happyParticles() {
+
+  const centerX =
+    width / 2;
+
+  const centerY =
+    height / 2;
+
+
+  sparkParticles.forEach(
+    (p, index) => {
+
+      const angle =
+        (index /
+        sparkParticles.length) *
+        Math.PI * 2;
+
+      const radius =
+        100 +
+        Math.random() * 180;
+
+
+      p.targetX =
+        centerX +
+        Math.cos(angle) *
+        radius;
+
+      p.targetY =
+        centerY +
+        Math.sin(angle) *
+        radius;
+
+    }
+  );
+
+
+  let progress = 0;
+
+
+  function animateHappy() {
+
+    progress += .025;
+
+
+    sparkParticles.forEach(
+      p => {
+
+        if (
+          p.targetX === undefined
+        ) return;
+
+
+        p.x +=
+          (p.targetX - p.x) *
+          .035;
+
+        p.y +=
+          (p.targetY - p.y) *
+          .035;
+
+      }
+    );
+
+
+    if (progress < 1) {
+
+      requestAnimationFrame(
+        animateHappy
+      );
+
+    }
+
+  }
+
+
+  animateHappy();
+
+
+  sparkParticles.forEach(
+    p => {
+
+      p.opacity = .75;
+
+    }
+  );
+
+
+  setTimeout(
+    resetParticlesColor,
+    900
+  );
+
+}
+
+
+/* =========================================
+   WRONG ANSWER ANIMATION
+========================================= */
+
+function wrongParticles() {
+
+  setParticlesColor(
+    "#FF5A2A"
+  );
+
+
+  sparkParticles.forEach(
+    p => {
+
+      p.opacity =
+        Math.min(
+          p.baseOpacity + .35,
+          .8
+        );
+
+    }
+  );
+
+
+  screenFlash.classList.remove(
+    "error"
+  );
+
+
+  void screenFlash.offsetWidth;
+
+
+  screenFlash.classList.add(
+    "error"
+  );
+
+
+  setTimeout(
+    resetParticlesColor,
+    700
+  );
+
+}
+
+
+/* =========================================
+   CREATE HEARTS
+========================================= */
+
+function createHearts() {
+
+  const emojis = [
+    "❤️",
+    "💙",
+    "💗",
+    "💕",
+    "💖"
+  ];
+
+
+  for (
+    let i = 0;
+    i < 14;
+    i++
+  ) {
+
+    const heart =
+      document.createElement("div");
+
+    heart.className =
+      "reaction-particle heart";
+
+
+    heart.textContent =
+      emojis[
+        Math.floor(
+          Math.random() *
+          emojis.length
+        )
+      ];
+
+
+    heart.style.setProperty(
+      "--x",
+      `${(Math.random() - .5) * 80}px`
+    );
+
+
+    heart.style.setProperty(
+      "--y",
+      `${(Math.random() - .5) * 60}px`
+    );
+
+
+    heart.style.setProperty(
+      "--x2",
+      `${(Math.random() - .5) * 330}px`
+    );
+
+
+    heart.style.setProperty(
+      "--y2",
+      `${-120 - Math.random() * 300}px`
+    );
+
+
+    heart.style.setProperty(
+      "--rotation",
+      `${(Math.random() - .5) * 100}deg`
+    );
+
+
+    heart.style.setProperty(
+      "--duration",
+      `${2.5 + Math.random() * 2}s`
+    );
+
+
+    heart.style.setProperty(
+      "--delay",
+      `${Math.random() * .7}s`
+    );
+
+
+    reactionLayer.appendChild(
+      heart
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   CREATE FIRE
+========================================= */
+
+function createFire() {
+
+  const emojis = [
+    "🔥",
+    "🔥",
+    "🔥",
+    "💥"
+  ];
+
+
+  for (
+    let i = 0;
+    i < 16;
+    i++
+  ) {
+
+    const fire =
+      document.createElement("div");
+
+    fire.className =
+      "reaction-particle fire";
+
+
+    fire.textContent =
+      emojis[
+        Math.floor(
+          Math.random() *
+          emojis.length
+        )
+      ];
+
+
+    fire.style.setProperty(
+      "--x",
+      `${(Math.random() - .5) * 90}px`
+    );
+
+
+    fire.style.setProperty(
+      "--y",
+      `${(Math.random() - .5) * 60}px`
+    );
+
+
+    fire.style.setProperty(
+      "--x2",
+      `${(Math.random() - .5) * 260}px`
+    );
+
+
+    fire.style.setProperty(
+      "--y2",
+      `${-100 - Math.random() * 180}px`
+    );
+
+
+    fire.style.setProperty(
+      "--x3",
+      `${(Math.random() - .5) * 380}px`
+    );
+
+
+    fire.style.setProperty(
+      "--y3",
+      `${-220 - Math.random() * 200}px`
+    );
+
+
+    fire.style.setProperty(
+      "--rotation",
+      `${(Math.random() - .5) * 80}deg`
+    );
+
+
+    fire.style.setProperty(
+      "--rotation2",
+      `${(Math.random() - .5) * 160}deg`
+    );
+
+
+    fire.style.setProperty(
+      "--duration",
+      `${2.5 + Math.random() * 2}s`
+    );
+
+
+    fire.style.setProperty(
+      "--delay",
+      `${Math.random() * .7}s`
+    );
+
+
+    reactionLayer.appendChild(
+      fire
+    );
+
+  }
+
+}
+
+
+/* =========================================
+   CLEAR REACTION
+========================================= */
+
+function clearReaction() {
+
+  reactionLayer
+    .querySelectorAll(
+      ".reaction-particle"
+    )
+    .forEach(
+      particle => {
+
+        particle.remove();
+
+      }
+    );
+
+}
+
+
+/* =========================================
+   SHOW HAPPY SPARK
+========================================= */
+
+function showHappySpark() {
+
+  clearReaction();
+
+
+  reactionSpark.src =
+    "assets/spark-happy.png";
+
+
+  reactionLayer.classList.remove(
+    "angry"
+  );
+
+
+  reactionLayer.classList.remove(
+    "happy"
+  );
+
+
+  void reactionLayer.offsetWidth;
+
+
+  reactionLayer.classList.add(
+    "happy"
+  );
+
+
+  createHearts();
+
+
+  setTimeout(
+    clearReaction,
+    5200
+  );
+
+}
+
+
+/* =========================================
+   SHOW ANGRY SPARK
+========================================= */
+
+function showAngrySpark() {
+
+  clearReaction();
+
+
+  reactionSpark.src =
+    "spark-angry.png";
+
+
+  reactionLayer.classList.remove(
+    "happy"
+  );
+
+
+  reactionLayer.classList.remove(
+    "angry"
+  );
+
+
+  void reactionLayer.offsetWidth;
+
+
+  reactionLayer.classList.add(
+    "angry"
+  );
+
+
+  createFire();
+
+
+  setTimeout(
+    clearReaction,
+    5200
+  );
+
+}
+
+
+/* =========================================
+   ANSWER SYSTEM
+========================================= */
+
+function checkAnswer(
+  button,
+  correct
+) {
+
+  const result =
+    document.getElementById(
+      "result"
+    );
+
+
+  if (correct) {
+
+    /* HAPPY SPARK *
