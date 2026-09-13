@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -11,1000 +9,815 @@
 <style>
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  min-height: 100vh;
+    min-height: 100vh;
+    background: #0A0A0A;
+    color: #F7F4EB;
+    font-family: Arial, sans-serif;
 
-  background: #0A0A0A;
-  color: #F7F4EB;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  font-family: Arial, sans-serif;
+    padding: 25px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 25px;
-
-  overflow: hidden;
+    overflow: hidden;
 }
 
 
-/* =================================
+/* =========================================
    MAIN CONTENT
-================================= */
+========================================= */
 
 .box {
-  width: 100%;
-  max-width: 700px;
+    width: 100%;
+    max-width: 700px;
 
-  text-align: center;
+    text-align: center;
 
-  position: relative;
-  z-index: 30;
+    position: relative;
+    z-index: 30;
 }
 
 .track {
-  color: #7BE8F6;
+    color: #7BE8F6;
 
-  font-size: 13px;
-  letter-spacing: 4px;
+    font-size: 13px;
+    letter-spacing: 4px;
 
-  margin-bottom: 25px;
+    margin-bottom: 25px;
 }
 
 h1 {
-  font-size: clamp(35px, 8vw, 65px);
+    font-size: clamp(35px, 8vw, 65px);
 
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .question {
-  color: #aaa;
+    color: #aaa;
 
-  font-size: 18px;
-  line-height: 1.6;
+    font-size: 18px;
+    line-height: 1.6;
 
-  margin-bottom: 30px;
-
-  position: relative;
+    margin-bottom: 30px;
 }
 
 .options {
-  display: grid;
-  gap: 12px;
+    display: grid;
+    gap: 12px;
 }
 
 button {
-  width: 100%;
+    width: 100%;
 
-  padding: 18px;
+    padding: 18px;
 
-  background: #111;
+    background: #111;
 
-  color: #F7F4EB;
+    color: #F7F4EB;
 
-  border: 1px solid #333;
+    border: 1px solid #333;
 
-  border-radius: 8px;
+    border-radius: 8px;
 
-  font-size: 16px;
+    font-size: 16px;
 
-  cursor: pointer;
+    cursor: pointer;
 
-  transition:
-    border-color .2s ease,
-    transform .2s ease,
-    box-shadow .2s ease;
+    transition:
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 button:hover {
-  border-color: #7BE8F6;
+    border-color: #7BE8F6;
 
-  transform: translateY(-2px);
+    transform: translateY(-2px);
 
-  box-shadow:
-    0 0 15px rgba(123,232,246,.08);
+    box-shadow:
+        0 0 15px rgba(123,232,246,.15);
 }
 
 button:disabled {
-  cursor: default;
-  transform: none;
+    cursor: default;
+    transform: none;
 }
 
 #result {
-  margin-top: 30px;
+    margin-top: 30px;
 
-  font-size: 18px;
-  line-height: 1.6;
+    font-size: 18px;
+    line-height: 1.6;
+
+    min-height: 80px;
 }
 
 .correct {
-  color: #7BE8F6;
+    color: #7BE8F6;
 }
 
 .wrong {
-  color: #FF5A2A;
+    color: #FF5A2A;
 }
 
 
-/* =================================
-   NEON BUILD CLUE
-================================= */
+/* =========================================
+   BUILD CLUE
+========================================= */
 
 .clue {
-  display: inline-block;
+    display: inline-block;
 
-  position: relative;
+    position: relative;
 
-  margin-top: 15px;
+    margin-top: 15px;
 
-  padding: 8px 24px;
+    padding: 8px 24px;
 
-  min-width: 150px;
+    min-width: 150px;
 
-  background: #071A3D;
+    background: #071A3D;
 
-  color: #FFFFFF;
+    color: #FFFFFF;
 
-  border: 1px solid #FFFFFF;
+    border: 1px solid #FFFFFF;
 
-  border-radius: 6px;
+    border-radius: 6px;
 
-  font-size: 30px;
+    font-size: 30px;
 
-  font-weight: 900;
+    font-weight: 900;
 
-  letter-spacing: 5px;
+    letter-spacing: 5px;
 
-  -webkit-text-stroke: .6px #FFFFFF;
+    -webkit-text-stroke: .6px #FFFFFF;
 
-  text-shadow:
-    0 0 4px #FFFFFF,
-    0 0 9px #FFFFFF,
-    0 0 18px #7BE8F6,
-    0 0 30px rgba(123,232,246,.8);
+    text-shadow:
+        0 0 4px #FFFFFF,
+        0 0 9px #FFFFFF,
+        0 0 18px #7BE8F6,
+        0 0 30px rgba(123,232,246,.8);
 
-  box-shadow:
-    0 0 4px #FFFFFF,
-    0 0 10px #FFFFFF,
-    0 0 20px rgba(123,232,246,.7),
-    inset 0 0 12px rgba(123,232,246,.22);
+    box-shadow:
+        0 0 4px #FFFFFF,
+        0 0 10px #FFFFFF,
+        0 0 20px rgba(123,232,246,.7),
+        inset 0 0 12px rgba(123,232,246,.22);
 
-  animation:
-    buildReveal .8s cubic-bezier(.2,.8,.2,1) both,
-    buildPulse 2s ease-in-out .8s infinite;
+    animation:
+        buildReveal .8s cubic-bezier(.2,.8,.2,1) both,
+        buildPulse 2s ease-in-out .8s infinite;
 }
 
 .clue::after {
-  content: "";
+    content: "";
 
-  position: absolute;
+    position: absolute;
 
-  left: 15%;
-  right: 15%;
+    left: 15%;
+    right: 15%;
 
-  bottom: -5px;
+    bottom: -5px;
 
-  height: 1px;
+    height: 1px;
 
-  background: #FFFFFF;
+    background: #FFFFFF;
 
-  box-shadow:
-    0 0 5px #FFFFFF,
-    0 0 12px #7BE8F6;
+    box-shadow:
+        0 0 5px #FFFFFF,
+        0 0 12px #7BE8F6;
 
-  opacity: .9;
+    opacity: .9;
 }
 
 @keyframes buildReveal {
 
-  0% {
-    opacity: 0;
+    0% {
+        opacity: 0;
 
-    transform:
-      scale(.55)
-      translateY(12px);
+        transform:
+            scale(.55)
+            translateY(12px);
 
-    filter: blur(12px);
-  }
+        filter: blur(12px);
+    }
 
-  45% {
-    opacity: 1;
+    45% {
+        opacity: 1;
 
-    transform:
-      scale(1.12)
-      translateY(0);
+        transform:
+            scale(1.12)
+            translateY(0);
 
-    filter: blur(0);
-  }
+        filter: blur(0);
+    }
 
-  70% {
-    transform: scale(.96);
-  }
+    70% {
+        transform: scale(.96);
+    }
 
-  100% {
-    opacity: 1;
-
-    transform: scale(1);
-  }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes buildPulse {
 
-  0%, 100% {
+    0%,100% {
+        box-shadow:
+            0 0 4px #FFFFFF,
+            0 0 10px #FFFFFF,
+            0 0 20px rgba(123,232,246,.7),
+            inset 0 0 12px rgba(123,232,246,.22);
+    }
 
-    box-shadow:
-      0 0 4px #FFFFFF,
-      0 0 10px #FFFFFF,
-      0 0 20px rgba(123,232,246,.7),
-      inset 0 0 12px rgba(123,232,246,.22);
-  }
-
-  50% {
-
-    box-shadow:
-      0 0 7px #FFFFFF,
-      0 0 18px #FFFFFF,
-      0 0 35px rgba(123,232,246,.95),
-      inset 0 0 20px rgba(123,232,246,.35);
-  }
+    50% {
+        box-shadow:
+            0 0 7px #FFFFFF,
+            0 0 18px #FFFFFF,
+            0 0 35px rgba(123,232,246,.95),
+            inset 0 0 20px rgba(123,232,246,.35);
+    }
 }
 
 
-/* =================================
-   ORIGINAL SPARK
-================================= */
+/* =========================================
+   NORMAL SPARK
+========================================= */
 
 #spark-stage {
+    position: fixed;
 
-  position: fixed;
+    right: 6vw;
+    bottom: 4vh;
 
-  right: 6vw;
-  bottom: 4vh;
+    width: 190px;
+    height: 240px;
 
-  width: 190px;
-  height: 240px;
+    z-index: 20;
 
-  z-index: 20;
-
-  pointer-events: none;
-
-  transition:
-    transform .35s ease;
+    pointer-events: none;
 }
 
 #spark-character {
+    position: absolute;
 
-  position: absolute;
+    width: 100%;
+    height: 100%;
 
-  width: 100%;
-  height: 100%;
+    object-fit: contain;
 
-  object-fit: contain;
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(123,232,246,.25)
+        );
 
-  filter:
-    drop-shadow(
-      0 0 12px
-      rgba(123,232,246,.25)
-    );
+    transform-origin: center bottom;
 
-  transform-origin: center bottom;
-
-  animation:
-    sparkIdle 3s ease-in-out infinite;
+    animation:
+        sparkIdle 3s ease-in-out infinite;
 }
 
 #spark-glow {
+    position: absolute;
 
-  position: absolute;
+    width: 130px;
+    height: 130px;
 
-  width: 130px;
-  height: 130px;
+    left: 30px;
+    bottom: 15px;
 
-  left: 30px;
-  bottom: 15px;
+    border-radius: 50%;
 
-  border-radius: 50%;
+    background:
+        rgba(123,232,246,.13);
 
-  background:
-    rgba(123,232,246,.13);
+    filter: blur(35px);
 
-  filter: blur(35px);
-
-  animation:
-    sparkGlow 2.5s ease-in-out infinite;
+    animation:
+        sparkGlow 2.5s ease-in-out infinite;
 }
-
-
-/* =================================
-   ORIGINAL SPARK ANIMATIONS
-================================= */
 
 @keyframes sparkIdle {
 
-  0%,100% {
-    transform:
-      translateY(0)
-      rotate(-1deg);
-  }
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-1deg);
+    }
 
-  50% {
-    transform:
-      translateY(-10px)
-      rotate(1deg);
-  }
+    50% {
+        transform:
+            translateY(-10px)
+            rotate(1deg);
+    }
 }
 
 @keyframes sparkGlow {
 
-  0%,100% {
-    transform: scale(.8);
-    opacity: .35;
-  }
+    0%,100% {
+        transform: scale(.8);
+        opacity: .35;
+    }
 
-  50% {
-    transform: scale(1.15);
-    opacity: .8;
-  }
+    50% {
+        transform: scale(1.15);
+        opacity: .8;
+    }
 }
 
 
-/* =================================
-   POPUP SPARK
-================================= */
+/* =========================================
+   REACTION LAYER
+========================================= */
 
 #reaction-layer {
+    position: fixed;
 
-  position: fixed;
+    inset: 0;
 
-  inset: 0;
+    z-index: 50;
 
-  z-index: 100;
+    pointer-events: none;
 
-  pointer-events: none;
+    display: none;
 
-  display: none;
+    align-items: center;
+    justify-content: center;
 }
 
-
-/*
-   نقطة ظهور الـSpark
-   موجودة تقريبًا في منتصف السؤال
-*/
-
-.reaction-spark {
-
-  position: absolute;
-
-  width: 170px;
-  height: 210px;
-
-  object-fit: contain;
-
-  left: 50%;
-  top: 47%;
-
-  transform:
-    translate(-50%, -50%)
-    scale(.15);
-
-  opacity: 0;
-
-  filter:
-    drop-shadow(
-      0 0 15px
-      rgba(123,232,246,.65)
-    );
+#reaction-layer.active {
+    display: flex;
 }
 
+#reaction-spark {
+    width: 230px;
+    height: 230px;
 
-/* =================================
-   HAPPY POPUP
-================================= */
+    object-fit: contain;
 
-#reaction-layer.happy {
-  display: block;
-}
+    position: relative;
 
-#reaction-layer.happy .reaction-spark {
-
-  animation:
-    happyPopup 5s ease forwards;
-}
-
-@keyframes happyPopup {
-
-  0% {
-
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(.15)
-      rotate(-8deg);
+    z-index: 3;
 
     filter:
-      blur(10px)
-      drop-shadow(
-        0 0 5px
-        rgba(123,232,246,.2)
-      );
-  }
+        drop-shadow(0 0 20px rgba(123,232,246,.7));
+}
 
-  10% {
 
-    opacity: 1;
+/* =========================================
+   HAPPY REACTION
+========================================= */
 
-    transform:
-      translate(-50%, -50%)
-      scale(1.08)
-      rotate(4deg);
+#reaction-layer.happy #reaction-spark {
+
+    animation:
+        happySpark 5s ease-in-out forwards;
+}
+
+@keyframes happySpark {
+
+    0% {
+        opacity: 0;
+
+        transform:
+            scale(.15)
+            translateY(40px);
+
+        filter:
+            drop-shadow(0 0 0 transparent);
+    }
+
+    15% {
+        opacity: 1;
+
+        transform:
+            scale(1.15)
+            translateY(0);
+
+        filter:
+            drop-shadow(0 0 35px rgba(123,232,246,.9));
+    }
+
+    25% {
+        transform:
+            scale(.95)
+            translateY(-10px);
+    }
+
+    40% {
+        transform:
+            scale(1.05)
+            translateY(0);
+    }
+
+    75% {
+        opacity: 1;
+
+        transform:
+            scale(1)
+            translateY(-5px);
+    }
+
+    100% {
+        opacity: 0;
+
+        transform:
+            scale(.85)
+            translateY(-30px);
+    }
+}
+
+
+/* =========================================
+   ANGRY REACTION
+========================================= */
+
+#reaction-layer.angry #reaction-spark {
+
+    animation:
+        angrySpark 5s ease-in-out forwards;
 
     filter:
-      blur(0)
-      drop-shadow(
-        0 0 30px
-        rgba(123,232,246,.9)
-      );
-  }
+        drop-shadow(0 0 30px rgba(255,70,30,.9));
+}
 
-  18% {
+@keyframes angrySpark {
 
-    transform:
-      translate(-50%, -50%)
-      scale(.96)
-      rotate(-3deg);
-  }
+    0% {
+        opacity: 0;
 
-  30% {
+        transform:
+            scale(.15)
+            translateY(40px);
+    }
 
-    transform:
-      translate(-50%, -50%)
-      scale(1)
-      rotate(0);
-  }
+    12% {
+        opacity: 1;
 
-  75% {
+        transform:
+            scale(1.15)
+            translateY(0);
+    }
 
-    opacity: 1;
+    20% {
+        transform:
+            scale(.95)
+            rotate(-7deg);
+    }
 
-    transform:
-      translate(-50%, -50%)
-      scale(1)
-      rotate(0);
-  }
+    28% {
+        transform:
+            scale(1)
+            rotate(7deg);
+    }
 
-  90% {
+    36% {
+        transform:
+            scale(1)
+            rotate(-5deg);
+    }
 
-    opacity: .7;
+    50% {
+        transform:
+            scale(1.03)
+            rotate(4deg);
+    }
 
-    transform:
-      translate(-50%, -50%)
-      scale(.92);
-  }
+    75% {
+        opacity: 1;
+    }
 
-  100% {
+    100% {
+        opacity: 0;
 
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(.7)
-      translateY(-20px);
-
-    filter: blur(7px);
-  }
+        transform:
+            scale(.85)
+            translateY(-25px);
+    }
 }
 
 
-/* =================================
-   ANGRY POPUP
-================================= */
-
-#reaction-layer.angry {
-  display: block;
-}
-
-#reaction-layer.angry .reaction-spark {
-
-  animation:
-    angryPopup 5s ease forwards;
-
-  filter:
-    drop-shadow(
-      0 0 20px
-      rgba(255,90,42,.8)
-    );
-}
-
-@keyframes angryPopup {
-
-  0% {
-
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(.15)
-      rotate(0);
-
-    filter:
-      blur(10px)
-      drop-shadow(
-        0 0 5px
-        rgba(255,90,42,.2)
-      );
-  }
-
-  8% {
-
-    opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1.1)
-      rotate(-5deg);
-
-    filter:
-      blur(0)
-      drop-shadow(
-        0 0 35px
-        rgba(255,90,42,.95)
-      );
-  }
-
-  16% {
-
-    transform:
-      translate(-50%, -50%)
-      scale(.96)
-      rotate(5deg);
-  }
-
-  24% {
-
-    transform:
-      translate(-50%, -50%)
-      scale(1)
-      rotate(-3deg);
-  }
-
-  32% {
-
-    transform:
-      translate(-50%, -50%)
-      scale(1)
-      rotate(3deg);
-  }
-
-  40% {
-
-    transform:
-      translate(-50%, -50%)
-      scale(1)
-      rotate(0);
-  }
-
-  75% {
-
-    opacity: 1;
-
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
-
-  90% {
-
-    opacity: .65;
-
-    transform:
-      translate(-50%, -50%)
-      scale(.92);
-  }
-
-  100% {
-
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(.7)
-      translateY(20px);
-
-    filter: blur(7px);
-  }
-}
-
-
-/* =================================
+/* =========================================
    REACTION PARTICLES
-================================= */
+========================================= */
 
 .reaction-particle {
+    position: absolute;
 
-  position: fixed;
-
-  left: 50%;
-  top: 47%;
-
-  pointer-events: none;
-
-  z-index: 101;
-
-  opacity: 0;
-
-  font-size: 22px;
-
-  will-change:
-    transform,
-    opacity;
-}
-
-
-/* ❤️ HEARTS */
-
-#reaction-layer.happy .heart {
-
-  animation:
-    heartFloat var(--duration) ease-out forwards;
-
-  animation-delay: var(--delay);
-}
-
-@keyframes heartFloat {
-
-  0% {
+    font-size: 30px;
 
     opacity: 0;
 
-    transform:
-      translate(-50%, -50%)
-      scale(.2)
-      rotate(0deg);
-  }
+    animation:
+        reactionParticle 4s ease-out forwards;
+}
 
-  12% {
+@keyframes reactionParticle {
 
-    opacity: 1;
+    0% {
+        opacity: 0;
 
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      scale(1);
-  }
+        transform:
+            translate(0,0)
+            scale(.2);
+    }
 
-  100% {
+    15% {
+        opacity: 1;
+    }
 
-    opacity: 0;
+    60% {
+        opacity: 1;
+    }
 
-    transform:
-      translate(
-        calc(-50% + var(--x2)),
-        calc(-50% + var(--y2))
-      )
-      scale(.55)
-      rotate(var(--rotation));
-  }
+    100% {
+        opacity: 0;
+
+        transform:
+            translate(var(--x),var(--y))
+            scale(1.3)
+            rotate(var(--r));
+    }
 }
 
 
-/* 🔥 FIRE */
-
-#reaction-layer.angry .fire {
-
-  animation:
-    fireFloat var(--duration) ease-out forwards;
-
-  animation-delay: var(--delay);
-}
-
-@keyframes fireFloat {
-
-  0% {
-
-    opacity: 0;
-
-    transform:
-      translate(-50%, -50%)
-      scale(.2);
-  }
-
-  10% {
-
-    opacity: 1;
-
-    transform:
-      translate(
-        calc(-50% + var(--x)),
-        calc(-50% + var(--y))
-      )
-      scale(1);
-  }
-
-  55% {
-
-    opacity: 1;
-
-    transform:
-      translate(
-        calc(-50% + var(--x2)),
-        calc(-50% + var(--y2))
-      )
-      scale(1.15)
-      rotate(var(--rotation));
-  }
-
-  100% {
-
-    opacity: 0;
-
-    transform:
-      translate(
-        calc(-50% + var(--x3)),
-        calc(-50% + var(--y3))
-      )
-      scale(.45)
-      rotate(var(--rotation2));
-  }
-}
-
-
-/* =================================
-   CANVAS
-================================= */
+/* =========================================
+   CODE PARTICLES CANVAS
+========================================= */
 
 #spark-canvas {
 
-  position: fixed;
+    position: fixed;
 
-  inset: 0;
+    inset: 0;
 
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 
-  pointer-events: none;
+    pointer-events: none;
 
-  z-index: 10;
+    z-index: 5;
 }
 
 
-/* =================================
+/* =========================================
    SCREEN FLASH
-================================= */
+========================================= */
 
 #screen-flash {
 
-  position: fixed;
+    position: fixed;
 
-  inset: 0;
+    inset: 0;
 
-  pointer-events: none;
+    pointer-events: none;
 
-  z-index: 15;
+    z-index: 40;
 
-  opacity: 0;
+    opacity: 0;
 }
 
 #screen-flash.error {
 
-  background:
-    rgba(255,60,40,.12);
+    background:
+        rgba(255,60,40,.14);
 
-  animation:
-    errorFlash .45s ease-out;
+    animation:
+        errorFlash .45s ease-out;
 }
 
 @keyframes errorFlash {
 
-  0% {
-    opacity: 0;
-  }
+    0% {
+        opacity: 0;
+    }
 
-  30% {
-    opacity: 1;
-  }
+    30% {
+        opacity: 1;
+    }
 
-  100% {
-    opacity: 0;
-  }
+    100% {
+        opacity: 0;
+    }
 }
 
 
-/* =================================
+/* =========================================
    MOBILE
-================================= */
+========================================= */
 
 @media (max-width:700px) {
 
-  #spark-stage {
+    #spark-stage {
 
-    width: 110px;
-    height: 145px;
+        width: 110px;
+        height: 145px;
 
-    right: 10px;
-    bottom: 10px;
-  }
+        right: 10px;
+        bottom: 10px;
+    }
 
-  .clue {
+    #reaction-spark {
 
-    font-size: 25px;
+        width: 190px;
+        height: 190px;
+    }
 
-    padding:
-      7px 18px;
-  }
+    .clue {
 
-  .reaction-spark {
+        font-size: 25px;
 
-    width: 135px;
-    height: 170px;
-
-    top: 45%;
-  }
-
-  .reaction-particle {
-
-    font-size: 19px;
-  }
+        padding:
+            7px 18px;
+    }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =================================
-     ORIGINAL SPARK
-================================= -->
+<!-- =========================================
+     NORMAL SPARK
+========================================= -->
 
 <div id="spark-stage">
 
-  <div id="spark-glow"></div>
+    <div id="spark-glow"></div>
 
-  <img
-    id="spark-character"
-    src="assets/spark-web.png"
-    alt="SPARK Web Development"
-  >
-
-</div>
-
-
-<!-- =================================
-     REACTION LAYER
-================================= -->
-
-<div id="reaction-layer">
-
-  <img
-    id="reaction-spark"
-    class="reaction-spark"
-    src=""
-    alt="Spark reaction"
-  >
+    <img
+        id="spark-character"
+        src="assets/spark-web.png"
+        alt="SPARK Web Development"
+    >
 
 </div>
 
 
-<!-- CANVAS -->
+<!-- =========================================
+     CODE PARTICLES
+========================================= -->
 
 <canvas id="spark-canvas"></canvas>
 
 
-<!-- ERROR FLASH -->
+<!-- =========================================
+     ERROR FLASH
+========================================= -->
 
 <div id="screen-flash"></div>
 
 
-<!-- =================================
+<!-- =========================================
+     REACTION SPARK
+========================================= -->
+
+<div id="reaction-layer">
+
+    <img
+        id="reaction-spark"
+        src=""
+        alt="Spark Reaction"
+    >
+
+</div>
+
+
+<!-- =========================================
      QUESTION
-================================= -->
+========================================= -->
 
 <div class="box">
 
-  <div class="track">
-    TRACK 01 / WEB DEVELOPMENT
-  </div>
+    <div class="track">
+        TRACK 01 / WEB DEVELOPMENT
+    </div>
 
 
-  <h1>
-    THE FIRST CLUE
-  </h1>
+    <h1>
+        THE FIRST CLUE
+    </h1>
 
 
-  <div class="question">
-    Which layer controls the structure of a webpage?
-  </div>
+    <div class="question">
+        Which layer controls the structure of a webpage?
+    </div>
 
 
-  <div class="options">
+    <div class="options">
 
-    <button onclick="checkAnswer(this, false)">
-      CSS
-    </button>
+        <button onclick="checkAnswer(this, false)">
+            CSS
+        </button>
 
-    <button onclick="checkAnswer(this, true)">
-      HTML
-    </button>
+        <button onclick="checkAnswer(this, true)">
+            HTML
+        </button>
 
-    <button onclick="checkAnswer(this, false)">
-      JavaScript
-    </button>
+        <button onclick="checkAnswer(this, false)">
+            JavaScript
+        </button>
 
-    <button onclick="checkAnswer(this, false)">
-      SQL
-    </button>
+        <button onclick="checkAnswer(this, false)">
+            SQL
+        </button>
 
-  </div>
+    </div>
 
 
-  <div id="result"></div>
+    <div id="result"></div>
 
 </div>
 
 
 <script>
 
-
 /* =========================================
    ELEMENTS
 ========================================= */
 
 const canvas =
-  document.getElementById("spark-canvas");
+    document.getElementById("spark-canvas");
 
 const ctx =
-  canvas.getContext("2d");
+    canvas.getContext("2d");
 
-const sparkStage =
-  document.getElementById("spark-stage");
+const result =
+    document.getElementById("result");
 
 const screenFlash =
-  document.getElementById("screen-flash");
+    document.getElementById("screen-flash");
 
 const reactionLayer =
-  document.getElementById("reaction-layer");
+    document.getElementById("reaction-layer");
 
 const reactionSpark =
-  document.getElementById("reaction-spark");
-
-
-let width;
-let height;
+    document.getElementById("reaction-spark");
 
 
 /* =========================================
    CANVAS SIZE
 ========================================= */
 
-function resizeSparkCanvas() {
-
-  width =
-    canvas.width =
+let width =
     window.innerWidth;
 
-  height =
-    canvas.height =
+let height =
     window.innerHeight;
+
+
+function resizeCanvas() {
+
+    const dpr =
+        window.devicePixelRatio || 1;
+
+    width =
+        window.innerWidth;
+
+    height =
+        window.innerHeight;
+
+    canvas.width =
+        width * dpr;
+
+    canvas.height =
+        height * dpr;
+
+    canvas.style.width =
+        width + "px";
+
+    canvas.style.height =
+        height + "px";
+
+    ctx.setTransform(
+        dpr,
+        0,
+        0,
+        dpr,
+        0,
+        0
+    );
 }
 
 
-resizeSparkCanvas();
+resizeCanvas();
 
 
 window.addEventListener(
-  "resize",
-  resizeSparkCanvas
+    "resize",
+    resizeCanvas
 );
 
 
@@ -1014,26 +827,45 @@ window.addEventListener(
 
 const sparkMouse = {
 
-  x:
-    window.innerWidth / 2,
+    x: width / 2,
 
-  y:
-    window.innerHeight / 2
+    y: height / 2
 };
 
 
 window.addEventListener(
-  "mousemove",
-  function(event) {
+    "mousemove",
+    function(event) {
 
-    sparkMouse.x =
-      event.clientX;
+        sparkMouse.x =
+            event.clientX;
 
-    sparkMouse.y =
-      event.clientY;
+        sparkMouse.y =
+            event.clientY;
 
-  }
+    }
 );
+
+
+/* =========================================
+   CODE SYMBOLS
+========================================= */
+
+const codeSymbols = [
+
+    "</>",
+    "{ }",
+    "01",
+    "[]",
+    "&&",
+    ";",
+    "/>",
+    "<>",
+    "HTML",
+    "CSS",
+    "JS"
+
+];
 
 
 /* =========================================
@@ -1043,64 +875,43 @@ window.addEventListener(
 const sparkParticles = [];
 
 
-const codeSymbols = [
+for (let i = 0; i < 90; i++) {
 
-  "</>",
-  "{ }",
-  "01",
-  "[]",
-  "&&",
-  ";",
-  "/>",
-  "<>",
-  "HTML",
-  "CSS",
-  "JS"
+    sparkParticles.push({
 
-];
+        x:
+            Math.random() * width,
 
+        y:
+            Math.random() * height,
 
-for (
-  let i = 0;
-  i < 75;
-  i++
-) {
+        vx:
+            (Math.random() - 0.5) * 0.35,
 
-  sparkParticles.push({
+        vy:
+            (Math.random() - 0.5) * 0.35,
 
-    x:
-      Math.random() * width,
+        size:
+            Math.random() * 10 + 9,
 
-    y:
-      Math.random() * height,
+        symbol:
+            codeSymbols[
+                Math.floor(
+                    Math.random() *
+                    codeSymbols.length
+                )
+            ],
 
-    vx:
-      (Math.random() - .5) * .25,
+        opacity:
+            Math.random() * 0.35 + 0.15,
 
-    vy:
-      (Math.random() - .5) * .25,
+        baseOpacity:
+            Math.random() * 0.35 + 0.15,
 
-    size:
-      Math.random() * 10 + 8,
+        color:
+            "#7BE8F6"
 
-    symbol:
-      codeSymbols[
-        Math.floor(
-          Math.random() *
-          codeSymbols.length
-        )
-      ],
-
-    opacity:
-      Math.random() * .35 + .05,
-
-    baseOpacity:
-      Math.random() * .35 + .05,
-
-    color:
-      "#7BE8F6"
-
-  });
+    });
 
 }
 
@@ -1111,13 +922,12 @@ for (
 
 function setParticlesColor(color) {
 
-  sparkParticles.forEach(
-    p => {
+    sparkParticles.forEach(function(p) {
 
-      p.color = color;
+        p.color = color;
 
-    }
-  );
+    });
+
 }
 
 
@@ -1125,376 +935,186 @@ function setParticlesColor(color) {
    RESET PARTICLES
 ========================================= */
 
-function resetParticlesColor() {
+function resetParticles() {
 
-  sparkParticles.forEach(
-    p => {
+    sparkParticles.forEach(function(p) {
 
-      p.color =
-        "#7BE8F6";
+        p.color =
+            "#7BE8F6";
 
-      p.opacity =
-        p.baseOpacity;
+        p.opacity =
+            p.baseOpacity;
 
-    }
-  );
+    });
+
 }
 
 
 /* =========================================
-   HAPPY PARTICLE ANIMATION
+   HAPPY PARTICLES
 ========================================= */
 
 function happyParticles() {
 
-  const centerX =
-    width / 2;
+    setParticlesColor("#7BE8F6");
 
-  const centerY =
-    height / 2;
+    sparkParticles.forEach(function(p, index) {
 
+        const angle =
+            (index /
+            sparkParticles.length) *
+            Math.PI * 2;
 
-  sparkParticles.forEach(
-    (p, index) => {
+        const radius =
+            120 +
+            Math.random() * 180;
 
-      const angle =
-        (index /
-        sparkParticles.length) *
-        Math.PI * 2;
+        p.targetX =
+            width / 2 +
+            Math.cos(angle) * radius;
 
-      const radius =
-        100 +
-        Math.random() * 180;
+        p.targetY =
+            height / 2 +
+            Math.sin(angle) * radius;
 
+        p.opacity =
+            0.9;
 
-      p.targetX =
-        centerX +
-        Math.cos(angle) *
-        radius;
-
-      p.targetY =
-        centerY +
-        Math.sin(angle) *
-        radius;
-
-    }
-  );
+    });
 
 
-  let progress = 0;
+    setTimeout(function() {
 
+        resetParticles();
 
-  function animateHappy() {
-
-    progress += .025;
-
-
-    sparkParticles.forEach(
-      p => {
-
-        if (
-          p.targetX === undefined
-        ) return;
-
-
-        p.x +=
-          (p.targetX - p.x) *
-          .035;
-
-        p.y +=
-          (p.targetY - p.y) *
-          .035;
-
-      }
-    );
-
-
-    if (progress < 1) {
-
-      requestAnimationFrame(
-        animateHappy
-      );
-
-    }
-
-  }
-
-
-  animateHappy();
-
-
-  sparkParticles.forEach(
-    p => {
-
-      p.opacity = .75;
-
-    }
-  );
-
-
-  setTimeout(
-    resetParticlesColor,
-    900
-  );
+    }, 1500);
 
 }
 
 
 /* =========================================
-   WRONG ANSWER ANIMATION
+   WRONG PARTICLES
 ========================================= */
 
 function wrongParticles() {
 
-  setParticlesColor(
-    "#FF5A2A"
-  );
+    setParticlesColor("#FF5A2A");
+
+    sparkParticles.forEach(function(p) {
+
+        p.opacity =
+            Math.min(
+                p.baseOpacity + 0.45,
+                1
+            );
+
+    });
 
 
-  sparkParticles.forEach(
-    p => {
+    screenFlash.classList.remove("error");
 
-      p.opacity =
-        Math.min(
-          p.baseOpacity + .35,
-          .8
+    void screenFlash.offsetWidth;
+
+    screenFlash.classList.add("error");
+
+
+    setTimeout(function() {
+
+        resetParticles();
+
+    }, 900);
+
+}
+
+
+/* =========================================
+   REACTION PARTICLES
+========================================= */
+
+function createReactionParticles(type) {
+
+    reactionLayer
+        .querySelectorAll(".reaction-particle")
+        .forEach(function(p) {
+
+            p.remove();
+
+        });
+
+
+    const symbols =
+        type === "happy"
+
+        ? ["♥", "♥", "♥", "✦", "♥", "✦"]
+
+        : ["🔥", "🔥", "🔥", "💥", "🔥", "💥"];
+
+
+    for (let i = 0; i < 14; i++) {
+
+        const particle =
+            document.createElement("div");
+
+        particle.className =
+            "reaction-particle";
+
+        particle.textContent =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        const angle =
+            Math.random() *
+            Math.PI * 2;
+
+        const distance =
+            120 +
+            Math.random() * 180;
+
+
+        const x =
+            Math.cos(angle) * distance;
+
+        const y =
+            Math.sin(angle) * distance;
+
+
+        particle.style.left =
+            "50%";
+
+        particle.style.top =
+            "50%";
+
+
+        particle.style.setProperty(
+            "--x",
+            x + "px"
+        );
+
+        particle.style.setProperty(
+            "--y",
+            y + "px"
+        );
+
+        particle.style.setProperty(
+            "--r",
+            (Math.random() * 90 - 45) + "deg"
+        );
+
+
+        particle.style.animationDelay =
+            (Math.random() * 0.4) + "s";
+
+
+        reactionLayer.appendChild(
+            particle
         );
 
     }
-  );
-
-
-  screenFlash.classList.remove(
-    "error"
-  );
-
-
-  void screenFlash.offsetWidth;
-
-
-  screenFlash.classList.add(
-    "error"
-  );
-
-
-  setTimeout(
-    resetParticlesColor,
-    700
-  );
-
-}
-
-
-/* =========================================
-   CREATE HEARTS
-========================================= */
-
-function createHearts() {
-
-  const emojis = [
-    "❤️",
-    "💙",
-    "💗",
-    "💕",
-    "💖"
-  ];
-
-
-  for (
-    let i = 0;
-    i < 14;
-    i++
-  ) {
-
-    const heart =
-      document.createElement("div");
-
-    heart.className =
-      "reaction-particle heart";
-
-
-    heart.textContent =
-      emojis[
-        Math.floor(
-          Math.random() *
-          emojis.length
-        )
-      ];
-
-
-    heart.style.setProperty(
-      "--x",
-      `${(Math.random() - .5) * 80}px`
-    );
-
-
-    heart.style.setProperty(
-      "--y",
-      `${(Math.random() - .5) * 60}px`
-    );
-
-
-    heart.style.setProperty(
-      "--x2",
-      `${(Math.random() - .5) * 330}px`
-    );
-
-
-    heart.style.setProperty(
-      "--y2",
-      `${-120 - Math.random() * 300}px`
-    );
-
-
-    heart.style.setProperty(
-      "--rotation",
-      `${(Math.random() - .5) * 100}deg`
-    );
-
-
-    heart.style.setProperty(
-      "--duration",
-      `${2.5 + Math.random() * 2}s`
-    );
-
-
-    heart.style.setProperty(
-      "--delay",
-      `${Math.random() * .7}s`
-    );
-
-
-    reactionLayer.appendChild(
-      heart
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   CREATE FIRE
-========================================= */
-
-function createFire() {
-
-  const emojis = [
-    "🔥",
-    "🔥",
-    "🔥",
-    "💥"
-  ];
-
-
-  for (
-    let i = 0;
-    i < 16;
-    i++
-  ) {
-
-    const fire =
-      document.createElement("div");
-
-    fire.className =
-      "reaction-particle fire";
-
-
-    fire.textContent =
-      emojis[
-        Math.floor(
-          Math.random() *
-          emojis.length
-        )
-      ];
-
-
-    fire.style.setProperty(
-      "--x",
-      `${(Math.random() - .5) * 90}px`
-    );
-
-
-    fire.style.setProperty(
-      "--y",
-      `${(Math.random() - .5) * 60}px`
-    );
-
-
-    fire.style.setProperty(
-      "--x2",
-      `${(Math.random() - .5) * 260}px`
-    );
-
-
-    fire.style.setProperty(
-      "--y2",
-      `${-100 - Math.random() * 180}px`
-    );
-
-
-    fire.style.setProperty(
-      "--x3",
-      `${(Math.random() - .5) * 380}px`
-    );
-
-
-    fire.style.setProperty(
-      "--y3",
-      `${-220 - Math.random() * 200}px`
-    );
-
-
-    fire.style.setProperty(
-      "--rotation",
-      `${(Math.random() - .5) * 80}deg`
-    );
-
-
-    fire.style.setProperty(
-      "--rotation2",
-      `${(Math.random() - .5) * 160}deg`
-    );
-
-
-    fire.style.setProperty(
-      "--duration",
-      `${2.5 + Math.random() * 2}s`
-    );
-
-
-    fire.style.setProperty(
-      "--delay",
-      `${Math.random() * .7}s`
-    );
-
-
-    reactionLayer.appendChild(
-      fire
-    );
-
-  }
-
-}
-
-
-/* =========================================
-   CLEAR REACTION
-========================================= */
-
-function clearReaction() {
-
-  reactionLayer
-    .querySelectorAll(
-      ".reaction-particle"
-    )
-    .forEach(
-      particle => {
-
-        particle.remove();
-
-      }
-    );
 
 }
 
@@ -1505,38 +1125,35 @@ function clearReaction() {
 
 function showHappySpark() {
 
-  clearReaction();
+    reactionLayer.className = "";
+
+    reactionLayer.classList.add(
+        "active",
+        "happy"
+    );
+
+    reactionSpark.src =
+        "assets/spark-happy.png";
 
 
-  reactionSpark.src =
-    "assets/spark-happy.png";
+    createReactionParticles("happy");
 
 
-  reactionLayer.classList.remove(
-    "angry"
-  );
+    setTimeout(function() {
 
+        reactionLayer.className = "";
 
-  reactionLayer.classList.remove(
-    "happy"
-  );
+        reactionSpark.src = "";
 
+        reactionLayer
+            .querySelectorAll(".reaction-particle")
+            .forEach(function(p) {
 
-  void reactionLayer.offsetWidth;
+                p.remove();
 
+            });
 
-  reactionLayer.classList.add(
-    "happy"
-  );
-
-
-  createHearts();
-
-
-  setTimeout(
-    clearReaction,
-    5200
-  );
+    }, 5000);
 
 }
 
@@ -1547,38 +1164,35 @@ function showHappySpark() {
 
 function showAngrySpark() {
 
-  clearReaction();
+    reactionLayer.className = "";
+
+    reactionLayer.classList.add(
+        "active",
+        "angry"
+    );
+
+    reactionSpark.src =
+        "spark-angry.png";
 
 
-  reactionSpark.src =
-    "spark-angry.png";
+    createReactionParticles("angry");
 
 
-  reactionLayer.classList.remove(
-    "happy"
-  );
+    setTimeout(function() {
 
+        reactionLayer.className = "";
 
-  reactionLayer.classList.remove(
-    "angry"
-  );
+        reactionSpark.src = "";
 
+        reactionLayer
+            .querySelectorAll(".reaction-particle")
+            .forEach(function(p) {
 
-  void reactionLayer.offsetWidth;
+                p.remove();
 
+            });
 
-  reactionLayer.classList.add(
-    "angry"
-  );
-
-
-  createFire();
-
-
-  setTimeout(
-    clearReaction,
-    5200
-  );
+    }, 5000);
 
 }
 
@@ -1587,17 +1201,152 @@ function showAngrySpark() {
    ANSWER SYSTEM
 ========================================= */
 
-function checkAnswer(
-  button,
-  correct
-) {
+let answeredCorrectly = false;
 
-  const result =
-    document.getElementById(
-      "result"
+
+function checkAnswer(button, correct) {
+
+    if (answeredCorrectly) {
+        return;
+    }
+
+
+    if (correct) {
+
+        answeredCorrectly = true;
+
+
+        happyParticles();
+
+        showHappySpark();
+
+
+        result.innerHTML = `
+
+            <div class="correct">
+                CORRECT.
+            </div>
+
+            <div>
+                YOUR CLUE IS:
+            </div>
+
+            <div class="clue">
+                BUILD
+            </div>
+
+        `;
+
+
+        document
+            .querySelectorAll(".options button")
+            .forEach(function(btn) {
+
+                btn.disabled = true;
+
+            });
+
+
+    } else {
+
+        wrongParticles();
+
+        showAngrySpark();
+
+
+        result.innerHTML = `
+
+            <div class="wrong">
+                NOT THIS ONE.
+            </div>
+
+            <div>
+                TRY AGAIN.
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* =========================================
+   MAIN PARTICLE LOOP
+========================================= */
+
+function animateSpark() {
+
+    ctx.clearRect(
+        0,
+        0,
+        width,
+        height
     );
 
 
-  if (correct) {
+    sparkParticles.forEach(function(p) {
 
-    /* HAPPY SPARK *
+        const dx =
+            sparkMouse.x - p.x;
+
+        const dy =
+            sparkMouse.y - p.y;
+
+        const distance =
+            Math.sqrt(
+                dx * dx +
+                dy * dy
+            );
+
+
+        if (distance < 180) {
+
+            p.x += dx * 0.0008;
+
+            p.y += dy * 0.0008;
+
+        }
+
+
+        p.x += p.vx;
+
+        p.y += p.vy;
+
+
+        if (p.x < -80) {
+
+            p.x =
+                width + 80;
+
+        }
+
+
+        if (p.x > width + 80) {
+
+            p.x = -80;
+
+        }
+
+
+        if (p.y < -80) {
+
+            p.y =
+                height + 80;
+
+        }
+
+
+        if (p.y > height + 80) {
+
+            p.y = -80;
+
+        }
+
+
+        ctx.globalAlpha =
+            p.opacity;
+
+
+        ctx.font =
+          
