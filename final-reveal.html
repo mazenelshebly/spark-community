@@ -1,1343 +1,1468 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-<meta charset="UTF-8">  
-<meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>BCU-Obour Branch | Final Reveal</title>  <style>  
-  
-:root {  
-    --black: #050A12;  
-    --deep-blue: #081525;  
-    --blue: #1687FF;  
-    --blue-light: #55B7FF;  
-    --cyan: #8DDBFF;  
-    --white: #F5FAFF;  
-    --muted: #9BAEC2;  
-    --line: rgba(141,219,255,.16);  
-}  
-  
-* {  
-    margin: 0;  
-    padding: 0;  
-    box-sizing: border-box;  
-}  
-  
-html {  
-    scroll-behavior: smooth;  
-}  
-  
-body {  
-    background: var(--black);  
-    color: var(--white);  
-    font-family: Arial, Helvetica, sans-serif;  
-    overflow-x: hidden;  
-}  
-  
-  
-/* =========================  
-   VIDEO INTRO  
-========================= */  
-  
-#videoIntro {  
-    position: relative;  
-    width: 100%;  
-    height: 100vh;  
-    height: 100svh;  
-    background: #000;  
-    overflow: hidden;  
-}  
-  
-#openingVideo {  
-    width: 100%;  
-    height: 100%;  
-    object-fit: cover;  
-    display: block;  
-    background: #000;  
-}  
-  
-.videoOverlay {  
-    position: absolute;  
-    inset: 0;  
-  
-    background:  
-        linear-gradient(  
-            to bottom,  
-            rgba(2,8,18,.18),  
-            rgba(2,8,18,.03) 48%,  
-            rgba(2,8,18,.72)  
-        );  
-  
-    pointer-events: none;  
-}  
-  
-  
-/* =========================  
-   TAP HINT  
-========================= */  
-  
-#tapHint {  
-    position: absolute;  
-    left: 50%;  
-    bottom: 32px;  
-    transform: translateX(-50%);  
-  
-    z-index: 5;  
-  
-    padding: 12px 20px;  
-  
-    border: 1px solid rgba(141,219,255,.35);  
-  
-    background: rgba(5,10,18,.60);  
-  
-    backdrop-filter: blur(12px);  
-  
-    color: var(--white);  
-  
-    font-size: 11px;  
-    letter-spacing: 3px;  
-    text-transform: uppercase;  
-  
-    opacity: 0;  
-  
-    transition: .5s ease;  
-  
-    pointer-events: none;  
-}  
-  
-#videoIntro.videoReady #tapHint {  
-    opacity: 1;  
-}  
-  
-  
-/* =========================  
-   EXPLORE  
-========================= */  
-  
-#explore {  
-    position: absolute;  
-  
-    bottom: 35px;  
-    left: 50%;  
-  
-    transform:  
-        translateX(-50%)  
-        translateY(20px);  
-  
-    z-index: 10;  
-  
-    opacity: 0;  
-  
-    pointer-events: none;  
-  
-    transition: .7s ease;  
-  
-    text-align: center;  
-}  
-  
-#explore.show {  
-    opacity: 1;  
-  
-    transform:  
-        translateX(-50%)  
-        translateY(0);  
-  
-    pointer-events: auto;  
-}  
-  
-.exploreText {  
-    color: var(--white);  
-  
-    font-size: 11px;  
-  
-    letter-spacing: 4px;  
-  
-    text-transform: uppercase;  
-  
-    margin-bottom: 10px;  
-}  
-  
-.arrow {  
-    color: var(--blue-light);  
-  
-    font-size: 24px;  
-  
-    animation: bounce 1.4s infinite;  
-}  
-  
-@keyframes bounce {  
-  
-    0%,100% {  
-        transform: translateY(0);  
-    }  
-  
-    50% {  
-        transform: translateY(8px);  
-    }  
-  
-}  
-  
-  
-/* =========================  
-   MAIN WEBSITE  
-========================= */  
-  
-#website {  
-    background: var(--black);  
-    color: var(--white);  
-}  
-  
-.section {  
-    padding: 90px 7%;  
-}  
-  
-  
-/* =========================  
-   HERO  
-========================= */  
-  
-.hero {  
-    min-height: 90vh;  
-  
-    display: flex;  
-  
-    align-items: center;  
-  
-    justify-content: center;  
-  
-    text-align: center;  
-  
-    background:  
-  
-        radial-gradient(  
-            circle at 50% 35%,  
-            rgba(22,135,255,.16),  
-            transparent 42%  
-        ),  
-  
-        var(--black);  
-}  
-  
-.heroInner {  
-    max-width: 1000px;  
-}  
-  
-.smallTitle {  
-  
-    font-size: 12px;  
-  
-    letter-spacing: 5px;  
-  
-    text-transform: uppercase;  
-  
-    color: var(--blue-light);  
-  
-    margin-bottom: 25px;  
-}  
-  
-.hero h1 {  
-  
-    font-size:  
-        clamp(50px, 9vw, 120px);  
-  
-    line-height: .9;  
-  
-    font-weight: 900;  
-  
-    letter-spacing: -4px;  
-}  
-  
-.hero h1 span {  
-    color: var(--blue);  
-}  
-  
-.hero p {  
-  
-    margin-top: 30px;  
-  
-    font-size: 17px;  
-  
-    line-height: 1.6;  
-  
-    color: var(--muted);  
-}  
-  
-  
-/* =========================  
-   FINAL MESSAGE  
-========================= */  
-  
-.message {  
-  
-    min-height: 70vh;  
-  
-    display: flex;  
-  
-    align-items: center;  
-  
-    justify-content: center;  
-  
-    text-align: center;  
-  
-    background:  
-  
-        radial-gradient(  
-            circle at 50% 50%,  
-            rgba(22,135,255,.09),  
-            transparent 48%  
-        ),  
-  
-        var(--black);  
-}  
-  
-.message h2 {  
-  
-    max-width: 1000px;  
-  
-    font-size:  
-        clamp(38px, 7vw, 90px);  
-  
-    line-height: 1;  
-  
-    letter-spacing: -3px;  
-}  
-  
-.message h2 span {  
-    color: var(--blue-light);  
-}  
-  
-  
-/* =========================  
-   TRACKS  
-========================= */  
-  
-.tracksHeader {  
-    margin-bottom: 45px;  
-}  
-  
-.tracksHeader h2 {  
-  
-    font-size:  
-        clamp(40px, 6vw, 70px);  
-  
-    line-height: 1;  
-}  
-  
-.tracksHeader p {  
-  
-    margin-top: 15px;  
-  
-    color: var(--muted);  
-}  
-  
-.trackGrid {  
-  
-    display: grid;  
-  
-    grid-template-columns:  
-        repeat(4, 1fr);  
-  
-    gap: 10px;  
-}  
-  
-.track {  
-  
-    min-height: 190px;  
-  
-    background:  
-  
-        linear-gradient(  
-            145deg,  
-            rgba(22,135,255,.10),  
-            rgba(8,21,37,.92)  
-        );  
-  
-    border:  
-        1px solid var(--line);  
-  
-    color: var(--white);  
-  
-    padding: 28px;  
-  
-    display: flex;  
-  
-    flex-direction: column;  
-  
-    justify-content: space-between;  
-  
-    transition: .3s ease;  
-}  
-  
-.track:hover {  
-  
-    border-color:  
-        rgba(85,183,255,.65);  
-  
-    background:  
-  
-        linear-gradient(  
-            145deg,  
-            rgba(22,135,255,.22),  
-            rgba(8,21,37,.98)  
-        );  
-  
-    transform: translateY(-5px);  
-  
-    box-shadow:  
-        0 15px 45px  
-        rgba(0,80,180,.18);  
-}  
-  
-.trackNumber {  
-  
-    font-size: 12px;  
-  
-    color: var(--blue-light);  
-  
-    opacity: .8;  
-}  
-  
-.trackName {  
-  
-    font-size: 22px;  
-  
-    font-weight: 800;  
-}  
-  
-  
-/* =========================  
-   WHAT AWAITS  
-========================= */  
-  
-.awaits {  
-  
-    background:  
-        var(--deep-blue);  
-  
-    color: var(--white);  
-}  
-  
-.awaits h2 {  
-  
-    font-size:  
-        clamp(40px, 6vw, 75px);  
-  
-    margin-bottom: 50px;  
-}  
-  
-.awaitsGrid {  
-  
-    display: grid;  
-  
-    grid-template-columns:  
-        repeat(4, 1fr);  
-  
-    gap: 20px;  
-}  
-  
-.awaitsItem {  
-  
-    border-top:  
-        1px solid var(--line);  
-  
-    padding-top: 20px;  
-}  
-  
-.awaitsItem h3 {  
-  
-    color: var(--blue-light);  
-  
-    font-size: 23px;  
-  
-    margin-bottom: 12px;  
-}  
-  
-.awaitsItem p {  
-  
-    color: var(--muted);  
-  
-    line-height: 1.6;  
-}  
-  
-  
-/* =========================  
-   JOIN  
-========================= */  
-  
-.join {  
-  
-    background:  
-  
-        radial-gradient(  
-            circle at 50% 20%,  
-            rgba(85,183,255,.18),  
-            transparent 45%  
-        ),  
-  
-        #07111F;  
-  
-    color: var(--white);  
-  
-    text-align: center;  
-}  
-  
-.join h2 {  
-  
-    font-size:  
-        clamp(60px, 12vw, 150px);  
-  
-    line-height: .8;  
-  
-    letter-spacing: -5px;  
-  
-    background:  
-  
-        linear-gradient(  
-            90deg,  
-            var(--white),  
-            var(--blue-light)  
-        );  
-  
-    -webkit-background-clip: text;  
-  
-    -webkit-text-fill-color: transparent;  
-}  
-  
-.join p {  
-  
-    margin: 30px auto;  
-  
-    max-width: 550px;  
-  
-    line-height: 1.6;  
-  
-    color: var(--muted);  
-}  
-  
-.joinButton {  
-  
-    display: inline-block;  
-  
-    padding: 17px 35px;  
-  
-    background: var(--blue);  
-  
-    color: white;  
-  
-    border:  
-        1px solid var(--blue-light);  
-  
-    text-decoration: none;  
-  
-    font-weight: bold;  
-  
-    letter-spacing: 2px;  
-  
-    transition: .3s ease;  
-  
-    box-shadow:  
-        0 10px 35px  
-        rgba(22,135,255,.20);  
-}  
-  
-.joinButton:hover {  
-  
-    background:  
-        var(--blue-light);  
-  
-    color:  
-        var(--black);  
-  
-    transform:  
-        translateY(-3px);  
-}  
-  
-  
-/* =========================  
-   SOCIAL  
-========================= */  
-  
-.social {  
-  
-    background:  
-        #050A12;  
-  
-    text-align: center;  
-}  
-  
-.social h2 {  
-  
-    font-size:  
-        clamp(38px, 6vw, 70px);  
-  
-    margin-bottom: 40px;  
-}  
-  
-.socialLinks {  
-  
-    display: flex;  
-  
-    justify-content: center;  
-  
-    flex-wrap: wrap;  
-  
-    gap: 12px;  
-}  
-  
-.socialLinks a {  
-  
-    display: inline-block;  
-  
-    padding: 15px 25px;  
-  
-    border:  
-        1px solid var(--line);  
-  
-    background:  
-        rgba(8,21,37,.7);  
-  
-    color:  
-        var(--white);  
-  
-    text-decoration: none;  
-  
-    font-weight: bold;  
-  
-    transition: .3s ease;  
-}  
-  
-.socialLinks a:hover {  
-  
-    background:  
-        var(--blue);  
-  
-    border-color:  
-        var(--blue-light);  
-  
-    transform:  
-        translateY(-3px);  
-  
-    box-shadow:  
-        0 10px 30px  
-        rgba(22,135,255,.18);  
-}  
-  
-  
-/* =========================  
-   FOOTER  
-========================= */  
-  
-footer {  
-  
-    background:  
-        #03070D;  
-  
-    color:  
-        var(--white);  
-  
-    padding:  
-        30px 7%;  
-  
-    display:  
-        flex;  
-  
-    justify-content:  
-        space-between;  
-  
-    gap:  
-        20px;  
-  
-    flex-wrap:  
-        wrap;  
-  
-    border-top:  
-        1px solid  
-        rgba(141,219,255,.08);  
-}  
-  
-footer p {  
-  
-    color:  
-        var(--muted);  
-  
-    font-size:  
-        12px;  
-}  
-  
-  
-/* =========================  
-   MOBILE  
-========================= */  
-  
-@media (max-width: 800px) {  
-  
-    .trackGrid {  
-  
-        grid-template-columns:  
-            repeat(2, 1fr);  
-    }  
-  
-    .awaitsGrid {  
-  
-        grid-template-columns:  
-            repeat(2, 1fr);  
-    }  
-  
-    .section {  
-  
-        padding:  
-            70px 6%;  
-    }  
-  
-    .hero h1 {  
-  
-        letter-spacing:  
-            -2px;  
-    }  
-  
-}  
-  
-  
-@media (max-width: 500px) {  
-  
-    .trackGrid,  
-    .awaitsGrid {  
-  
-        grid-template-columns:  
-            1fr;  
-    }  
-  
-    .track {  
-  
-        min-height:  
-            150px;  
-    }  
-  
-    .socialLinks {  
-  
-        flex-direction:  
-            column;  
-    }  
-  
-    .socialLinks a {  
-  
-        width:  
-            100%;  
-    }  
-  
-}  
-  
-</style>  </head>  <body>  <!-- =========================  
-     VIDEO INTRO  
-========================= -->  <section id="videoIntro">  <video  
-    id="openingVideo"  
-    autoplay  
-    muted  
-    playsinline  
-    preload="auto"  
->  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <source  
-        src="video/opening.mp4"  
-        type="video/mp4"  
-    >  
+<title>BCU-Obour Branch | Final Reveal</title>
 
-    Your browser does not support HTML5 video.  
+<style>
 
-</video>  
+:root {
+    --black: #050A12;
+    --deep-blue: #081525;
+    --blue: #1687FF;
+    --blue-light: #55B7FF;
+    --cyan: #8DDBFF;
+    --white: #F5FAFF;
+    --muted: #9BAEC2;
+    --line: rgba(141,219,255,.16);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
+}
 
 
-<div class="videoOverlay"></div>  
+/* =========================
+   VIDEO INTRO
+========================= */
+
+#videoIntro {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    background: #000;
+    overflow: hidden;
+}
+
+#openingVideo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #000;
+}
+
+.videoOverlay {
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(2,8,18,.18),
+            rgba(2,8,18,.03) 48%,
+            rgba(2,8,18,.72)
+        );
+
+    pointer-events: none;
+}
 
 
-<div id="tapHint">  
+/* =========================
+   TAP HINT
+========================= */
 
-    TAP TO ENTER FULLSCREEN  
+#tapHint {
+    position: absolute;
+    left: 50%;
+    bottom: 32px;
+    transform: translateX(-50%);
 
-</div>  
+    z-index: 5;
+
+    padding: 12px 20px;
+
+    border: 1px solid rgba(141,219,255,.35);
+
+    background: rgba(5,10,18,.60);
+
+    backdrop-filter: blur(12px);
+
+    color: var(--white);
+
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    transition: .5s ease;
+
+    pointer-events: none;
+}
+
+#videoIntro.videoReady #tapHint {
+    opacity: 1;
+}
 
 
-<div id="explore">  
+/* =========================
+   EXPLORE
+========================= */
 
-    <div class="exploreText">  
+#explore {
+    position: absolute;
 
-        Explore the community  
+    bottom: 35px;
+    left: 50%;
 
-    </div>  
+    transform:
+        translateX(-50%)
+        translateY(20px);
 
-    <div class="arrow">  
+    z-index: 10;
 
-        ↓  
+    opacity: 0;
 
-    </div>  
+    pointer-events: none;
+
+    transition: .7s ease;
+
+    text-align: center;
+}
+
+#explore.show {
+    opacity: 1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+
+    pointer-events: auto;
+}
+
+.exploreText {
+    color: var(--white);
+
+    font-size: 11px;
+
+    letter-spacing: 4px;
+
+    text-transform: uppercase;
+
+    margin-bottom: 10px;
+}
+
+.arrow {
+    color: var(--blue-light);
+
+    font-size: 24px;
+
+    animation: bounce 1.4s infinite;
+}
+
+@keyframes bounce {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(8px);
+    }
+
+}
+
+
+/* =========================
+   MAIN WEBSITE
+========================= */
+
+#website {
+    background: var(--black);
+    color: var(--white);
+}
+
+.section {
+    padding: 90px 7%;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 90vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 35%,
+            rgba(22,135,255,.16),
+            transparent 42%
+        ),
+
+        var(--black);
+}
+
+.heroInner {
+    max-width: 1000px;
+}
+
+.smallTitle {
+
+    font-size: 12px;
+
+    letter-spacing: 5px;
+
+    text-transform: uppercase;
+
+    color: var(--blue-light);
+
+    margin-bottom: 25px;
+}
+
+.hero h1 {
+
+    font-size:
+        clamp(50px, 9vw, 120px);
+
+    line-height: .9;
+
+    font-weight: 900;
+
+    letter-spacing: -4px;
+}
+
+.hero h1 span {
+    color: var(--blue);
+}
+
+.hero p {
+
+    margin-top: 30px;
+
+    font-size: 17px;
+
+    line-height: 1.6;
+
+    color: var(--muted);
+}
+
+
+/* =========================
+   FINAL MESSAGE
+========================= */
+
+.message {
+
+    min-height: 70vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    background:
+
+        radial-gradient(
+            circle at 50% 50%,
+            rgba(22,135,255,.09),
+            transparent 48%
+        ),
+
+        var(--black);
+}
+
+.message h2 {
+
+    max-width: 1000px;
+
+    font-size:
+        clamp(38px, 7vw, 90px);
+
+    line-height: 1;
+
+    letter-spacing: -3px;
+}
+
+.message h2 span {
+    color: var(--blue-light);
+}
+
+
+/* =========================
+   TRACKS
+========================= */
+
+.tracksHeader {
+    margin-bottom: 45px;
+}
+
+.tracksHeader h2 {
+
+    font-size:
+        clamp(40px, 6vw, 70px);
+
+    line-height: 1;
+}
+
+.tracksHeader p {
+
+    margin-top: 15px;
+
+    color: var(--muted);
+}
+
+.trackGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 10px;
+}
+
+.track {
+
+    min-height: 190px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(22,135,255,.10),
+            rgba(8,21,37,.92)
+        );
+
+    border:
+        1px solid var(--line);
+
+    color: var(--white);
+
+    padding: 28px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    transition: .3s ease;
+}
+
+.track:hover {
+
+    border-color:
+        rgba(85,183,255,.65);
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(22,135,255,.22),
+            rgba(8,21,37,.98)
+        );
+
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,80,180,.18);
+}
+
+.trackNumber {
+
+    font-size: 12px;
+
+    color: var(--blue-light);
+
+    opacity: .8;
+}
+
+.trackName {
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+/* =========================
+   WHAT AWAITS
+========================= */
+
+.awaits {
+
+    background:
+        var(--deep-blue);
+
+    color: var(--white);
+}
+
+.awaits h2 {
+
+    font-size:
+        clamp(40px, 6vw, 75px);
+
+    margin-bottom: 50px;
+}
+
+.awaitsGrid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.awaitsItem {
+
+    border-top:
+        1px solid var(--line);
+
+    padding-top: 20px;
+}
+
+.awaitsItem h3 {
+
+    color: var(--blue-light);
+
+    font-size: 23px;
+
+    margin-bottom: 12px;
+}
+
+.awaitsItem p {
+
+    color: var(--muted);
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   JOIN
+========================= */
+
+.join {
+
+    background:
+
+        radial-gradient(
+            circle at 50% 20%,
+            rgba(85,183,255,.18),
+            transparent 45%
+        ),
+
+        #07111F;
+
+    color: var(--white);
+
+    text-align: center;
+}
+
+.join h2 {
+
+    font-size:
+        clamp(60px, 12vw, 150px);
+
+    line-height: .8;
+
+    letter-spacing: -5px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            var(--white),
+            var(--blue-light)
+        );
+
+    -webkit-background-clip: text;
+
+    -webkit-text-fill-color: transparent;
+}
+
+.join p {
+
+    margin: 30px auto;
+
+    max-width: 550px;
+
+    line-height: 1.6;
+
+    color: var(--muted);
+}
+
+.joinButton {
+
+    display: inline-block;
+
+    padding: 17px 35px;
+
+    background: var(--blue);
+
+    color: white;
+
+    border:
+        1px solid var(--blue-light);
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
+
+    transition: .3s ease;
+
+    box-shadow:
+        0 10px 35px
+        rgba(22,135,255,.20);
+}
+
+.joinButton:hover {
+
+    background:
+        var(--blue-light);
+
+    color:
+        var(--black);
+
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================
+   SOCIAL
+========================= */
+
+.social {
+
+    background:
+        #050A12;
+
+    text-align: center;
+}
+
+.social h2 {
+
+    font-size:
+        clamp(38px, 6vw, 70px);
+
+    margin-bottom: 40px;
+}
+
+.socialLinks {
+
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+.socialLinks a {
+
+    display: inline-block;
+
+    padding: 15px 25px;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(8,21,37,.7);
+
+    color:
+        var(--white);
+
+    text-decoration: none;
+
+    font-weight: bold;
+
+    transition: .3s ease;
+}
+
+.socialLinks a:hover {
+
+    background:
+        var(--blue);
+
+    border-color:
+        var(--blue-light);
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 10px 30px
+        rgba(22,135,255,.18);
+}
+
+
+/* =========================
+   NAME FORM
+========================= */
+
+.nameForm {
+
+    display: flex;
+
+    align-items: center;
+
+    width: min(100%, 420px);
+
+    margin: 25px auto 0;
+
+    border:
+        1px solid var(--line);
+
+    background:
+        rgba(8,21,37,.7);
+}
+
+.nameForm input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 15px 18px;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: var(--white);
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+}
+
+.nameForm input::placeholder {
+
+    color: var(--muted);
+
+    opacity: .8;
+}
+
+.nameForm button {
+
+    width: 55px;
+
+    height: 48px;
+
+    border: none;
+
+    border-left:
+        1px solid var(--line);
+
+    background:
+        var(--blue);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: .3s ease;
+}
+
+.nameForm button:hover {
+
+    background:
+        var(--blue-light);
+
+    color:
+        var(--black);
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+
+    background:
+        #03070D;
+
+    color:
+        var(--white);
+
+    padding:
+        30px 7%;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+    flex-wrap:
+        wrap;
+
+    border-top:
+        1px solid
+        rgba(141,219,255,.08);
+}
+
+footer p {
+
+    color:
+        var(--muted);
+
+    font-size:
+        12px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 800px) {
+
+    .trackGrid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .awaitsGrid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .section {
+
+        padding:
+            70px 6%;
+    }
+
+    .hero h1 {
+
+        letter-spacing:
+            -2px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .trackGrid,
+    .awaitsGrid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .track {
+
+        min-height:
+            150px;
+    }
+
+    .socialLinks {
+
+        flex-direction:
+            column;
+    }
+
+    .socialLinks a {
+
+        width:
+            100%;
+    }
+
+    .nameForm {
+
+        width: 100%;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     VIDEO INTRO
+========================= -->
+
+<section id="videoIntro">
+
+<video
+    id="openingVideo"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+>
+
+    <source
+        src="video/opening.mp4"
+        type="video/mp4"
+    >
+
+    Your browser does not support HTML5 video.
+
+</video>
+
+
+<div class="videoOverlay"></div>
+
+
+<div id="tapHint">
+
+    TAP TO ENTER FULLSCREEN
 
 </div>
 
-</section>  <!-- =========================  
-     WEBSITE  
-========================= -->  <main id="website">  <!-- HERO -->  
 
-<section class="hero section">  
+<div id="explore">
 
-    <div class="heroInner">  
+    <div class="exploreText">
 
+        Explore the community
 
-        <div class="smallTitle">  
+    </div>
 
-            BCU-Obour Branch  
+    <div class="arrow">
 
-        </div>  
+        ↓
 
+    </div>
 
-        <h1>  
+</div>
 
-            8 TRACKS.<br>  
+</section>
 
-            <span>1 COMMUNITY.</span>  
 
-        </h1>  
+<!-- =========================
+     WEBSITE
+========================= -->
 
+<main id="website">
 
-        <p>  
 
-            You found the final piece.  
-            Now discover what comes next.  
+<section class="hero section">
 
-        </p>  
+    <div class="heroInner">
 
+        <div class="smallTitle">
 
-    </div>  
+            BCU-Obour Branch
 
-</section>  
+        </div>
 
+        <h1>
 
+            8 TRACKS.<br>
 
-<!-- FINAL MESSAGE -->  
+            <span>1 COMMUNITY.</span>
 
-<section class="message section">  
+        </h1>
 
-    <h2>  
+        <p>
 
-        THE FUTURE IS BUILT BY  
+            You found the final piece.
+            Now discover what comes next.
 
-        <span>  
-            PEOPLE WHO CONNECT.  
-        </span>  
+        </p>
 
-    </h2>  
+    </div>
 
-</section>  
+</section>
 
 
+<section class="message section">
 
-<!-- TRACKS -->  
+    <h2>
 
-<section class="section">  
+        THE FUTURE IS BUILT BY
 
+        <span>
+            PEOPLE WHO CONNECT.
+        </span>
 
-    <div class="tracksHeader">  
+    </h2>
 
-        <h2>  
+</section>
 
-            THE TRACKS.  
 
-        </h2>  
+<section class="section">
 
+    <div class="tracksHeader">
 
-        <p>  
+        <h2>
 
-            Eight paths. One connected community.  
+            THE TRACKS.
 
-        </p>  
+        </h2>
 
-    </div>  
+        <p>
 
+            Eight paths. One connected community.
 
+        </p>
 
-    <div class="trackGrid">  
+    </div>
 
 
-        <div class="track">  
+    <div class="trackGrid">
 
-            <span class="trackNumber">  
-                01  
-            </span>  
 
-            <span class="trackName">  
-                WEB DEVELOPMENT  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                01
+            </span>
 
+            <span class="trackName">
+                WEB DEVELOPMENT
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                02  
-            </span>  
 
-            <span class="trackName">  
-                DATA ANALYSIS  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                02
+            </span>
 
+            <span class="trackName">
+                DATA ANALYSIS
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                03  
-            </span>  
 
-            <span class="trackName">  
-                CYBER SECURITY  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                03
+            </span>
 
+            <span class="trackName">
+                CYBER SECURITY
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                04  
-            </span>  
 
-            <span class="trackName">  
-                BIOINFORMATICS  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                04
+            </span>
 
+            <span class="trackName">
+                BIOINFORMATICS
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                05  
-            </span>  
 
-            <span class="trackName">  
-                MARKETING  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                05
+            </span>
 
+            <span class="trackName">
+                MARKETING
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                06  
-            </span>  
 
-            <span class="trackName">  
-                HR  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                06
+            </span>
 
+            <span class="trackName">
+                HR
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                07  
-            </span>  
 
-            <span class="trackName">  
-                LOGISTICS  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                07
+            </span>
 
+            <span class="trackName">
+                LOGISTICS
+            </span>
 
-        <div class="track">  
+        </div>
 
-            <span class="trackNumber">  
-                08  
-            </span>  
 
-            <span class="trackName">  
-                GENERAL SKILLS  
-            </span>  
+        <div class="track">
 
-        </div>  
+            <span class="trackNumber">
+                08
+            </span>
 
+            <span class="trackName">
+                GENERAL SKILLS
+            </span>
 
-    </div>  
+        </div>
 
-</section>  
 
+    </div>
 
+</section>
 
-<!-- WHAT AWAITS -->  
 
-<section class="awaits section">  
+<section class="awaits section">
 
+    <h2>
 
-    <h2>  
+        WHAT AWAITS YOU.
 
-        WHAT AWAITS YOU.  
+    </h2>
 
-    </h2>  
 
+    <div class="awaitsGrid">
 
-    <div class="awaitsGrid">  
 
+        <div class="awaitsItem">
 
-        <div class="awaitsItem">  
+            <h3>
+                WORKSHOPS
+            </h3>
 
-            <h3>  
-                WORKSHOPS  
-            </h3>  
+            <p>
+                Practical sessions designed
+                to turn knowledge into real skills.
+            </p>
 
-            <p>  
+        </div>
 
-                Practical sessions designed  
-                to turn knowledge into real skills.  
 
-            </p>  
+        <div class="awaitsItem">
 
-        </div>  
+            <h3>
+                CHALLENGES
+            </h3>
 
+            <p>
+                Test yourself, compete
+                and push your limits.
+            </p>
 
-        <div class="awaitsItem">  
+        </div>
 
-            <h3>  
-                CHALLENGES  
-            </h3>  
 
-            <p>  
+        <div class="awaitsItem">
 
-                Test yourself, compete  
-                and push your limits.  
+            <h3>
+                PROJECTS
+            </h3>
 
-            </p>  
+            <p>
+                Build things that actually
+                connect you to the real world.
+            </p>
 
-        </div>  
+        </div>
 
 
-        <div class="awaitsItem">  
+        <div class="awaitsItem">
 
-            <h3>  
-                PROJECTS  
-            </h3>  
+            <h3>
+                COMMUNITY
+            </h3>
 
-            <p>  
+            <p>
+                Meet people, exchange ideas
+                and grow together.
+            </p>
 
-                Build things that actually  
-                connect you to the real world.  
+        </div>
 
-            </p>  
 
-        </div>  
+    </div>
 
+</section>
 
-        <div class="awaitsItem">  
 
-            <h3>  
-                COMMUNITY  
-            </h3>  
+<section class="join section">
 
-            <p>  
+    <h2>
+        READY?
+    </h2>
 
-                Meet people, exchange ideas  
-                and grow together.  
+    <p>
 
-            </p>  
+        Your next skill starts here.
+        Join the community and discover your path.
 
-        </div>  
+    </p>
 
+    <a
+        class="joinButton"
+        href="https://www.facebook.com/share/1CRonkPQkN/"
+        target="_blank"
+        rel="noopener noreferrer"
+    >
 
-    </div>  
+        JOIN THE COMMUNITY
 
-</section>  
+    </a>
 
+</section>
 
 
-<!-- JOIN -->  
+<!-- =========================
+     SOCIAL + NAME
+========================= -->
 
-<section class="join section">  
+<section class="social section">
 
+    <h2>
 
-    <h2>  
+        STAY CONNECTED.
 
-        READY?  
+    </h2>
 
-    </h2>  
 
+    <div class="socialLinks">
 
-    <p>  
 
-        Your next skill starts here.  
-        Join the community and discover your path.  
+        <a
+            href="https://www.instagram.com/brightcodeunion?stkn=MXh1emtqd2xzaGtvbg=="
+            target="_blank"
+            rel="noopener noreferrer"
+        >
 
-    </p>  
+            INSTAGRAM
 
+        </a>
 
-    <a  
-        class="joinButton"  
-        href="https://www.facebook.com/share/1CRonkPQkN/"  
-        target="_blank"  
-        rel="noopener noreferrer"  
-    >  
 
-        JOIN THE COMMUNITY  
+        <a
+            href="https://www.facebook.com/share/1CRonkPQkN/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
 
-    </a>  
+            FACEBOOK
 
+        </a>
 
-</section>  
 
+        <a
+            href="https://www.linkedin.com/company/bright-code-union/"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
 
+            LINKEDIN
 
-<!-- SOCIAL -->  
+        </a>
 
-<section class="social section">  
 
+        <!-- NAME FORM -->
 
-    <h2>  
+        <form
+            id="nameForm"
+            class="nameForm"
+        >
 
-        STAY CONNECTED.  
+            <input
+                id="nameInput"
+                type="text"
+                placeholder="WRITE YOUR FIRST NAME ONLY"
+                autocomplete="off"
+                required
+            >
 
-    </h2>  
+            <button type="submit">
+                →
+            </button>
 
+        </form>
 
-    <div class="socialLinks">  
 
+    </div>
 
-        <a  
-            href="https://www.instagram.com/brightcodeunion?stkn=MXh1emtqd2xzaGtvbg=="  
-            target="_blank"  
-            rel="noopener noreferrer"  
-        >  
+</section>
 
-            INSTAGRAM  
 
-        </a>  
+<footer>
 
+    <p>
+        BCU-Obour Branch
+    </p>
 
-        <a  
-            href="https://www.facebook.com/share/1CRonkPQkN/"  
-            target="_blank"  
-            rel="noopener noreferrer"  
-        >  
-
-            FACEBOOK  
-
-        </a>  
-
-
-        <a  
-            href="https://www.linkedin.com/company/bright-code-union/"  
-            target="_blank"  
-            rel="noopener noreferrer"  
-        >  
-
-            LINKEDIN  
-
-        </a>  
-
-
-        <a  
-            href="https://www.facebook.com/share/1CRonkPQkN/"  
-            target="_blank"  
-            rel="noopener noreferrer"  
-        >  
-
-            FORM  
-
-        </a>  
-
-
-    </div>  
-
-</section>  
-
-
-
-<!-- FOOTER -->  
-
-<footer>  
-
-
-    <p>  
-
-        BCU-Obour Branch  
-
-    </p>  
-
-
-    <p>  
-
-        THE FUTURE IS BUILT BY PEOPLE WHO CONNECT.  
-
-    </p>  
-
+    <p>
+        THE FUTURE IS BUILT BY PEOPLE WHO CONNECT.
+    </p>
 
 </footer>
 
-</main>  <script>  
-  
-  
-const video =  
-    document.getElementById("openingVideo");  
-  
-const videoIntro =  
-    document.getElementById("videoIntro");  
-  
-const explore =  
-    document.getElementById("explore");  
-  
-const tapHint =  
-    document.getElementById("tapHint");  
-  
-  
-  
-/* =========================  
-   AUTOPLAY  
-========================= */  
-  
-video.play().catch(() => {  
-  
-    tapHint.style.opacity = "1";  
-  
-    tapHint.style.pointerEvents = "auto";  
-  
-});  
-  
-  
-  
-/* =========================  
-   FULLSCREEN  
-========================= */  
-  
-async function enterFullscreen() {  
-  
-    try {  
-  
-        if (video.requestFullscreen) {  
-  
-            await video.requestFullscreen();  
-  
-        }  
-  
-        else if (video.webkitEnterFullscreen) {  
-  
-            video.webkitEnterFullscreen();  
-  
-        }  
-  
-        else if (video.parentElement.requestFullscreen) {  
-  
-            await video.parentElement.requestFullscreen();  
-  
-        }  
-  
-    }  
-  
-    catch (error) {  
-  
-        console.log(  
-            "Fullscreen requires user interaction on this browser."  
-        );  
-  
-    }  
-  
-}  
-  
-  
-  
-/* =========================  
-   FIRST TAP  
-========================= */  
-  
-videoIntro.addEventListener("click", () => {  
-  
-  
-    enterFullscreen();  
-  
-  
-    tapHint.style.opacity = "0";  
-  
-  
-    if (video.paused) {  
-  
-        video.play().catch(() => {});  
-  
-    }  
-  
-  
-}, { once: true });  
-  
-  
-  
-/* =========================  
-   VIDEO END  
-========================= */  
-  
-video.addEventListener("ended", () => {  
-  
-  
-    explore.classList.add("show");  
-  
-  
-    try {  
-  
-        if (document.fullscreenElement) {  
-  
-            document.exitFullscreen();  
-  
-        }  
-  
-    }  
-  
-    catch (error) {}  
-  
-});  
-  
-  
-  
-/* =========================  
-   EXPLORE  
-========================= */  
-  
-explore.addEventListener("click", () => {  
-  
-  
-    document  
-        .getElementById("website")  
-        .scrollIntoView({  
-  
-            behavior: "smooth"  
-  
-        });  
-  
-  
-});  
-  
-  
-  
-/* =========================  
-   AUTO SCROLL AFTER VIDEO  
-========================= */  
-  
-video.addEventListener("ended", () => {  
-  
-  
-    setTimeout(() => {  
-  
-  
-        window.scrollTo({  
-  
-            top:  
-                window.innerHeight,  
-  
-            behavior:  
-                "smooth"  
-  
-        });  
-  
-  
-    }, 1800);  
-  
-  
-});  
-  
-  
-</script>  </body>  
-   </html>
+
+</main>
+
+
+<script>
+
+
+/* =========================
+   VIDEO
+========================= */
+
+const video =
+    document.getElementById("openingVideo");
+
+const videoIntro =
+    document.getElementById("videoIntro");
+
+const explore =
+    document.getElementById("explore");
+
+const tapHint =
+    document.getElementById("tapHint");
+
+
+/* =========================
+   AUTOPLAY
+========================= */
+
+video.play().catch(() => {
+
+    tapHint.style.opacity = "1";
+
+    tapHint.style.pointerEvents = "auto";
+
+});
+
+
+/* =========================
+   FULLSCREEN
+   ORIGINAL — UNCHANGED
+========================= */
+
+async function enterFullscreen() {
+
+    try {
+
+        if (video.requestFullscreen) {
+
+            await video.requestFullscreen();
+
+        }
+
+        else if (video.webkitEnterFullscreen) {
+
+            video.webkitEnterFullscreen();
+
+        }
+
+        else if (video.parentElement.requestFullscreen) {
+
+            await video.parentElement.requestFullscreen();
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Fullscreen requires user interaction on this browser."
+        );
+
+    }
+
+}
+
+
+/* =========================
+   FIRST TAP
+========================= */
+
+videoIntro.addEventListener("click", () => {
+
+
+    enterFullscreen();
+
+
+    tapHint.style.opacity = "0";
+
+
+    if (video.paused) {
+
+        video.play().catch(() => {});
+
+    }
+
+
+}, { once: true });
+
+
+/* =========================
+   VIDEO END
+========================= */
+
+video.addEventListener("ended", () => {
+
+
+    explore.classList.add("show");
+
+
+    try {
+
+        if (document.fullscreenElement) {
+
+            document.exitFullscreen();
+
+        }
+
+    }
+
+    catch (error) {}
+
+});
+
+
+/* =========================
+   EXPLORE
+========================= */
+
+explore.addEventListener("click", () => {
+
+
+    document
+        .getElementById("website")
+        .scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+
+});
+
+
+/* =========================
+   AUTO SCROLL
+========================= */
+
+video.addEventListener("ended", () => {
+
+
+    setTimeout(() => {
+
+
+        window.scrollTo({
+
+            top:
+                window.innerHeight,
+
+            behavior:
+                "smooth"
+
+        });
+
+
+    }, 1800);
+
+
+});
+
+
+/* =========================
+   NAME → PAGE
+========================= */
+
+const nameForm =
+    document.getElementById("nameForm");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+
+nameForm.addEventListener(
+    "submit",
+    (event) => {
+
+        event.preventDefault();
+
+
+        const name =
+            nameInput.value
+                .trim()
+                .toLowerCase();
+
+
+        if (name === "saher") {
+
+            window.location.href =
+                "saher.html";
+
+        }
+
+        else {
+
+            window.location.href =
+                "thank-you.html";
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+              </html>
