@@ -218,13 +218,10 @@ body {
         ),
 
         var(--black);
-
-    overflow: hidden;
 }
 
 .heroInner {
-    width: 100%;
-    max-width: 1400px;
+    max-width: 1000px;
 }
 
 .smallTitle {
@@ -237,7 +234,7 @@ body {
 
     color: var(--blue-light);
 
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 
@@ -246,28 +243,22 @@ body {
 ========================= */
 
 .heroVisual {
-
     position: relative;
 
-    width: min(100%, 1536px);
+    width: min(100%, 1100px);
 
     margin: 0 auto;
 
     overflow: hidden;
-
-    /*
-       Smoothly blends the image
-       into the dark website background.
-    */
 
     -webkit-mask-image:
         linear-gradient(
             to bottom,
             transparent 0%,
             rgba(0,0,0,.45) 5%,
-            black 12%,
-            black 84%,
-            rgba(0,0,0,.5) 94%,
+            black 13%,
+            black 82%,
+            rgba(0,0,0,.45) 94%,
             transparent 100%
         );
 
@@ -276,107 +267,55 @@ body {
             to bottom,
             transparent 0%,
             rgba(0,0,0,.45) 5%,
-            black 12%,
-            black 84%,
-            rgba(0,0,0,.5) 94%,
+            black 13%,
+            black 82%,
+            rgba(0,0,0,.45) 94%,
             transparent 100%
         );
 }
 
 .heroVisual img {
-
     display: block;
 
     width: 100%;
 
     height: auto;
 
-    position: relative;
-
-    z-index: 1;
-
-    /*
-       Very subtle cinematic adjustment.
-    */
-
     filter:
-        brightness(.95)
-        contrast(1.04)
-        saturate(1.03);
+        brightness(.92)
+        contrast(1.05)
+        saturate(1.05);
 
     transform: scale(1.01);
 }
 
-
-/* =========================
-   IMAGE BLENDING
-========================= */
-
-.heroVisual::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 2;
-
-    pointer-events: none;
-
-    background:
-
-        linear-gradient(
-            to bottom,
-            var(--black) 0%,
-            rgba(5,10,18,.35) 7%,
-            transparent 18%,
-            transparent 82%,
-            rgba(5,10,18,.45) 94%,
-            var(--black) 100%
-        );
-}
-
 .heroVisual::after {
-
     content: "";
 
     position: absolute;
 
     inset: 0;
 
-    z-index: 3;
-
     pointer-events: none;
 
     background:
-
         radial-gradient(
             ellipse at center,
-            transparent 50%,
-            rgba(5,10,18,.28) 78%,
-            rgba(5,10,18,.85) 100%
+            transparent 48%,
+            rgba(5,10,18,.18) 70%,
+            rgba(5,10,18,.82) 100%
         );
 }
-
-
-/* =========================
-   HERO DESCRIPTION
-========================= */
 
 .hero p {
 
-    margin-top: 0;
+    margin-top: 30px;
 
     font-size: 17px;
 
     line-height: 1.6;
 
     color: var(--muted);
-
-    position: relative;
-
-    z-index: 5;
 }
 
 
@@ -890,28 +829,10 @@ footer p {
             70px 6%;
     }
 
-    .hero {
-
-        min-height:
-            auto;
-
-        padding-top:
-            70px;
-
-        padding-bottom:
-            75px;
-    }
-
     .heroVisual {
-
-        width:
-            112%;
-
-        margin-left:
-            -6%;
-
-        margin-right:
-            -6%;
+        width: 112%;
+        margin-left: -6%;
+        margin-right: -6%;
     }
 
 }
@@ -946,20 +867,13 @@ footer p {
 
     .nameForm {
 
-        width:
-            100%;
+        width: 100%;
     }
 
     .heroVisual {
-
-        width:
-            120%;
-
-        margin-left:
-            -10%;
-
-        margin-right:
-            -10%;
+        width: 120%;
+        margin-left: -10%;
+        margin-right: -10%;
     }
 
 }
@@ -1042,15 +956,13 @@ footer p {
         </div>
 
 
-        <!-- =========================
-             HERO IMAGE
-        ========================= -->
+        <!-- ONLY THIS PART WAS CHANGED -->
 
         <div class="heroVisual">
 
             <img
                 src="IMG_20260914_211330_310.jpg"
-                alt="8 Tracks 1 Community"
+                alt="BCU"
             >
 
         </div>
@@ -1496,4 +1408,96 @@ videoIntro.addEventListener("click", () => {
 
         video.play().catch(() => {});
 
-    
+    }
+
+
+}, { once: true });
+
+
+/* =========================
+   VIDEO END
+========================= */
+
+video.addEventListener("ended", () => {
+
+
+    explore.classList.add("show");
+
+
+    try {
+
+        if (document.fullscreenElement) {
+
+            document.exitFullscreen();
+
+        }
+
+    }
+
+    catch (error) {}
+
+});
+
+
+/* =========================
+   EXPLORE
+========================= */
+
+explore.addEventListener("click", () => {
+
+
+    document
+        .getElementById("website")
+        .scrollIntoView({
+
+            behavior: "smooth"
+
+        });
+
+
+});
+
+
+/* =========================
+   AUTO SCROLL
+========================= */
+
+video.addEventListener("ended", () => {
+
+
+    setTimeout(() => {
+
+
+        window.scrollTo({
+
+            top:
+                window.innerHeight,
+
+            behavior:
+                "smooth"
+
+        });
+
+
+    }, 1800);
+
+
+});
+
+
+/* =========================
+   NAME → PAGE
+========================= */
+
+const nameForm =
+    document.getElementById("nameForm");
+
+const nameInput =
+    document.getElementById("nameInput");
+
+
+nameForm.addEventListener(
+    "submit",
+    (event) => {
+
+        event.pr
