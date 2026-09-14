@@ -237,77 +237,20 @@ body {
     margin-bottom: 25px;
 }
 
+.hero h1 {
 
-/* =========================
-   HERO IMAGE
-========================= */
+    font-size:
+        clamp(50px, 9vw, 120px);
 
-.heroVisual {
-    position: relative;
+    line-height: .9;
 
-    width: min(100%, 1100px);
+    font-weight: 900;
 
-    margin: 0 auto;
-
-    overflow: hidden;
-
-    -webkit-mask-image:
-        linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0,0,0,.45) 5%,
-            black 13%,
-            black 82%,
-            rgba(0,0,0,.45) 94%,
-            transparent 100%
-        );
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0,0,0,.45) 5%,
-            black 13%,
-            black 82%,
-            rgba(0,0,0,.45) 94%,
-            transparent 100%
-        );
+    letter-spacing: -4px;
 }
 
-.heroVisual img {
-
-    display: block;
-
-    width: 100%;
-
-    height: auto;
-
-    filter:
-        brightness(.92)
-        contrast(1.05)
-        saturate(1.05);
-
-    transform: scale(1.01);
-}
-
-.heroVisual::after {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-
-        radial-gradient(
-            ellipse at center,
-            transparent 48%,
-            rgba(5,10,18,.18) 70%,
-            rgba(5,10,18,.82) 100%
-        );
+.hero h1 span {
+    color: var(--blue);
 }
 
 .hero p {
@@ -832,6 +775,12 @@ footer p {
             70px 6%;
     }
 
+    .hero h1 {
+
+        letter-spacing:
+            -2px;
+    }
+
 }
 
 
@@ -867,19 +816,14 @@ footer p {
         width: 100%;
     }
 
-    .heroVisual {
-
-        width: 112%;
-
-        margin-left: -6%;
-    }
-
 }
 
 </style>
 </head>
 
+
 <body>
+
 
 <!-- =========================
      VIDEO INTRO
@@ -887,40 +831,49 @@ footer p {
 
 <section id="videoIntro">
 
-    <video
-        id="openingVideo"
-        autoplay
-        muted
-        playsinline
-        preload="auto"
+<video
+    id="openingVideo"
+    autoplay
+    muted
+    playsinline
+    preload="auto"
+>
+
+    <source
+        src="video/opening.mp4"
+        type="video/mp4"
     >
 
-        <source
-            src="video/opening.mp4"
-            type="video/mp4"
-        >
+    Your browser does not support HTML5 video.
 
-        Your browser does not support HTML5 video.
+</video>
 
-    </video>
 
-    <div class="videoOverlay"></div>
+<div class="videoOverlay"></div>
 
-    <div id="tapHint">
-        TAP TO ENTER FULLSCREEN
-    </div>
 
-    <div id="explore">
+<div id="tapHint">
 
-        <div class="exploreText">
-            Explore the community
-        </div>
+    TAP TO ENTER FULLSCREEN
 
-        <div class="arrow">
-            ↓
-        </div>
+</div>
+
+
+<div id="explore">
+
+    <div class="exploreText">
+
+        Explore the community
 
     </div>
+
+    <div class="arrow">
+
+        ↓
+
+    </div>
+
+</div>
 
 </section>
 
@@ -937,17 +890,18 @@ footer p {
     <div class="heroInner">
 
         <div class="smallTitle">
+
             BCU-Obour Branch
-        </div>
-
-        <div class="heroVisual">
-
-            <img
-                src="IMG_20260914_211330_310.jpg"
-                alt="BCU"
-            >
 
         </div>
+
+        <h1>
+
+            8 TRACKS.<br>
+
+            <span>1 COMMUNITY.</span>
+
+        </h1>
 
         <p>
 
@@ -981,11 +935,15 @@ footer p {
     <div class="tracksHeader">
 
         <h2>
+
             THE TRACKS.
+
         </h2>
 
         <p>
+
             Eight paths. One connected community.
+
         </p>
 
     </div>
@@ -1106,7 +1064,9 @@ footer p {
 <section class="awaits section">
 
     <h2>
+
         WHAT AWAITS YOU.
+
     </h2>
 
 
@@ -1208,7 +1168,9 @@ footer p {
 <section class="social section">
 
     <h2>
+
         STAY CONNECTED.
+
     </h2>
 
 
@@ -1247,6 +1209,8 @@ footer p {
 
         </a>
 
+
+        <!-- NAME FORM -->
 
         <form
             id="nameForm"
@@ -1291,6 +1255,7 @@ footer p {
 
 <script>
 
+
 /* =========================
    VIDEO
 ========================= */
@@ -1323,6 +1288,7 @@ video.play().catch(() => {
 
 /* =========================
    FULLSCREEN
+   ORIGINAL — UNCHANGED
 ========================= */
 
 async function enterFullscreen() {
@@ -1366,15 +1332,19 @@ async function enterFullscreen() {
 
 videoIntro.addEventListener("click", () => {
 
+
     enterFullscreen();
 
+
     tapHint.style.opacity = "0";
+
 
     if (video.paused) {
 
         video.play().catch(() => {});
 
     }
+
 
 }, { once: true });
 
@@ -1385,7 +1355,9 @@ videoIntro.addEventListener("click", () => {
 
 video.addEventListener("ended", () => {
 
+
     explore.classList.add("show");
+
 
     try {
 
@@ -1408,6 +1380,7 @@ video.addEventListener("ended", () => {
 
 explore.addEventListener("click", () => {
 
+
     document
         .getElementById("website")
         .scrollIntoView({
@@ -1415,6 +1388,7 @@ explore.addEventListener("click", () => {
             behavior: "smooth"
 
         });
+
 
 });
 
@@ -1425,7 +1399,9 @@ explore.addEventListener("click", () => {
 
 video.addEventListener("ended", () => {
 
+
     setTimeout(() => {
+
 
         window.scrollTo({
 
@@ -1437,7 +1413,9 @@ video.addEventListener("ended", () => {
 
         });
 
+
     }, 1800);
+
 
 });
 
@@ -1459,6 +1437,7 @@ nameForm.addEventListener(
 
         event.preventDefault();
 
+
         const name =
             nameInput.value
                 .trim()
@@ -1466,4 +1445,24 @@ nameForm.addEventListener(
 
 
         if (name === "saher") {
-            
+
+            window.location.href =
+                "saher.html";
+
+        }
+
+        else {
+
+            window.location.href =
+                "thank-you.html";
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+    </html>
