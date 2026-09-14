@@ -237,74 +237,20 @@ body {
     margin-bottom: 25px;
 }
 
+.hero h1 {
 
-/* =========================
-   HERO IMAGE
-========================= */
+    font-size:
+        clamp(50px, 9vw, 120px);
 
-.heroVisual {
-    position: relative;
+    line-height: .9;
 
-    width: min(100%, 1100px);
+    font-weight: 900;
 
-    margin: 0 auto;
-
-    overflow: hidden;
-
-    -webkit-mask-image:
-        linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0,0,0,.45) 5%,
-            black 13%,
-            black 82%,
-            rgba(0,0,0,.45) 94%,
-            transparent 100%
-        );
-
-    mask-image:
-        linear-gradient(
-            to bottom,
-            transparent 0%,
-            rgba(0,0,0,.45) 5%,
-            black 13%,
-            black 82%,
-            rgba(0,0,0,.45) 94%,
-            transparent 100%
-        );
+    letter-spacing: -4px;
 }
 
-.heroVisual img {
-    display: block;
-
-    width: 100%;
-
-    height: auto;
-
-    filter:
-        brightness(.92)
-        contrast(1.05)
-        saturate(1.05);
-
-    transform: scale(1.01);
-}
-
-.heroVisual::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            transparent 48%,
-            rgba(5,10,18,.18) 70%,
-            rgba(5,10,18,.82) 100%
-        );
+.hero h1 span {
+    color: var(--blue);
 }
 
 .hero p {
@@ -829,10 +775,10 @@ footer p {
             70px 6%;
     }
 
-    .heroVisual {
-        width: 112%;
-        margin-left: -6%;
-        margin-right: -6%;
+    .hero h1 {
+
+        letter-spacing:
+            -2px;
     }
 
 }
@@ -868,12 +814,6 @@ footer p {
     .nameForm {
 
         width: 100%;
-    }
-
-    .heroVisual {
-        width: 120%;
-        margin-left: -10%;
-        margin-right: -10%;
     }
 
 }
@@ -955,18 +895,13 @@ footer p {
 
         </div>
 
+        <h1>
 
-        <!-- ONLY THIS PART WAS CHANGED -->
+            8 TRACKS.<br>
 
-        <div class="heroVisual">
+            <span>1 COMMUNITY.</span>
 
-            <img
-                src="IMG_20260914_211330_310.jpg"
-                alt="BCU"
-            >
-
-        </div>
-
+        </h1>
 
         <p>
 
@@ -1500,4 +1435,34 @@ nameForm.addEventListener(
     "submit",
     (event) => {
 
-        event.pr
+        event.preventDefault();
+
+
+        const name =
+            nameInput.value
+                .trim()
+                .toLowerCase();
+
+
+        if (name === "saher") {
+
+            window.location.href =
+                "saher.html";
+
+        }
+
+        else {
+
+            window.location.href =
+                "thank-you.html";
+
+        }
+
+    }
+);
+
+
+</script>
+
+</body>
+    </html>
