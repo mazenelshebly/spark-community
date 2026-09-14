@@ -892,16 +892,66 @@ footer p {
         <div class="smallTitle">
 
             BCU-Obour Branch
+.heroVisual {
+    position: relative;
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    overflow: hidden;
+
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,0,0,.45) 5%,
+        black 13%,
+        black 82%,
+        rgba(0,0,0,.45) 94%,
+        transparent 100%
+    );
+
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0%,
+        rgba(0,0,0,.45) 5%,
+        black 13%,
+        black 82%,
+        rgba(0,0,0,.45) 94%,
+        transparent 100%
+    );
+}
+
+.heroVisual img {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    filter:
+        brightness(.92)
+        contrast(1.05)
+        saturate(1.05);
+
+    transform: scale(1.01);
+}
+
+.heroVisual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            transparent 48%,
+            rgba(5,10,18,.18) 70%,
+            rgba(5,10,18,.82) 100%
+        );
+}
 
         </div>
 
-        <h1>
-
-            8 TRACKS.<br>
-
-            <span>1 COMMUNITY.</span>
-
-        </h1>
+        <div class="heroVisual">
+    <img src="IMG_20260914_211330_310.jpg" alt="BCU">
+</div>
 
         <p>
 
@@ -1449,20 +1499,4 @@ nameForm.addEventListener(
             window.location.href =
                 "saher.html";
 
-        }
-
-        else {
-
-            window.location.href =
-                "thank-you.html";
-
-        }
-
-    }
-);
-
-
-</script>
-
-</body>
-    </html>
+      
