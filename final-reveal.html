@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,7 +39,7 @@ body {
 
 
 /* =========================
-   VIDEO INTRO
+   IMAGE INTRO
 ========================= */
 
 #videoIntro {
@@ -50,7 +51,7 @@ body {
     overflow: hidden;
 }
 
-#openingVideo {
+#openingImage {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -75,95 +76,40 @@ body {
 
 
 /* =========================
-   TAP HINT
-========================= */
-
-#tapHint {
-    position: absolute;
-    left: 50%;
-    bottom: 32px;
-    transform: translateX(-50%);
-
-    z-index: 5;
-
-    padding: 12px 20px;
-
-    border: 1px solid rgba(141,219,255,.35);
-
-    background: rgba(5,10,18,.60);
-
-    backdrop-filter: blur(12px);
-
-    color: var(--white);
-
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-
-    opacity: 0;
-
-    transition: .5s ease;
-
-    pointer-events: none;
-}
-
-#videoIntro.videoReady #tapHint {
-    opacity: 1;
-}
-
-
-/* =========================
    EXPLORE
 ========================= */
 
 #explore {
     position: absolute;
-
     bottom: 35px;
     left: 50%;
 
     transform:
         translateX(-50%)
-        translateY(20px);
+        translateY(0);
 
     z-index: 10;
 
-    opacity: 0;
-
-    pointer-events: none;
+    opacity: 1;
+    pointer-events: auto;
 
     transition: .7s ease;
-
     text-align: center;
-}
 
-#explore.show {
-    opacity: 1;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-
-    pointer-events: auto;
+    cursor: pointer;
 }
 
 .exploreText {
     color: var(--white);
-
     font-size: 11px;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
-
     margin-bottom: 10px;
 }
 
 .arrow {
     color: var(--blue-light);
-
     font-size: 24px;
-
     animation: bounce 1.4s infinite;
 }
 
@@ -202,21 +148,16 @@ body {
     min-height: 90vh;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     text-align: center;
 
     background:
-
         radial-gradient(
             circle at 50% 35%,
             rgba(22,135,255,.16),
             transparent 42%
         ),
-
         var(--black);
 }
 
@@ -225,27 +166,17 @@ body {
 }
 
 .smallTitle {
-
     font-size: 12px;
-
     letter-spacing: 5px;
-
     text-transform: uppercase;
-
     color: var(--blue-light);
-
     margin-bottom: 25px;
 }
 
 .hero h1 {
-
-    font-size:
-        clamp(50px, 9vw, 120px);
-
+    font-size: clamp(50px, 9vw, 120px);
     line-height: .9;
-
     font-weight: 900;
-
     letter-spacing: -4px;
 }
 
@@ -254,13 +185,9 @@ body {
 }
 
 .hero p {
-
     margin-top: 30px;
-
     font-size: 17px;
-
     line-height: 1.6;
-
     color: var(--muted);
 }
 
@@ -270,37 +197,26 @@ body {
 ========================= */
 
 .message {
-
     min-height: 70vh;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     text-align: center;
 
     background:
-
         radial-gradient(
             circle at 50% 50%,
             rgba(22,135,255,.09),
             transparent 48%
         ),
-
         var(--black);
 }
 
 .message h2 {
-
     max-width: 1000px;
-
-    font-size:
-        clamp(38px, 7vw, 90px);
-
+    font-size: clamp(38px, 7vw, 90px);
     line-height: 1;
-
     letter-spacing: -3px;
 }
 
@@ -318,65 +234,47 @@ body {
 }
 
 .tracksHeader h2 {
-
-    font-size:
-        clamp(40px, 6vw, 70px);
-
+    font-size: clamp(40px, 6vw, 70px);
     line-height: 1;
 }
 
 .tracksHeader p {
-
     margin-top: 15px;
-
     color: var(--muted);
 }
 
 .trackGrid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 10px;
 }
 
 .track {
-
     min-height: 190px;
 
     background:
-
         linear-gradient(
             145deg,
             rgba(22,135,255,.10),
             rgba(8,21,37,.92)
         );
 
-    border:
-        1px solid var(--line);
-
+    border: 1px solid var(--line);
     color: var(--white);
 
     padding: 28px;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
 
     transition: .3s ease;
 }
 
 .track:hover {
-
-    border-color:
-        rgba(85,183,255,.65);
+    border-color: rgba(85,183,255,.65);
 
     background:
-
         linear-gradient(
             145deg,
             rgba(22,135,255,.22),
@@ -391,18 +289,13 @@ body {
 }
 
 .trackNumber {
-
     font-size: 12px;
-
     color: var(--blue-light);
-
     opacity: .8;
 }
 
 .trackName {
-
     font-size: 22px;
-
     font-weight: 800;
 }
 
@@ -412,52 +305,34 @@ body {
 ========================= */
 
 .awaits {
-
-    background:
-        var(--deep-blue);
-
+    background: var(--deep-blue);
     color: var(--white);
 }
 
 .awaits h2 {
-
-    font-size:
-        clamp(40px, 6vw, 75px);
-
+    font-size: clamp(40px, 6vw, 75px);
     margin-bottom: 50px;
 }
 
 .awaitsGrid {
-
     display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
 
 .awaitsItem {
-
-    border-top:
-        1px solid var(--line);
-
+    border-top: 1px solid var(--line);
     padding-top: 20px;
 }
 
 .awaitsItem h3 {
-
     color: var(--blue-light);
-
     font-size: 23px;
-
     margin-bottom: 12px;
 }
 
 .awaitsItem p {
-
     color: var(--muted);
-
     line-height: 1.6;
 }
 
@@ -467,33 +342,24 @@ body {
 ========================= */
 
 .join {
-
     background:
-
         radial-gradient(
             circle at 50% 20%,
             rgba(85,183,255,.18),
             transparent 45%
         ),
-
         #07111F;
 
     color: var(--white);
-
     text-align: center;
 }
 
 .join h2 {
-
-    font-size:
-        clamp(60px, 12vw, 150px);
-
+    font-size: clamp(60px, 12vw, 150px);
     line-height: .8;
-
     letter-spacing: -5px;
 
     background:
-
         linear-gradient(
             90deg,
             var(--white),
@@ -501,38 +367,27 @@ body {
         );
 
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
 }
 
 .join p {
-
     margin: 30px auto;
-
     max-width: 550px;
-
     line-height: 1.6;
-
     color: var(--muted);
 }
 
 .joinButton {
-
     display: inline-block;
-
     padding: 17px 35px;
 
     background: var(--blue);
-
     color: white;
 
-    border:
-        1px solid var(--blue-light);
+    border: 1px solid var(--blue-light);
 
     text-decoration: none;
-
     font-weight: bold;
-
     letter-spacing: 2px;
 
     transition: .3s ease;
@@ -543,15 +398,9 @@ body {
 }
 
 .joinButton:hover {
-
-    background:
-        var(--blue-light);
-
-    color:
-        var(--black);
-
-    transform:
-        translateY(-3px);
+    background: var(--blue-light);
+    color: var(--black);
+    transform: translateY(-3px);
 }
 
 
@@ -560,64 +409,40 @@ body {
 ========================= */
 
 .social {
-
-    background:
-        #050A12;
-
+    background: #050A12;
     text-align: center;
 }
 
 .social h2 {
-
-    font-size:
-        clamp(38px, 6vw, 70px);
-
+    font-size: clamp(38px, 6vw, 70px);
     margin-bottom: 40px;
 }
 
 .socialLinks {
-
     display: flex;
-
     justify-content: center;
-
     flex-wrap: wrap;
-
     gap: 12px;
 }
 
 .socialLinks a {
-
     display: inline-block;
-
     padding: 15px 25px;
 
-    border:
-        1px solid var(--line);
+    border: 1px solid var(--line);
+    background: rgba(8,21,37,.7);
 
-    background:
-        rgba(8,21,37,.7);
-
-    color:
-        var(--white);
-
+    color: var(--white);
     text-decoration: none;
-
     font-weight: bold;
 
     transition: .3s ease;
 }
 
 .socialLinks a:hover {
-
-    background:
-        var(--blue);
-
-    border-color:
-        var(--blue-light);
-
-    transform:
-        translateY(-3px);
+    background: var(--blue);
+    border-color: var(--blue-light);
+    transform: translateY(-3px);
 
     box-shadow:
         0 10px 30px
@@ -630,82 +455,56 @@ body {
 ========================= */
 
 .nameForm {
-
     display: flex;
-
     align-items: center;
 
     width: min(100%, 420px);
-
     margin: 25px auto 0;
 
-    border:
-        1px solid var(--line);
-
-    background:
-        rgba(8,21,37,.7);
+    border: 1px solid var(--line);
+    background: rgba(8,21,37,.7);
 }
 
 .nameForm input {
-
     flex: 1;
-
     min-width: 0;
 
     padding: 15px 18px;
 
     background: transparent;
-
     border: none;
-
     outline: none;
 
     color: var(--white);
-
     font-size: 13px;
-
     letter-spacing: 1px;
-
     text-transform: uppercase;
 }
 
 .nameForm input::placeholder {
-
     color: var(--muted);
-
     opacity: .8;
 }
 
 .nameForm button {
-
     width: 55px;
-
     height: 48px;
 
     border: none;
+    border-left: 1px solid var(--line);
 
-    border-left:
-        1px solid var(--line);
-
-    background:
-        var(--blue);
-
+    background: var(--blue);
     color: white;
 
     font-size: 22px;
-
     cursor: pointer;
 
     transition: .3s ease;
 }
 
 .nameForm button:hover {
-
-    background:
-        var(--blue-light);
-
-    color:
-        var(--black);
+    background: var(--blue-light);
+    color: var(--black);
 }
 
 
@@ -714,40 +513,23 @@ body {
 ========================= */
 
 footer {
+    background: #03070D;
+    color: var(--white);
 
-    background:
-        #03070D;
+    padding: 30px 7%;
 
-    color:
-        var(--white);
+    display: flex;
+    justify-content: space-between;
 
-    padding:
-        30px 7%;
+    gap: 20px;
+    flex-wrap: wrap;
 
-    display:
-        flex;
-
-    justify-content:
-        space-between;
-
-    gap:
-        20px;
-
-    flex-wrap:
-        wrap;
-
-    border-top:
-        1px solid
-        rgba(141,219,255,.08);
+    border-top: 1px solid rgba(141,219,255,.08);
 }
 
 footer p {
-
-    color:
-        var(--muted);
-
-    font-size:
-        12px;
+    color: var(--muted);
+    font-size: 12px;
 }
 
 
@@ -758,27 +540,19 @@ footer p {
 @media (max-width: 800px) {
 
     .trackGrid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .awaitsGrid {
-
-        grid-template-columns:
-            repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);
     }
 
     .section {
-
-        padding:
-            70px 6%;
+        padding: 70px 6%;
     }
 
     .hero h1 {
-
-        letter-spacing:
-            -2px;
+        letter-spacing: -2px;
     }
 
 }
@@ -788,31 +562,22 @@ footer p {
 
     .trackGrid,
     .awaitsGrid {
-
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .track {
-
-        min-height:
-            150px;
+        min-height: 150px;
     }
 
     .socialLinks {
-
-        flex-direction:
-            column;
+        flex-direction: column;
     }
 
     .socialLinks a {
-
-        width:
-            100%;
+        width: 100%;
     }
 
     .nameForm {
-
         width: 100%;
     }
 
@@ -826,54 +591,30 @@ footer p {
 
 
 <!-- =========================
-     VIDEO INTRO
+     IMAGE INTRO
 ========================= -->
 
 <section id="videoIntro">
 
-<video
-    id="openingVideo"
-    autoplay
-    muted
-    playsinline
-    preload="auto"
->
-
-    <source
-        src="video/opening.mp4"
-        type="video/mp4"
+    <img
+        id="openingImage"
+        src="images/opening.jpg"
+        alt="BCU-Obour Branch"
     >
 
-    Your browser does not support HTML5 video.
+    <div class="videoOverlay"></div>
 
-</video>
+    <div id="explore">
 
+        <div class="exploreText">
+            Explore the community
+        </div>
 
-<div class="videoOverlay"></div>
-
-
-<div id="tapHint">
-
-    TAP TO ENTER FULLSCREEN
-
-</div>
-
-
-<div id="explore">
-
-    <div class="exploreText">
-
-        Explore the community
+        <div class="arrow">
+            ↓
+        </div>
 
     </div>
-
-    <div class="arrow">
-
-        ↓
-
-    </div>
-
-</div>
 
 </section>
 
@@ -890,24 +631,17 @@ footer p {
     <div class="heroInner">
 
         <div class="smallTitle">
-
             BCU-Obour Branch
-
         </div>
 
         <h1>
-
             8 TRACKS.<br>
-
             <span>1 COMMUNITY.</span>
-
         </h1>
 
         <p>
-
             You found the final piece.
             Now discover what comes next.
-
         </p>
 
     </div>
@@ -918,13 +652,10 @@ footer p {
 <section class="message section">
 
     <h2>
-
         THE FUTURE IS BUILT BY
-
         <span>
             PEOPLE WHO CONNECT.
         </span>
-
     </h2>
 
 </section>
@@ -935,15 +666,11 @@ footer p {
     <div class="tracksHeader">
 
         <h2>
-
             THE TRACKS.
-
         </h2>
 
         <p>
-
             Eight paths. One connected community.
-
         </p>
 
     </div>
@@ -1064,9 +791,7 @@ footer p {
 <section class="awaits section">
 
     <h2>
-
         WHAT AWAITS YOU.
-
     </h2>
 
 
@@ -1141,10 +866,8 @@ footer p {
     </h2>
 
     <p>
-
         Your next skill starts here.
         Join the community and discover your path.
-
     </p>
 
     <a
@@ -1153,9 +876,7 @@ footer p {
         target="_blank"
         rel="noopener noreferrer"
     >
-
         JOIN THE COMMUNITY
-
     </a>
 
 </section>
@@ -1168,9 +889,7 @@ footer p {
 <section class="social section">
 
     <h2>
-
         STAY CONNECTED.
-
     </h2>
 
 
@@ -1182,9 +901,7 @@ footer p {
             target="_blank"
             rel="noopener noreferrer"
         >
-
             INSTAGRAM
-
         </a>
 
 
@@ -1193,9 +910,7 @@ footer p {
             target="_blank"
             rel="noopener noreferrer"
         >
-
             FACEBOOK
-
         </a>
 
 
@@ -1204,9 +919,7 @@ footer p {
             target="_blank"
             rel="noopener noreferrer"
         >
-
             LINKEDIN
-
         </a>
 
 
@@ -1257,129 +970,28 @@ footer p {
 
 
 /* =========================
-   VIDEO
+   IMAGE INTRO
 ========================= */
 
-const video =
-    document.getElementById("openingVideo");
-
-const videoIntro =
+const imageIntro =
     document.getElementById("videoIntro");
 
 const explore =
     document.getElementById("explore");
-
-const tapHint =
-    document.getElementById("tapHint");
-
-
-/* =========================
-   AUTOPLAY
-========================= */
-
-video.play().catch(() => {
-
-    tapHint.style.opacity = "1";
-
-    tapHint.style.pointerEvents = "auto";
-
-});
-
-
-/* =========================
-   FULLSCREEN
-   ORIGINAL — UNCHANGED
-========================= */
-
-async function enterFullscreen() {
-
-    try {
-
-        if (video.requestFullscreen) {
-
-            await video.requestFullscreen();
-
-        }
-
-        else if (video.webkitEnterFullscreen) {
-
-            video.webkitEnterFullscreen();
-
-        }
-
-        else if (video.parentElement.requestFullscreen) {
-
-            await video.parentElement.requestFullscreen();
-
-        }
-
-    }
-
-    catch (error) {
-
-        console.log(
-            "Fullscreen requires user interaction on this browser."
-        );
-
-    }
-
-}
-
-
-/* =========================
-   FIRST TAP
-========================= */
-
-videoIntro.addEventListener("click", () => {
-
-
-    enterFullscreen();
-
-
-    tapHint.style.opacity = "0";
-
-
-    if (video.paused) {
-
-        video.play().catch(() => {});
-
-    }
-
-
-}, { once: true });
-
-
-/* =========================
-   VIDEO END
-========================= */
-
-video.addEventListener("ended", () => {
-
-
-    explore.classList.add("show");
-
-
-    try {
-
-        if (document.fullscreenElement) {
-
-            document.exitFullscreen();
-
-        }
-
-    }
-
-    catch (error) {}
-
-});
 
 
 /* =========================
    EXPLORE
 ========================= */
 
-explore.addEventListener("click", () => {
+explore.classList.add("show");
 
+
+/* =========================
+   EXPLORE CLICK
+========================= */
+
+explore.addEventListener("click", () => {
 
     document
         .getElementById("website")
@@ -1388,34 +1000,6 @@ explore.addEventListener("click", () => {
             behavior: "smooth"
 
         });
-
-
-});
-
-
-/* =========================
-   AUTO SCROLL
-========================= */
-
-video.addEventListener("ended", () => {
-
-
-    setTimeout(() => {
-
-
-        window.scrollTo({
-
-            top:
-                window.innerHeight,
-
-            behavior:
-                "smooth"
-
-        });
-
-
-    }, 1800);
-
 
 });
 
@@ -1465,4 +1049,5 @@ nameForm.addEventListener(
 </script>
 
 </body>
-    </html>
+            </html>
+            
