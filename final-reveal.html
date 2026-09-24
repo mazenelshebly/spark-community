@@ -1182,9 +1182,27 @@ nameForm.addEventListener(
 
 
             if (
-                !registration ||
-                !registration.entry_number ||
-                !registration.unique_code
+                if (
+    !registration ||
+    !registration.entry_number ||
+    !registration.unique_code
+) {
+
+    console.error(
+        "Invalid Supabase response:",
+        registration
+    );
+
+    alert(
+        "Supabase returned:\n\n" +
+        JSON.stringify(registration, null, 2)
+    );
+
+    throw new Error(
+        "Invalid registration response."
+    );
+
+            }
             ) {
 
                 throw new Error(
