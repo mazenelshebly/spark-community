@@ -66,14 +66,10 @@ body {
 #videoIntro {
 
     position: relative;
-
     width: 100%;
-
     height: 100vh;
     height: 100svh;
-
     background: #000;
-
     overflow: hidden;
 
 }
@@ -83,13 +79,9 @@ body {
 
     width: 100%;
     height: 100%;
-
     object-fit: cover;
-
     object-position: center;
-
     display: block;
-
     background: #000;
 
 }
@@ -98,7 +90,6 @@ body {
 .videoOverlay {
 
     position: absolute;
-
     inset: 0;
 
     background:
@@ -108,9 +99,7 @@ body {
             to bottom,
 
             rgba(2,8,18,.08),
-
             rgba(2,8,18,.03) 48%,
-
             rgba(2,8,18,.72)
 
         );
@@ -127,25 +116,18 @@ body {
 #explore {
 
     position: absolute;
-
     bottom: 35px;
     left: 50%;
 
     transform:
-
         translateX(-50%)
         translateY(0);
 
     z-index: 10;
-
     opacity: 1;
-
     pointer-events: auto;
-
     text-align: center;
-
     cursor: pointer;
-
     transition: .7s ease;
 
 }
@@ -154,15 +136,10 @@ body {
 .exploreText {
 
     color: var(--white);
-
     font-size: 11px;
-
     letter-spacing: 4px;
-
     text-transform: uppercase;
-
     margin-bottom: 10px;
-
     white-space: nowrap;
 
 }
@@ -171,9 +148,7 @@ body {
 .arrow {
 
     color: var(--blue-light);
-
     font-size: 24px;
-
     animation: bounce 1.4s infinite;
 
 }
@@ -182,15 +157,11 @@ body {
 @keyframes bounce {
 
     0%, 100% {
-
         transform: translateY(0);
-
     }
 
     50% {
-
         transform: translateY(8px);
-
     }
 
 }
@@ -203,7 +174,6 @@ body {
 #website {
 
     background: var(--black);
-
     color: var(--white);
 
 }
@@ -225,9 +195,7 @@ body {
     min-height: 90vh;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -239,7 +207,6 @@ body {
             circle at 50% 35%,
 
             rgba(22,135,255,.16),
-
             transparent 42%
 
         ),
@@ -259,13 +226,9 @@ body {
 .smallTitle {
 
     font-size: 12px;
-
     letter-spacing: 5px;
-
     text-transform: uppercase;
-
     color: var(--blue-light);
-
     margin-bottom: 25px;
 
 }
@@ -274,11 +237,8 @@ body {
 .hero h1 {
 
     font-size: clamp(50px, 9vw, 120px);
-
     line-height: .9;
-
     font-weight: 900;
-
     letter-spacing: -4px;
 
 }
@@ -298,13 +258,9 @@ body {
 .hero p {
 
     margin-top: 30px;
-
     font-size: 17px;
-
     line-height: 1.6;
-
     color: var(--muted);
-
     font-weight: 700;
 
 }
@@ -319,9 +275,7 @@ body {
     min-height: 70vh;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
@@ -333,7 +287,6 @@ body {
             circle at 50% 50%,
 
             rgba(22,135,255,.09),
-
             transparent 48%
 
         ),
@@ -346,11 +299,8 @@ body {
 .message h2 {
 
     max-width: 1000px;
-
     font-size: clamp(38px, 7vw, 90px);
-
     line-height: 1;
-
     letter-spacing: -3px;
 
 }
@@ -377,7 +327,6 @@ body {
 .tracksHeader h2 {
 
     font-size: clamp(40px, 6vw, 70px);
-
     line-height: 1;
 
 }
@@ -386,7 +335,6 @@ body {
 .tracksHeader p {
 
     margin-top: 15px;
-
     color: var(--muted);
 
 }
@@ -395,9 +343,7 @@ body {
 .trackGrid {
 
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 10px;
 
 }
@@ -414,21 +360,16 @@ body {
             145deg,
 
             rgba(22,135,255,.10),
-
             rgba(8,21,37,.92)
 
         );
 
     border: 1px solid var(--line);
-
     color: var(--white);
-
     padding: 28px;
 
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
 
     transition: .3s ease;
@@ -447,7 +388,6 @@ body {
             145deg,
 
             rgba(22,135,255,.22),
-
             rgba(8,21,37,.98)
 
         );
@@ -455,7 +395,6 @@ body {
     transform: translateY(-5px);
 
     box-shadow:
-
         0 15px 45px rgba(0,80,180,.18);
 
 }
@@ -464,9 +403,7 @@ body {
 .trackNumber {
 
     font-size: 12px;
-
     color: var(--blue-light);
-
     opacity: .8;
 
 }
@@ -475,7 +412,6 @@ body {
 .trackName {
 
     font-size: 22px;
-
     font-weight: 800;
 
 }
@@ -488,7 +424,6 @@ body {
 .awaits {
 
     background: var(--deep-blue);
-
     color: var(--white);
 
 }
@@ -497,7 +432,6 @@ body {
 .awaits h2 {
 
     font-size: clamp(40px, 6vw, 75px);
-
     margin-bottom: 50px;
 
 }
@@ -506,9 +440,7 @@ body {
 .awaitsGrid {
 
     display: grid;
-
     grid-template-columns: repeat(4, 1fr);
-
     gap: 20px;
 
 }
@@ -517,7 +449,6 @@ body {
 .awaitsItem {
 
     border-top: 1px solid var(--line);
-
     padding-top: 20px;
 
 }
@@ -526,9 +457,7 @@ body {
 .awaitsItem h3 {
 
     color: var(--blue-light);
-
     font-size: 23px;
-
     margin-bottom: 12px;
 
 }
@@ -537,7 +466,6 @@ body {
 .awaitsItem p {
 
     color: var(--muted);
-
     line-height: 1.6;
 
 }
@@ -556,7 +484,6 @@ body {
             circle at 50% 20%,
 
             rgba(85,183,255,.18),
-
             transparent 45%
 
         ),
@@ -564,7 +491,6 @@ body {
         #07111F;
 
     color: var(--white);
-
     text-align: center;
 
 }
@@ -573,9 +499,7 @@ body {
 .join h2 {
 
     font-size: clamp(60px, 12vw, 150px);
-
     line-height: .8;
-
     letter-spacing: -5px;
 
     background:
@@ -585,13 +509,11 @@ body {
             90deg,
 
             var(--white),
-
             var(--blue-light)
 
         );
 
     -webkit-background-clip: text;
-
     -webkit-text-fill-color: transparent;
 
 }
@@ -600,11 +522,8 @@ body {
 .join p {
 
     margin: 30px auto;
-
     max-width: 550px;
-
     line-height: 1.6;
-
     color: var(--muted);
 
 }
@@ -617,21 +536,17 @@ body {
     padding: 17px 35px;
 
     background: var(--blue);
-
     color: white;
 
     border: 1px solid var(--blue-light);
 
     text-decoration: none;
-
     font-weight: bold;
-
     letter-spacing: 2px;
 
     transition: .3s ease;
 
     box-shadow:
-
         0 10px 35px rgba(22,135,255,.20);
 
 }
@@ -640,9 +555,7 @@ body {
 .joinButton:hover {
 
     background: var(--blue-light);
-
     color: var(--black);
-
     transform: translateY(-3px);
 
 }
@@ -655,7 +568,6 @@ body {
 .social {
 
     background: #050A12;
-
     text-align: center;
 
 }
@@ -664,7 +576,6 @@ body {
 .social h2 {
 
     font-size: clamp(38px, 6vw, 70px);
-
     margin-bottom: 40px;
 
 }
@@ -673,11 +584,8 @@ body {
 .socialLinks {
 
     display: flex;
-
     justify-content: center;
-
     flex-wrap: wrap;
-
     gap: 12px;
 
 }
@@ -690,13 +598,10 @@ body {
     padding: 15px 25px;
 
     border: 1px solid var(--line);
-
     background: rgba(8,21,37,.7);
-
     color: var(--white);
 
     text-decoration: none;
-
     font-weight: bold;
 
     transition: .3s ease;
@@ -707,13 +612,11 @@ body {
 .socialLinks a:hover {
 
     background: var(--blue);
-
     border-color: var(--blue-light);
 
     transform: translateY(-3px);
 
     box-shadow:
-
         0 10px 30px rgba(22,135,255,.18);
 
 }
@@ -726,7 +629,6 @@ body {
 .nameForm {
 
     display: flex;
-
     align-items: center;
 
     width: min(100%, 420px);
@@ -734,7 +636,6 @@ body {
     margin: 25px auto 0;
 
     border: 1px solid var(--line);
-
     background: rgba(8,21,37,.7);
 
 }
@@ -743,23 +644,17 @@ body {
 .nameForm input {
 
     flex: 1;
-
     min-width: 0;
 
     padding: 15px 18px;
 
     background: transparent;
-
     border: none;
-
     outline: none;
 
     color: var(--white);
-
     font-size: 13px;
-
     letter-spacing: 1px;
-
     text-transform: uppercase;
 
 }
@@ -768,7 +663,6 @@ body {
 .nameForm input::placeholder {
 
     color: var(--muted);
-
     opacity: .8;
 
 }
@@ -777,19 +671,15 @@ body {
 .nameForm button {
 
     width: 55px;
-
     height: 48px;
 
     border: none;
-
     border-left: 1px solid var(--line);
 
     background: var(--blue);
-
     color: white;
 
     font-size: 22px;
-
     cursor: pointer;
 
     transition: .3s ease;
@@ -800,8 +690,15 @@ body {
 .nameForm button:hover {
 
     background: var(--blue-light);
-
     color: var(--black);
+
+}
+
+
+.nameForm button:disabled {
+
+    opacity: .6;
+    cursor: wait;
 
 }
 
@@ -813,17 +710,14 @@ body {
 footer {
 
     background: #03070D;
-
     color: var(--white);
 
     padding: 30px 7%;
 
     display: flex;
-
     justify-content: space-between;
 
     gap: 20px;
-
     flex-wrap: wrap;
 
     border-top: 1px solid rgba(141,219,255,.08);
@@ -834,7 +728,6 @@ footer {
 footer p {
 
     color: var(--muted);
-
     font-size: 12px;
 
 }
@@ -909,7 +802,6 @@ footer p {
     .exploreText {
 
         font-size: 10px;
-
         letter-spacing: 3px;
 
     }
@@ -1401,6 +1293,8 @@ footer p {
 
                 required
 
+                maxlength="100"
+
             >
 
 
@@ -1444,10 +1338,44 @@ footer p {
 
 
 <!-- =========================
+     SUPABASE LIBRARY
+========================= -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<!-- =========================
      JAVASCRIPT
 ========================= -->
 
 <script>
+
+
+/* =========================
+   SUPABASE CONFIGURATION
+========================= */
+
+// Replace these two values with your project details.
+
+const SUPABASE_URL =
+
+    "YOUR_SUPABASE_PROJECT_URL";
+
+
+const SUPABASE_ANON_KEY =
+
+    "YOUR_SUPABASE_ANON_KEY";
+
+
+const supabaseClient =
+
+    window.supabase.createClient(
+
+        SUPABASE_URL,
+
+        SUPABASE_ANON_KEY
+
+    );
 
 
 /* =========================
@@ -1477,7 +1405,7 @@ explore.addEventListener("click", () => {
 
 
 /* =========================
-   NAME → PAGE
+   NAME → SUPABASE REGISTRATION
 ========================= */
 
 const nameForm =
@@ -1490,11 +1418,49 @@ const nameInput =
     document.getElementById("nameInput");
 
 
+const submitButton =
+
+    nameForm.querySelector("button");
+
+
+const STORAGE_KEY =
+
+    "bcu_final_reveal_registration";
+
+
+/* =========================
+   GO TO THANK YOU
+========================= */
+
+function goToThankYou(registration) {
+
+
+    localStorage.setItem(
+
+        STORAGE_KEY,
+
+        JSON.stringify(registration)
+
+    );
+
+
+    window.location.href =
+
+        "thank-you.html";
+
+
+}
+
+
+/* =========================
+   FORM SUBMIT
+========================= */
+
 nameForm.addEventListener(
 
     "submit",
 
-    (event) => {
+    async (event) => {
 
 
         event.preventDefault();
@@ -1502,14 +1468,39 @@ nameForm.addEventListener(
 
         const name =
 
-            nameInput.value
-
-                .trim()
-
-                .toLowerCase();
+            nameInput.value.trim();
 
 
-        if (name === "no name") {
+        const normalizedName =
+
+            name.toLowerCase();
+
+
+        /* =========================
+           VALIDATE NAME
+        ========================= */
+
+        if (!name || name.length < 2) {
+
+
+            alert(
+
+                "Please enter your name."
+
+            );
+
+
+            return;
+
+
+        }
+
+
+        /* =========================
+           EXISTING SPECIAL ROUTE
+        ========================= */
+
+        if (normalizedName === "no name") {
 
 
             window.location.href =
@@ -1517,29 +1508,120 @@ nameForm.addEventListener(
                 "saher.html";
 
 
-        }
-
-
-        else {
-
-
-            window.location.href =
-
-                "thank-you.html";
+            return;
 
 
         }
 
 
-    }
+        /* =========================
+           CHECK LOCAL REGISTRATION
+        ========================= */
 
-);
+        const savedRegistration =
+
+            localStorage.getItem(
+
+                STORAGE_KEY
+
+            );
 
 
-</script>
+        if (savedRegistration) {
 
 
-</body>
+            try {
 
-   </html>
-   
+
+                const registration =
+
+                    JSON.parse(
+
+                        savedRegistration
+
+                    );
+
+
+                if (
+
+                    registration &&
+
+                    registration.entry_number &&
+
+                    registration.unique_code
+
+                ) {
+
+
+                    goToThankYou(
+
+                        registration
+
+                    );
+
+
+                    return;
+
+
+                }
+
+
+            } catch (error) {
+
+
+                console.error(
+
+                    "Saved registration error:",
+
+                    error
+
+                );
+
+
+            }
+
+
+            localStorage.removeItem(
+
+                STORAGE_KEY
+
+            );
+
+
+        }
+
+
+        /* =========================
+           DISABLE BUTTON
+        ========================= */
+
+        submitButton.disabled = true;
+
+
+        submitButton.textContent =
+
+            "…";
+
+
+        /* =========================
+           CALL SUPABASE FUNCTION
+        ========================= */
+
+        try {
+
+
+            const {
+
+                data,
+
+                error
+
+            } = await supabaseClient.rpc(
+
+                "register_participant",
+
+                {
+
+                    p_name: name
+
+      
