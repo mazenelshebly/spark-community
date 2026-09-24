@@ -1,19 +1,12 @@
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BCU-Obour Branch | Final Reveal</title>
 
 <style>
-
-/* =========================
-   ROOT
-========================= */
 
 :root {
     --black: #050A12;
@@ -25,11 +18,6 @@
     --muted: #9BAEC2;
     --line: rgba(141,219,255,.16);
 }
-
-
-/* =========================
-   RESET
-========================= */
 
 * {
     margin: 0;
@@ -48,7 +36,6 @@ body {
     overflow-x: hidden;
 }
 
-
 /* =========================
    IMAGE INTRO
 ========================= */
@@ -58,18 +45,14 @@ body {
     width: 100%;
     height: 100vh;
     height: 100svh;
-    min-height: 420px;
     background: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     overflow: hidden;
 }
 
 #openingImage {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover;
     object-position: center;
     display: block;
     background: #000;
@@ -78,7 +61,6 @@ body {
 .videoOverlay {
     position: absolute;
     inset: 0;
-
     background:
         linear-gradient(
             to bottom,
@@ -86,10 +68,8 @@ body {
             rgba(2,8,18,.03) 48%,
             rgba(2,8,18,.72)
         );
-
     pointer-events: none;
 }
-
 
 /* =========================
    EXPLORE
@@ -103,7 +83,6 @@ body {
     z-index: 10;
     text-align: center;
     cursor: pointer;
-    transition: .7s ease;
 }
 
 .exploreText {
@@ -122,7 +101,6 @@ body {
 }
 
 @keyframes bounce {
-
     0%, 100% {
         transform: translateY(0);
     }
@@ -130,9 +108,7 @@ body {
     50% {
         transform: translateY(8px);
     }
-
 }
-
 
 /* =========================
    MAIN WEBSITE
@@ -147,18 +123,15 @@ body {
     padding: 90px 7%;
 }
 
-
 /* =========================
    HERO
 ========================= */
 
 .hero {
     min-height: 90vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
 
     background:
@@ -167,7 +140,6 @@ body {
             rgba(22,135,255,.16),
             transparent 42%
         ),
-
         var(--black);
 }
 
@@ -202,18 +174,15 @@ body {
     font-weight: 700;
 }
 
-
 /* =========================
    FINAL MESSAGE
 ========================= */
 
 .message {
     min-height: 70vh;
-
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
 
     background:
@@ -222,7 +191,6 @@ body {
             rgba(22,135,255,.09),
             transparent 48%
         ),
-
         var(--black);
 }
 
@@ -236,7 +204,6 @@ body {
 .message h2 span {
     color: var(--blue-light);
 }
-
 
 /* =========================
    TRACKS
@@ -273,7 +240,6 @@ body {
         );
 
     border: 1px solid var(--line);
-    color: var(--white);
     padding: 28px;
 
     display: flex;
@@ -309,7 +275,6 @@ body {
     font-size: 22px;
     font-weight: 800;
 }
-
 
 /* =========================
    WHAT AWAITS
@@ -347,7 +312,6 @@ body {
     line-height: 1.6;
 }
 
-
 /* =========================
    JOIN
 ========================= */
@@ -359,7 +323,6 @@ body {
             rgba(85,183,255,.18),
             transparent 45%
         ),
-
         #07111F;
 
     color: var(--white);
@@ -391,15 +354,14 @@ body {
 
 .joinButton {
     display: inline-block;
-
     padding: 17px 35px;
 
     background: var(--blue);
     color: white;
 
     border: 1px solid var(--blue-light);
-
     text-decoration: none;
+
     font-weight: bold;
     letter-spacing: 2px;
 
@@ -414,7 +376,6 @@ body {
     color: var(--black);
     transform: translateY(-3px);
 }
-
 
 /* =========================
    SOCIAL
@@ -439,29 +400,26 @@ body {
 
 .socialLinks a {
     display: inline-block;
-
     padding: 15px 25px;
 
     border: 1px solid var(--line);
     background: rgba(8,21,37,.7);
+
     color: var(--white);
-
     text-decoration: none;
-    font-weight: bold;
 
+    font-weight: bold;
     transition: .3s ease;
 }
 
 .socialLinks a:hover {
     background: var(--blue);
     border-color: var(--blue-light);
-
     transform: translateY(-3px);
 
     box-shadow:
         0 10px 30px rgba(22,135,255,.18);
 }
-
 
 /* =========================
    NAME FORM
@@ -472,7 +430,6 @@ body {
     align-items: center;
 
     width: min(100%, 420px);
-
     margin: 25px auto 0;
 
     border: 1px solid var(--line);
@@ -521,12 +478,6 @@ body {
     color: var(--black);
 }
 
-.nameForm button:disabled {
-    opacity: .6;
-    cursor: wait;
-}
-
-
 /* =========================
    FOOTER
 ========================= */
@@ -539,7 +490,6 @@ footer {
 
     display: flex;
     justify-content: space-between;
-
     gap: 20px;
     flex-wrap: wrap;
 
@@ -550,7 +500,6 @@ footer p {
     color: var(--muted);
     font-size: 12px;
 }
-
 
 /* =========================
    MOBILE
@@ -607,12 +556,9 @@ footer p {
 }
 
 </style>
-
 </head>
 
-
 <body>
-
 
 <!-- =========================
      IMAGE INTRO
@@ -684,10 +630,13 @@ footer p {
 <section class="message section">
 
     <h2>
+
         THE FUTURE IS BUILT BY
+
         <span>
             PEOPLE WHO CONNECT.
         </span>
+
     </h2>
 
 </section>
@@ -716,50 +665,106 @@ footer p {
 
 
         <div class="track">
-            <span class="trackNumber">01</span>
-            <span class="trackName">WEB DEVELOPMENT</span>
+
+            <span class="trackNumber">
+                01
+            </span>
+
+            <span class="trackName">
+                WEB DEVELOPMENT
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">02</span>
-            <span class="trackName">DATA ANALYSIS</span>
+
+            <span class="trackNumber">
+                02
+            </span>
+
+            <span class="trackName">
+                DATA ANALYSIS
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">03</span>
-            <span class="trackName">CYBER SECURITY</span>
+
+            <span class="trackNumber">
+                03
+            </span>
+
+            <span class="trackName">
+                CYBER SECURITY
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">04</span>
-            <span class="trackName">BIOINFORMATICS</span>
+
+            <span class="trackNumber">
+                04
+            </span>
+
+            <span class="trackName">
+                BIOINFORMATICS
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">05</span>
-            <span class="trackName">MARKETING</span>
+
+            <span class="trackNumber">
+                05
+            </span>
+
+            <span class="trackName">
+                MARKETING
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">06</span>
-            <span class="trackName">HR</span>
+
+            <span class="trackNumber">
+                06
+            </span>
+
+            <span class="trackName">
+                HR
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">07</span>
-            <span class="trackName">LOGISTICS</span>
+
+            <span class="trackNumber">
+                07
+            </span>
+
+            <span class="trackName">
+                LOGISTICS
+            </span>
+
         </div>
 
 
         <div class="track">
-            <span class="trackNumber">08</span>
-            <span class="trackName">GENERAL SKILLS</span>
+
+            <span class="trackNumber">
+                08
+            </span>
+
+            <span class="trackName">
+                GENERAL SKILLS
+            </span>
+
         </div>
 
 
@@ -784,7 +789,9 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>WORKSHOPS</h3>
+            <h3>
+                WORKSHOPS
+            </h3>
 
             <p>
                 Practical sessions designed
@@ -796,7 +803,9 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>CHALLENGES</h3>
+            <h3>
+                CHALLENGES
+            </h3>
 
             <p>
                 Test yourself, compete
@@ -808,7 +817,9 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>PROJECTS</h3>
+            <h3>
+                PROJECTS
+            </h3>
 
             <p>
                 Build things that actually
@@ -820,7 +831,9 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>COMMUNITY</h3>
+            <h3>
+                COMMUNITY
+            </h3>
 
             <p>
                 Meet people, exchange ideas
@@ -857,7 +870,9 @@ footer p {
         target="_blank"
         rel="noopener noreferrer"
     >
+
         JOIN THE COMMUNITY
+
     </a>
 
 </section>
@@ -882,7 +897,9 @@ footer p {
             target="_blank"
             rel="noopener noreferrer"
         >
+
             INSTAGRAM
+
         </a>
 
 
@@ -891,7 +908,9 @@ footer p {
             target="_blank"
             rel="noopener noreferrer"
         >
+
             FACEBOOK
+
         </a>
 
 
@@ -900,38 +919,43 @@ footer p {
             target="_blank"
             rel="noopener noreferrer"
         >
+
             LINKEDIN
+
         </a>
+
+
+        <!-- NAME FORM -->
+
+        <form
+            id="nameForm"
+            class="nameForm"
+        >
+
+            <input
+                id="nameInput"
+                type="text"
+                placeholder="WRITE YOUR FIRST NAME ONLY"
+                autocomplete="off"
+                required
+            >
+
+
+            <button type="submit">
+
+                →
+
+            </button>
+
+        </form>
 
 
     </div>
 
-
-    <!-- NAME FORM -->
-
-    <form
-        id="nameForm"
-        class="nameForm"
-    >
-
-        <input
-            id="nameInput"
-            type="text"
-            placeholder="WRITE YOUR FIRST NAME ONLY"
-            autocomplete="off"
-            required
-            minlength="2"
-            maxlength="100"
-        >
-
-
-        <button type="submit">
-            →
-        </button>
-
-    </form>
-
 </section>
+
+
+</main>
 
 
 <!-- =========================
@@ -952,40 +976,24 @@ footer p {
 </footer>
 
 
-</main>
-
-
-<!-- =========================
-     SUPABASE LIBRARY
-========================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
 <!-- =========================
      JAVASCRIPT
 ========================= -->
 
 <script>
 
-
 /* =========================
-   SUPABASE CONFIGURATION
+   SUPABASE CONFIG
 ========================= */
 
 const SUPABASE_URL =
     "https://kyiyxkprrqdgosmhabjv.supabase.co";
 
-
-const SUPABASE_ANON_KEY =
+const SUPABASE_KEY =
     "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
 
-
-const supabaseClient =
-    window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-    );
+const STORAGE_KEY =
+    "bcu_final_reveal_registration";
 
 
 /* =========================
@@ -1001,14 +1009,16 @@ explore.addEventListener("click", () => {
     document
         .getElementById("website")
         .scrollIntoView({
+
             behavior: "smooth"
+
         });
 
 });
 
 
 /* =========================
-   NAME → SUPABASE REGISTRATION
+   NAME FORM
 ========================= */
 
 const nameForm =
@@ -1019,35 +1029,6 @@ const nameInput =
     document.getElementById("nameInput");
 
 
-const submitButton =
-    nameForm.querySelector("button");
-
-
-const STORAGE_KEY =
-    "bcu_final_reveal_registration";
-
-
-/* =========================
-   GO TO THANK YOU
-========================= */
-
-function goToThankYou(registration) {
-
-    localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(registration)
-    );
-
-    window.location.href =
-        "thank-you.html";
-
-}
-
-
-/* =========================
-   FORM SUBMIT
-========================= */
-
 nameForm.addEventListener(
     "submit",
     async (event) => {
@@ -1055,23 +1036,21 @@ nameForm.addEventListener(
         event.preventDefault();
 
 
-        const name =
+        const originalName =
             nameInput.value.trim();
 
 
-        const normalizedName =
-            name.toLowerCase();
+        const name =
+            originalName.toLowerCase();
 
 
         /* =========================
-           VALIDATE NAME
+           VALIDATION
         ========================= */
 
-        if (!name || name.length < 2) {
+        if (!originalName) {
 
-            alert(
-                "Please enter your name."
-            );
+            alert("Please enter your name.");
 
             return;
 
@@ -1079,10 +1058,10 @@ nameForm.addEventListener(
 
 
         /* =========================
-           EXISTING SPECIAL ROUTE
+           SPECIAL NAME
         ========================= */
 
-        if (normalizedName === "no name") {
+        if (name === "no name") {
 
             window.location.href =
                 "saher.html";
@@ -1093,13 +1072,11 @@ nameForm.addEventListener(
 
 
         /* =========================
-           CHECK LOCAL REGISTRATION
+           PREVENT DUPLICATE ACCESS
         ========================= */
 
         const savedRegistration =
-            localStorage.getItem(
-                STORAGE_KEY
-            );
+            localStorage.getItem(STORAGE_KEY);
 
 
         if (savedRegistration) {
@@ -1107,9 +1084,7 @@ nameForm.addEventListener(
             try {
 
                 const registration =
-                    JSON.parse(
-                        savedRegistration
-                    );
+                    JSON.parse(savedRegistration);
 
 
                 if (
@@ -1118,9 +1093,8 @@ nameForm.addEventListener(
                     registration.unique_code
                 ) {
 
-                    goToThankYou(
-                        registration
-                    );
+                    window.location.href =
+                        "thank-you.html";
 
                     return;
 
@@ -1128,81 +1102,84 @@ nameForm.addEventListener(
 
             } catch (error) {
 
-                console.error(
-                    "Saved registration error:",
-                    error
+                localStorage.removeItem(
+                    STORAGE_KEY
                 );
 
             }
-
-
-            localStorage.removeItem(
-                STORAGE_KEY
-            );
 
         }
 
 
         /* =========================
-           DISABLE BUTTON
+           BUTTON STATE
         ========================= */
+
+        const submitButton =
+            nameForm.querySelector("button");
+
 
         submitButton.disabled = true;
 
-        submitButton.textContent =
-            "…";
+        submitButton.textContent = "…";
 
-
-        /* =========================
-           CALL SUPABASE FUNCTION
-        ========================= */
 
         try {
 
-            const {
-                data,
-                error
-            } = await supabaseClient.rpc(
-                "register_participant",
-                {
-                    p_name: name
-                }
-            );
-
 
             /* =========================
-               HANDLE SUPABASE ERROR
+               SUPABASE REQUEST
             ========================= */
 
-            if (error) {
+            const response =
+                await fetch(
+                    `${SUPABASE_URL}/rest/v1/rpc/register_participant`,
+                    {
 
-                console.error(
-                    "Supabase registration error:",
-                    error
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json",
+
+                            "apikey":
+                                SUPABASE_KEY,
+
+                            "Authorization":
+                                `Bearer ${SUPABASE_KEY}`
+
+                        },
+
+                        body: JSON.stringify({
+
+                            p_name: originalName
+
+                        })
+
+                    }
                 );
 
-                alert(
-                    "Something went wrong. Please try again."
-                );
-
-                submitButton.disabled = false;
-
-                submitButton.textContent =
-                    "→";
-
-                return;
-
-            }
-
-
-            /* =========================
-               VALIDATE RESPONSE
-            ========================= */
 
             const registration =
-                Array.isArray(data)
-                    ? data[0]
-                    : data;
+                await response.json();
+
+
+            /* =========================
+               ERROR HANDLING
+            ========================= */
+
+            if (!response.ok) {
+
+                throw new Error(
+
+                    registration.message ||
+                    registration.error ||
+                    "Registration failed."
+
+                );
+
+            }
 
 
             if (
@@ -1211,10 +1188,39 @@ nameForm.addEventListener(
                 !registration.unique_code
             ) {
 
-                console.error(
-                    "Invalid registration response:",
-                    data
+                throw new Error(
+                    "Invalid registration response."
                 );
 
-                alert(
-   
+            }
+
+
+            /* =========================
+               SAVE REGISTRATION
+            ========================= */
+
+            const finalRegistration = {
+
+                name:
+                    registration.participant_name ||
+                    registration.name ||
+                    originalName,
+
+                entry_number:
+                    registration.entry_number,
+
+                unique_code:
+                    registration.unique_code
+
+            };
+
+
+            localStorage.setItem(
+
+                STORAGE_KEY,
+
+           JSON.stringify(
+               finalRegistration
+              )
+               );
+           /*======
