@@ -16,7 +16,6 @@
 ========================= */
 
 :root {
-
     --black: #050A12;
     --deep-blue: #081525;
     --blue: #1687FF;
@@ -25,7 +24,6 @@
     --white: #F5FAFF;
     --muted: #9BAEC2;
     --line: rgba(141,219,255,.16);
-
 }
 
 
@@ -34,28 +32,20 @@
 ========================= */
 
 * {
-
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
 }
-
 
 html {
-
     scroll-behavior: smooth;
-
 }
 
-
 body {
-
     background: var(--black);
     color: var(--white);
     font-family: Arial, Helvetica, sans-serif;
     overflow-x: hidden;
-
 }
 
 
@@ -64,48 +54,40 @@ body {
 ========================= */
 
 #videoIntro {
-
     position: relative;
     width: 100%;
     height: 100vh;
     height: 100svh;
+    min-height: 420px;
     background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     overflow: hidden;
-
 }
 
-
 #openingImage {
-
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
     display: block;
     background: #000;
-
 }
 
-
 .videoOverlay {
-
     position: absolute;
     inset: 0;
 
     background:
-
         linear-gradient(
-
             to bottom,
-
             rgba(2,8,18,.08),
             rgba(2,8,18,.03) 48%,
             rgba(2,8,18,.72)
-
         );
 
     pointer-events: none;
-
 }
 
 
@@ -114,45 +96,30 @@ body {
 ========================= */
 
 #explore {
-
     position: absolute;
     bottom: 35px;
     left: 50%;
-
-    transform:
-        translateX(-50%)
-        translateY(0);
-
+    transform: translateX(-50%);
     z-index: 10;
-    opacity: 1;
-    pointer-events: auto;
     text-align: center;
     cursor: pointer;
     transition: .7s ease;
-
 }
 
-
 .exploreText {
-
     color: var(--white);
     font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
     margin-bottom: 10px;
     white-space: nowrap;
-
 }
 
-
 .arrow {
-
     color: var(--blue-light);
     font-size: 24px;
     animation: bounce 1.4s infinite;
-
 }
-
 
 @keyframes bounce {
 
@@ -172,17 +139,12 @@ body {
 ========================= */
 
 #website {
-
     background: var(--black);
     color: var(--white);
-
 }
 
-
 .section {
-
     padding: 90px 7%;
-
 }
 
 
@@ -191,7 +153,6 @@ body {
 ========================= */
 
 .hero {
-
     min-height: 90vh;
 
     display: flex;
@@ -201,68 +162,44 @@ body {
     text-align: center;
 
     background:
-
         radial-gradient(
-
             circle at 50% 35%,
-
             rgba(22,135,255,.16),
             transparent 42%
-
         ),
 
         var(--black);
-
 }
-
 
 .heroInner {
-
     max-width: 1000px;
-
 }
 
-
 .smallTitle {
-
     font-size: 12px;
     letter-spacing: 5px;
     text-transform: uppercase;
     color: var(--blue-light);
     margin-bottom: 25px;
-
 }
 
-
 .hero h1 {
-
     font-size: clamp(50px, 9vw, 120px);
     line-height: .9;
     font-weight: 900;
     letter-spacing: -4px;
-
 }
-
 
 .hero h1 span {
-
     color: var(--blue);
-
 }
 
-
-/* =========================
-   HERO PARAGRAPH
-========================= */
-
 .hero p {
-
     margin-top: 30px;
     font-size: 17px;
     line-height: 1.6;
     color: var(--muted);
     font-weight: 700;
-
 }
 
 
@@ -271,7 +208,6 @@ body {
 ========================= */
 
 .message {
-
     min-height: 70vh;
 
     display: flex;
@@ -281,35 +217,24 @@ body {
     text-align: center;
 
     background:
-
         radial-gradient(
-
             circle at 50% 50%,
-
             rgba(22,135,255,.09),
             transparent 48%
-
         ),
 
         var(--black);
-
 }
 
-
 .message h2 {
-
     max-width: 1000px;
     font-size: clamp(38px, 7vw, 90px);
     line-height: 1;
     letter-spacing: -3px;
-
 }
 
-
 .message h2 span {
-
     color: var(--blue-light);
-
 }
 
 
@@ -318,50 +243,33 @@ body {
 ========================= */
 
 .tracksHeader {
-
     margin-bottom: 45px;
-
 }
-
 
 .tracksHeader h2 {
-
     font-size: clamp(40px, 6vw, 70px);
     line-height: 1;
-
 }
-
 
 .tracksHeader p {
-
     margin-top: 15px;
     color: var(--muted);
-
 }
 
-
 .trackGrid {
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
-
 }
 
-
 .track {
-
     min-height: 190px;
 
     background:
-
         linear-gradient(
-
             145deg,
-
             rgba(22,135,255,.10),
             rgba(8,21,37,.92)
-
         );
 
     border: 1px solid var(--line);
@@ -373,47 +281,33 @@ body {
     justify-content: space-between;
 
     transition: .3s ease;
-
 }
 
-
 .track:hover {
-
     border-color: rgba(85,183,255,.65);
 
     background:
-
         linear-gradient(
-
             145deg,
-
             rgba(22,135,255,.22),
             rgba(8,21,37,.98)
-
         );
 
     transform: translateY(-5px);
 
     box-shadow:
         0 15px 45px rgba(0,80,180,.18);
-
 }
 
-
 .trackNumber {
-
     font-size: 12px;
     color: var(--blue-light);
     opacity: .8;
-
 }
 
-
 .trackName {
-
     font-size: 22px;
     font-weight: 800;
-
 }
 
 
@@ -422,52 +316,35 @@ body {
 ========================= */
 
 .awaits {
-
     background: var(--deep-blue);
     color: var(--white);
-
 }
-
 
 .awaits h2 {
-
     font-size: clamp(40px, 6vw, 75px);
     margin-bottom: 50px;
-
 }
 
-
 .awaitsGrid {
-
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-
 }
-
 
 .awaitsItem {
-
     border-top: 1px solid var(--line);
     padding-top: 20px;
-
 }
 
-
 .awaitsItem h3 {
-
     color: var(--blue-light);
     font-size: 23px;
     margin-bottom: 12px;
-
 }
 
-
 .awaitsItem p {
-
     color: var(--muted);
     line-height: 1.6;
-
 }
 
 
@@ -476,61 +353,43 @@ body {
 ========================= */
 
 .join {
-
     background:
-
         radial-gradient(
-
             circle at 50% 20%,
-
             rgba(85,183,255,.18),
             transparent 45%
-
         ),
 
         #07111F;
 
     color: var(--white);
     text-align: center;
-
 }
 
-
 .join h2 {
-
     font-size: clamp(60px, 12vw, 150px);
     line-height: .8;
     letter-spacing: -5px;
 
     background:
-
         linear-gradient(
-
             90deg,
-
             var(--white),
             var(--blue-light)
-
         );
 
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-
 }
 
-
 .join p {
-
     margin: 30px auto;
     max-width: 550px;
     line-height: 1.6;
     color: var(--muted);
-
 }
 
-
 .joinButton {
-
     display: inline-block;
 
     padding: 17px 35px;
@@ -548,16 +407,12 @@ body {
 
     box-shadow:
         0 10px 35px rgba(22,135,255,.20);
-
 }
 
-
 .joinButton:hover {
-
     background: var(--blue-light);
     color: var(--black);
     transform: translateY(-3px);
-
 }
 
 
@@ -566,33 +421,23 @@ body {
 ========================= */
 
 .social {
-
     background: #050A12;
     text-align: center;
-
 }
-
 
 .social h2 {
-
     font-size: clamp(38px, 6vw, 70px);
     margin-bottom: 40px;
-
 }
 
-
 .socialLinks {
-
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 12px;
-
 }
 
-
 .socialLinks a {
-
     display: inline-block;
 
     padding: 15px 25px;
@@ -605,12 +450,9 @@ body {
     font-weight: bold;
 
     transition: .3s ease;
-
 }
 
-
 .socialLinks a:hover {
-
     background: var(--blue);
     border-color: var(--blue-light);
 
@@ -618,7 +460,6 @@ body {
 
     box-shadow:
         0 10px 30px rgba(22,135,255,.18);
-
 }
 
 
@@ -627,7 +468,6 @@ body {
 ========================= */
 
 .nameForm {
-
     display: flex;
     align-items: center;
 
@@ -637,12 +477,9 @@ body {
 
     border: 1px solid var(--line);
     background: rgba(8,21,37,.7);
-
 }
 
-
 .nameForm input {
-
     flex: 1;
     min-width: 0;
 
@@ -656,20 +493,14 @@ body {
     font-size: 13px;
     letter-spacing: 1px;
     text-transform: uppercase;
-
 }
-
 
 .nameForm input::placeholder {
-
     color: var(--muted);
     opacity: .8;
-
 }
 
-
 .nameForm button {
-
     width: 55px;
     height: 48px;
 
@@ -683,23 +514,16 @@ body {
     cursor: pointer;
 
     transition: .3s ease;
-
 }
-
 
 .nameForm button:hover {
-
     background: var(--blue-light);
     color: var(--black);
-
 }
 
-
 .nameForm button:disabled {
-
     opacity: .6;
     cursor: wait;
-
 }
 
 
@@ -708,7 +532,6 @@ body {
 ========================= */
 
 footer {
-
     background: #03070D;
     color: var(--white);
 
@@ -721,15 +544,11 @@ footer {
     flex-wrap: wrap;
 
     border-top: 1px solid rgba(141,219,255,.08);
-
 }
 
-
 footer p {
-
     color: var(--muted);
     font-size: 12px;
-
 }
 
 
@@ -740,70 +559,49 @@ footer p {
 @media (max-width: 800px) {
 
     .trackGrid {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
 
     .awaitsGrid {
-
         grid-template-columns: repeat(2, 1fr);
-
     }
 
     .section {
-
         padding: 70px 6%;
-
     }
 
     .hero h1 {
-
         letter-spacing: -2px;
-
     }
 
 }
-
 
 @media (max-width: 500px) {
 
     .trackGrid,
     .awaitsGrid {
-
         grid-template-columns: 1fr;
-
     }
 
     .track {
-
         min-height: 150px;
-
     }
 
     .socialLinks {
-
         flex-direction: column;
-
     }
 
     .socialLinks a {
-
         width: 100%;
-
     }
 
     .nameForm {
-
         width: 100%;
-
     }
 
     .exploreText {
-
         font-size: 10px;
         letter-spacing: 3px;
-
     }
 
 }
@@ -833,15 +631,11 @@ footer p {
     <div id="explore">
 
         <div class="exploreText">
-
             Explore the community
-
         </div>
 
         <div class="arrow">
-
             ↓
-
         </div>
 
     </div>
@@ -865,24 +659,17 @@ footer p {
     <div class="heroInner">
 
         <div class="smallTitle">
-
             BCU-Obour Branch
-
         </div>
 
         <h1>
-
             8 TRACKS.<br>
-
             <span>1 COMMUNITY.</span>
-
         </h1>
 
         <p>
-
             You found the final piece.
             Now discover what comes next.
-
         </p>
 
     </div>
@@ -897,15 +684,10 @@ footer p {
 <section class="message section">
 
     <h2>
-
         THE FUTURE IS BUILT BY
-
         <span>
-
             PEOPLE WHO CONNECT.
-
         </span>
-
     </h2>
 
 </section>
@@ -920,15 +702,11 @@ footer p {
     <div class="tracksHeader">
 
         <h2>
-
             THE TRACKS.
-
         </h2>
 
         <p>
-
             Eight paths. One connected community.
-
         </p>
 
     </div>
@@ -938,138 +716,50 @@ footer p {
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                01
-
-            </span>
-
-            <span class="trackName">
-
-                WEB DEVELOPMENT
-
-            </span>
-
+            <span class="trackNumber">01</span>
+            <span class="trackName">WEB DEVELOPMENT</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                02
-
-            </span>
-
-            <span class="trackName">
-
-                DATA ANALYSIS
-
-            </span>
-
+            <span class="trackNumber">02</span>
+            <span class="trackName">DATA ANALYSIS</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                03
-
-            </span>
-
-            <span class="trackName">
-
-                CYBER SECURITY
-
-            </span>
-
+            <span class="trackNumber">03</span>
+            <span class="trackName">CYBER SECURITY</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                04
-
-            </span>
-
-            <span class="trackName">
-
-                BIOINFORMATICS
-
-            </span>
-
+            <span class="trackNumber">04</span>
+            <span class="trackName">BIOINFORMATICS</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                05
-
-            </span>
-
-            <span class="trackName">
-
-                MARKETING
-
-            </span>
-
+            <span class="trackNumber">05</span>
+            <span class="trackName">MARKETING</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                06
-
-            </span>
-
-            <span class="trackName">
-
-                HR
-
-            </span>
-
+            <span class="trackNumber">06</span>
+            <span class="trackName">HR</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                07
-
-            </span>
-
-            <span class="trackName">
-
-                LOGISTICS
-
-            </span>
-
+            <span class="trackNumber">07</span>
+            <span class="trackName">LOGISTICS</span>
         </div>
 
 
         <div class="track">
-
-            <span class="trackNumber">
-
-                08
-
-            </span>
-
-            <span class="trackName">
-
-                GENERAL SKILLS
-
-            </span>
-
+            <span class="trackNumber">08</span>
+            <span class="trackName">GENERAL SKILLS</span>
         </div>
 
 
@@ -1085,9 +775,7 @@ footer p {
 <section class="awaits section">
 
     <h2>
-
         WHAT AWAITS YOU.
-
     </h2>
 
 
@@ -1096,17 +784,11 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>
-
-                WORKSHOPS
-
-            </h3>
+            <h3>WORKSHOPS</h3>
 
             <p>
-
                 Practical sessions designed
                 to turn knowledge into real skills.
-
             </p>
 
         </div>
@@ -1114,17 +796,11 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>
-
-                CHALLENGES
-
-            </h3>
+            <h3>CHALLENGES</h3>
 
             <p>
-
                 Test yourself, compete
                 and push your limits.
-
             </p>
 
         </div>
@@ -1132,17 +808,11 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>
-
-                PROJECTS
-
-            </h3>
+            <h3>PROJECTS</h3>
 
             <p>
-
                 Build things that actually
                 connect you to the real world.
-
             </p>
 
         </div>
@@ -1150,17 +820,11 @@ footer p {
 
         <div class="awaitsItem">
 
-            <h3>
-
-                COMMUNITY
-
-            </h3>
+            <h3>COMMUNITY</h3>
 
             <p>
-
                 Meet people, exchange ideas
                 and grow together.
-
             </p>
 
         </div>
@@ -1178,33 +842,22 @@ footer p {
 <section class="join section">
 
     <h2>
-
         READY?
-
     </h2>
 
     <p>
-
         Your next skill starts here.
         Join the community and discover your path.
-
     </p>
 
 
     <a
-
         class="joinButton"
-
         href="https://www.facebook.com/share/1CRonkPQkN/"
-
         target="_blank"
-
         rel="noopener noreferrer"
-
     >
-
         JOIN THE COMMUNITY
-
     </a>
 
 </section>
@@ -1217,9 +870,7 @@ footer p {
 <section class="social section">
 
     <h2>
-
         STAY CONNECTED.
-
     </h2>
 
 
@@ -1227,87 +878,58 @@ footer p {
 
 
         <a
-
             href="https://www.instagram.com/brightcodeunion?stkn=MXh1emtqd2xzaGtvbg=="
-
             target="_blank"
-
             rel="noopener noreferrer"
-
         >
-
             INSTAGRAM
-
         </a>
 
 
         <a
-
             href="https://www.facebook.com/share/1CRonkPQkN/"
-
             target="_blank"
-
             rel="noopener noreferrer"
-
         >
-
             FACEBOOK
-
         </a>
 
 
         <a
-
             href="https://www.linkedin.com/company/bright-code-union/"
-
             target="_blank"
-
             rel="noopener noreferrer"
-
         >
-
             LINKEDIN
-
         </a>
-
-
-        <!-- NAME FORM -->
-
-        <form
-
-            id="nameForm"
-
-            class="nameForm"
-
-        >
-
-            <input
-
-                id="nameInput"
-
-                type="text"
-
-                placeholder="WRITE YOUR FIRST NAME ONLY"
-
-                autocomplete="off"
-
-                required
-
-                maxlength="100"
-
-            >
-
-
-            <button type="submit">
-
-                →
-
-            </button>
-
-        </form>
 
 
     </div>
+
+
+    <!-- NAME FORM -->
+
+    <form
+        id="nameForm"
+        class="nameForm"
+    >
+
+        <input
+            id="nameInput"
+            type="text"
+            placeholder="WRITE YOUR FIRST NAME ONLY"
+            autocomplete="off"
+            required
+            minlength="2"
+            maxlength="100"
+        >
+
+
+        <button type="submit">
+            →
+        </button>
+
+    </form>
 
 </section>
 
@@ -1319,16 +941,12 @@ footer p {
 <footer>
 
     <p>
-
         BCU-Obour Branch
-
     </p>
 
 
     <p>
-
         BUILD TOGETHER GROW TOGETHER.
-
     </p>
 
 </footer>
@@ -1355,26 +973,18 @@ footer p {
    SUPABASE CONFIGURATION
 ========================= */
 
-// Replace these two values with your project details.
-
 const SUPABASE_URL =
-
-    "YOUR_SUPABASE_PROJECT_URL";
+    "https://kyiyxkprrqdgosmhabjv.supabase.co";
 
 
 const SUPABASE_ANON_KEY =
-
-    "YOUR_SUPABASE_ANON_KEY";
+    "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
 
 
 const supabaseClient =
-
     window.supabase.createClient(
-
         SUPABASE_URL,
-
         SUPABASE_ANON_KEY
-
     );
 
 
@@ -1383,23 +993,16 @@ const supabaseClient =
 ========================= */
 
 const explore =
-
     document.getElementById("explore");
 
 
 explore.addEventListener("click", () => {
 
-
     document
-
         .getElementById("website")
-
         .scrollIntoView({
-
             behavior: "smooth"
-
         });
-
 
 });
 
@@ -1409,22 +1012,18 @@ explore.addEventListener("click", () => {
 ========================= */
 
 const nameForm =
-
     document.getElementById("nameForm");
 
 
 const nameInput =
-
     document.getElementById("nameInput");
 
 
 const submitButton =
-
     nameForm.querySelector("button");
 
 
 const STORAGE_KEY =
-
     "bcu_final_reveal_registration";
 
 
@@ -1434,20 +1033,13 @@ const STORAGE_KEY =
 
 function goToThankYou(registration) {
 
-
     localStorage.setItem(
-
         STORAGE_KEY,
-
         JSON.stringify(registration)
-
     );
 
-
     window.location.href =
-
         "thank-you.html";
-
 
 }
 
@@ -1457,22 +1049,17 @@ function goToThankYou(registration) {
 ========================= */
 
 nameForm.addEventListener(
-
     "submit",
-
     async (event) => {
-
 
         event.preventDefault();
 
 
         const name =
-
             nameInput.value.trim();
 
 
         const normalizedName =
-
             name.toLowerCase();
 
 
@@ -1482,16 +1069,11 @@ nameForm.addEventListener(
 
         if (!name || name.length < 2) {
 
-
             alert(
-
                 "Please enter your name."
-
             );
 
-
             return;
-
 
         }
 
@@ -1502,14 +1084,10 @@ nameForm.addEventListener(
 
         if (normalizedName === "no name") {
 
-
             window.location.href =
-
                 "saher.html";
 
-
             return;
-
 
         }
 
@@ -1519,74 +1097,48 @@ nameForm.addEventListener(
         ========================= */
 
         const savedRegistration =
-
             localStorage.getItem(
-
                 STORAGE_KEY
-
             );
 
 
         if (savedRegistration) {
 
-
             try {
 
-
                 const registration =
-
                     JSON.parse(
-
                         savedRegistration
-
                     );
 
 
                 if (
-
                     registration &&
-
                     registration.entry_number &&
-
                     registration.unique_code
-
                 ) {
 
-
                     goToThankYou(
-
                         registration
-
                     );
-
 
                     return;
 
-
                 }
-
 
             } catch (error) {
 
-
                 console.error(
-
                     "Saved registration error:",
-
                     error
-
                 );
-
 
             }
 
 
             localStorage.removeItem(
-
                 STORAGE_KEY
-
             );
-
 
         }
 
@@ -1597,9 +1149,7 @@ nameForm.addEventListener(
 
         submitButton.disabled = true;
 
-
         submitButton.textContent =
-
             "…";
 
 
@@ -1609,19 +1159,62 @@ nameForm.addEventListener(
 
         try {
 
-
             const {
-
                 data,
-
                 error
-
             } = await supabaseClient.rpc(
-
                 "register_participant",
-
                 {
-
                     p_name: name
+                }
+            );
 
-      
+
+            /* =========================
+               HANDLE SUPABASE ERROR
+            ========================= */
+
+            if (error) {
+
+                console.error(
+                    "Supabase registration error:",
+                    error
+                );
+
+                alert(
+                    "Something went wrong. Please try again."
+                );
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    "→";
+
+                return;
+
+            }
+
+
+            /* =========================
+               VALIDATE RESPONSE
+            ========================= */
+
+            const registration =
+                Array.isArray(data)
+                    ? data[0]
+                    : data;
+
+
+            if (
+                !registration ||
+                !registration.entry_number ||
+                !registration.unique_code
+            ) {
+
+                console.error(
+                    "Invalid registration response:",
+                    data
+                );
+
+                alert(
+   
