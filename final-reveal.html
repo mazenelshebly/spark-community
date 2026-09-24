@@ -1233,8 +1233,9 @@ nameForm.addEventListener(
                 error
                 );
             alert(
-                "something went wrong.please try again."
-                );
+    "Registration failed:\n\n" +
+    (error.message || "Unknown error")
+);
             submitButton.disabled = false;
             submitButton.textContent = "_";
         }
