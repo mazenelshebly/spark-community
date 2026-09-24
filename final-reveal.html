@@ -1181,36 +1181,32 @@ nameForm.addEventListener(
             }
 
 
+            const normalizedRegistration =
+                Array.isArray(registration)
+                    ? registration[0]
+                    : registration;
+
             if (
-                if (
-    !registration ||
-    !registration.entry_number ||
-    !registration.unique_code
-) {
-
-    console.error(
-        "Invalid Supabase response:",
-        registration
-    );
-
-    alert(
-        "Supabase returned:\n\n" +
-        JSON.stringify(registration, null, 2)
-    );
-
-    throw new Error(
-        "Invalid registration response."
-    );
-
-            }
+                !normalizedRegistration ||
+                !normalizedRegistration.entry_number ||
+                !normalizedRegistration.unique_code
             ) {
+
+                console.error(
+                    "Invalid Supabase response:",
+                    registration
+                );
+
+                alert(
+                    "Supabase returned:\n\n" +
+                    JSON.stringify(registration, null, 2)
+                );
 
                 throw new Error(
                     "Invalid registration response."
                 );
 
             }
-
 
             /* =========================
                SAVE REGISTRATION
@@ -1219,15 +1215,15 @@ nameForm.addEventListener(
             const finalRegistration = {
 
                 name:
-                    registration.participant_name ||
-                    registration.name ||
+                    normalizedRegistration.participant_name ||
+                    normalizedRegistration.name ||
                     originalName,
 
                 entry_number:
-                    registration.entry_number,
+                    normalizedRegistration.entry_number,
 
                 unique_code:
-                    registration.unique_code
+                    normalizedRegistration.unique_code
 
             };
 
@@ -1263,5 +1259,3 @@ nameForm.addEventListener(
 
 </body>
 </html>
-
-
