@@ -321,7 +321,7 @@
     }
 
     .final-clue {
-      color: #FF5A2A;
+      color: #7BE8F6;
       font-size: 34px;
       font-weight: bold;
       letter-spacing: 4px;
@@ -460,17 +460,133 @@
         You planned the route, managed the load, and delivered on time.
       </p>
 
-      <div class="final-clue">BUILD</div>
+      <div class="final-clue" id="finalCode">GENERATING...</div>
 
     </div>
 
   </div>
 
   <script>
+
+    /* ================================
+       SUPABASE
+    ================================= */
+
+    const SUPABASE_URL =
+      "https://kyiyxkprrqdgosmhabjv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
+
+
+    /* ================================
+       GAME VARIABLES
+    ================================= */
+
     let currentStage = 1;
     let completedStages = 0;
     let packagesMoved = 0;
     let routesOptimized = 0;
+
+    let finalCodeGenerated = false;
+
+
+    /* ================================
+       GENERATE FINAL CODE
+    ================================= */
+
+    async function generateFinalCode() {
+
+      if (finalCodeGenerated) return;
+
+      finalCodeGenerated = true;
+
+      const finalCodeElement =
+        document.getElementById("finalCode");
+
+      finalCodeElement.textContent = "GENERATING...";
+
+      try {
+
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/rpc/issue_final_token`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`
+            },
+
+            body: JSON.stringify({
+              p_track: "logistics"
+            })
+          }
+        );
+
+
+        if (!response.ok) {
+
+          const errorText = await response.text();
+
+          console.error(
+            "Supabase error:",
+            errorText
+          );
+
+          finalCodeElement.textContent =
+            "ERROR";
+
+          finalCodeGenerated = false;
+
+          return;
+        }
+
+
+        const data = await response.json();
+
+        console.log(
+          "Logistics final token:",
+          data
+        );
+
+
+        if (
+          Array.isArray(data) &&
+          data.length > 0 &&
+          data[0].token
+        ) {
+
+          finalCodeElement.textContent =
+            data[0].token;
+
+        } else {
+
+          finalCodeElement.textContent =
+            "ERROR";
+
+          finalCodeGenerated = false;
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Token generation failed:",
+          error
+        );
+
+        finalCodeElement.textContent =
+          "ERROR";
+
+        finalCodeGenerated = false;
+      }
+    }
+
+
+    /* ================================
+       STAGES
+    ================================= */
 
     const stages = [
 
@@ -584,6 +700,11 @@
 
     ];
 
+
+    /* ================================
+       DASHBOARD
+    ================================= */
+
     function updateDashboard() {
 
       document.getElementById("packagesMoved").textContent =
@@ -595,7 +716,8 @@
       document.getElementById("deliveryStatus").textContent =
         completedStages === 3 ? "DONE" : "PENDING";
 
-      const progress = Math.round((completedStages / 3) * 100);
+      const progress =
+        Math.round((completedStages / 3) * 100);
 
       document.getElementById("progressFill").style.width =
         progress + "%";
@@ -604,17 +726,27 @@
         progress + "%";
     }
 
+
+    /* ================================
+       LOAD STAGE
+    ================================= */
+
     function loadStage() {
 
-      const stage = stages[currentStage - 1];
+      const stage =
+        stages[currentStage - 1];
 
       document.getElementById("stageContainer").innerHTML = `
 
         <div class="stage">
 
-          <div class="stage-number">${stage.number}</div>
+          <div class="stage-number">
+            ${stage.number}
+          </div>
 
-          <h2>${stage.title}</h2>
+          <h2>
+            ${stage.title}
+          </h2>
 
           <div class="stage-question">
             ${stage.question}
@@ -625,7 +757,9 @@
           <div class="options">
 
             ${stage.options.map(option => `
-              <button onclick="checkAnswer(this, ${option[1]})">
+              <button
+                onclick="checkAnswer(this, ${option[1]})"
+              >
                 ${option[0]}
               </button>
             `).join("")}
@@ -639,64 +773,119 @@
       document.getElementById("result").innerHTML = "";
     }
 
+
+    /* ================================
+       CHECK ANSWER
+    ================================= */
+
     function checkAnswer(button, correct) {
 
-      const result = document.getElementById("result");
+      const result =
+        document.getElementById("result");
+
 
       if (correct) {
 
         completedStages++;
+
         packagesMoved += 10;
+
 
         if (currentStage === 1) {
           routesOptimized++;
         }
 
+
         updateDashboard();
 
-        result.innerHTML = `
-          <div class="correct">MISSION STEP COMPLETE.</div>
-          <div>LOGISTICS DATA UPDATED.</div>
 
-          <button class="next-btn" onclick="nextStage()">
-            ${currentStage === 3 ? "COMPLETE MISSION" : "NEXT PHASE →"}
+        result.innerHTML = `
+          <div class="correct">
+            MISSION STEP COMPLETE.
+          </div>
+
+          <div>
+            LOGISTICS DATA UPDATED.
+          </div>
+
+          <button
+            class="next-btn"
+            onclick="nextStage()"
+          >
+            ${
+              currentStage === 3
+                ? "COMPLETE MISSION"
+                : "NEXT PHASE →"
+            }
           </button>
         `;
 
-        document.querySelectorAll("#stageContainer button").forEach(btn => {
-          btn.disabled = true;
-        });
+
+        document
+          .querySelectorAll("#stageContainer button")
+          .forEach(btn => {
+            btn.disabled = true;
+          });
+
 
       } else {
 
         result.innerHTML = `
-          <div class="wrong">DELIVERY ERROR.</div>
-          <div>CHECK THE DATA AND TRY AGAIN.</div>
+          <div class="wrong">
+            DELIVERY ERROR.
+          </div>
+
+          <div>
+            CHECK THE DATA AND TRY AGAIN.
+          </div>
         `;
 
       }
     }
 
-    function nextStage() {
+
+    /* ================================
+       NEXT STAGE
+    ================================= */
+
+    async function nextStage() {
 
       if (currentStage === 3) {
 
-        document.getElementById("stageContainer").style.display = "none";
-        document.getElementById("result").style.display = "none";
-        document.getElementById("finalScreen").style.display = "block";
+        document.getElementById(
+          "stageContainer"
+        ).style.display = "none";
+
+        document.getElementById(
+          "result"
+        ).style.display = "none";
+
+        document.getElementById(
+          "finalScreen"
+        ).style.display = "block";
 
         updateDashboard();
+
+        await generateFinalCode();
 
         return;
       }
 
+
       currentStage++;
+
       loadStage();
     }
 
+
+    /* ================================
+       START
+    ================================= */
+
     loadStage();
     updateDashboard();
+
   </script>
 
 </body>
-</html>
+      </html>
