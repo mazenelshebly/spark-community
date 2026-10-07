@@ -451,6 +451,18 @@
   </div>
 
   <script>
+
+    /* =========================================
+       SUPABASE
+    ========================================= */
+
+    const SUPABASE_URL =
+      "https://kyiyxkprrqdgosmhabjv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
+
+
     let currentStage = 1;
 
     const stages = [
@@ -500,123 +512,415 @@
       }
     ];
 
-    function checkAnswer(selected) {
-      const stage = stages[currentStage - 1];
-      const result = document.getElementById("result");
-      const spark = document.getElementById("spark");
-      const buttons = document.querySelectorAll("#options button");
 
-      if (selected === stage.correct) {
-        spark.classList.remove("sad");
-        spark.classList.add("happy");
+    /* =========================================
+       GENERATE FINAL CODE
+    ========================================= */
 
-        buttons.forEach(button => {
-          button.disabled = true;
-        });
+    async function generateFinalCode() {
 
-        if (currentStage === 3) {
-          document.getElementById("systemStatus").textContent =
-            "SYSTEM SECURED";
+      const result =
+        document.getElementById("result");
 
-          document.getElementById("firewallStatus").textContent =
-            "FIREWALL: ACTIVE";
 
-          document.getElementById("securityLevel").textContent =
-            "SECURITY LEVEL: MAX";
+      result.innerHTML = `
 
-          document.getElementById("terminalMessage").textContent =
-            "ALL THREATS NEUTRALIZED. SYSTEM SECURED.";
+        <div class="correct secure">
+          ACCESS GRANTED.
+        </div>
 
-          document.getElementById("title").textContent =
-            "SYSTEM SECURED";
+        <div class="correct">
+          ALL SECURITY PROTOCOLS COMPLETE.
+        </div>
 
-          document.getElementById("subtitle").textContent =
-            "SPARK IS SAFE. YOU COMPLETED THE SECURITY PROTOCOL.";
+        <div>
+          GENERATING YOUR FINAL CODE...
+        </div>
 
-          result.innerHTML = `
-            <div class="correct secure">ACCESS GRANTED.</div>
-            <div class="correct">ALL SECURITY PROTOCOLS COMPLETE.</div>
-            <div>YOUR CLUE IS:</div>
-            <div class="clue">GROW</div>
-          `;
+      `;
 
-          document.querySelector(".terminal").classList.add("secure");
-        } else {
-          result.innerHTML = `
-            <div class="correct">CORRECT.</div>
-            <div>THREAT LEVEL REDUCED.</div>
-            <button class="next-btn" onclick="nextStage()">
-              CONTINUE SECURITY PROTOCOL →
-            </button>
-          `;
+
+      try {
+
+        const response =
+          await fetch(
+            `${SUPABASE_URL}/rest/v1/rpc/issue_final_token`,
+            {
+
+              method: "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  `Bearer ${SUPABASE_KEY}`
+
+              },
+
+              body:
+                JSON.stringify({
+                  p_track:
+                    "cyber-security"
+                })
+
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data?.message ||
+            data?.error ||
+            "Failed to generate code."
+          );
+
         }
 
-      } else {
-        spark.classList.remove("happy");
-        spark.classList.add("sad");
+
+        const token =
+          Array.isArray(data)
+            ? data[0]?.token
+            : data?.token;
+
+
+        if (!token) {
+
+          throw new Error(
+            "No final code was returned."
+          );
+
+        }
+
 
         result.innerHTML = `
-          <div class="wrong">ACCESS DENIED.</div>
-          <div class="wrong">WRONG SECURITY RESPONSE.</div>
-          <div>TRY AGAIN.</div>
+
+          <div class="correct secure">
+            ACCESS GRANTED.
+          </div>
+
+          <div class="correct">
+            ALL SECURITY PROTOCOLS COMPLETE.
+          </div>
+
+          <div>
+            YOUR FINAL CODE IS:
+          </div>
+
+          <div class="clue">
+            ${token}
+          </div>
+
+          <div style="
+            margin-top:18px;
+            color:#6e9297;
+            font-size:12px;
+            letter-spacing:1px;
+          ">
+            SAVE THIS CODE. YOU WILL NEED IT TO UNLOCK THE FINAL.
+          </div>
+
         `;
 
-        setTimeout(() => {
-          spark.classList.remove("sad");
-        }, 500);
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        result.innerHTML = `
+
+          <div class="wrong">
+            FAILED TO GENERATE YOUR CODE.
+          </div>
+
+          <div>
+            PLEASE REFRESH AND TRY AGAIN.
+          </div>
+
+        `;
+
       }
+
     }
 
+
+    function checkAnswer(selected) {
+
+      const stage =
+        stages[currentStage - 1];
+
+      const result =
+        document.getElementById("result");
+
+      const spark =
+        document.getElementById("spark");
+
+      const buttons =
+        document.querySelectorAll(
+          "#options button"
+        );
+
+
+      if (selected === stage.correct) {
+
+        spark.classList.remove(
+          "sad"
+        );
+
+        spark.classList.add(
+          "happy"
+        );
+
+
+        buttons.forEach(
+          button => {
+
+            button.disabled = true;
+
+          }
+        );
+
+
+        if (currentStage === 3) {
+
+          document.getElementById(
+            "systemStatus"
+          ).textContent =
+            "SYSTEM SECURED";
+
+
+          document.getElementById(
+            "firewallStatus"
+          ).textContent =
+            "FIREWALL: ACTIVE";
+
+
+          document.getElementById(
+            "securityLevel"
+          ).textContent =
+            "SECURITY LEVEL: MAX";
+
+
+          document.getElementById(
+            "terminalMessage"
+          ).textContent =
+            "ALL THREATS NEUTRALIZED. SYSTEM SECURED.";
+
+
+          document.getElementById(
+            "title"
+          ).textContent =
+            "SYSTEM SECURED";
+
+
+          document.getElementById(
+            "subtitle"
+          ).textContent =
+            "SPARK IS SAFE. YOU COMPLETED THE SECURITY PROTOCOL.";
+
+
+          document.querySelector(
+            ".terminal"
+          ).classList.add(
+            "secure"
+          );
+
+
+          generateFinalCode();
+
+
+        } else {
+
+          result.innerHTML = `
+
+            <div class="correct">
+              CORRECT.
+            </div>
+
+            <div>
+              THREAT LEVEL REDUCED.
+            </div>
+
+            <button
+              class="next-btn"
+              onclick="nextStage()"
+            >
+              CONTINUE SECURITY PROTOCOL →
+            </button>
+
+          `;
+
+        }
+
+
+      } else {
+
+        spark.classList.remove(
+          "happy"
+        );
+
+        spark.classList.add(
+          "sad"
+        );
+
+
+        result.innerHTML = `
+
+          <div class="wrong">
+            ACCESS DENIED.
+          </div>
+
+          <div class="wrong">
+            WRONG SECURITY RESPONSE.
+          </div>
+
+          <div>
+            TRY AGAIN.
+          </div>
+
+        `;
+
+
+        setTimeout(
+          () => {
+
+            spark.classList.remove(
+              "sad"
+            );
+
+          },
+          500
+        );
+
+      }
+
+    }
+
+
     function nextStage() {
+
       currentStage++;
 
-      const stage = stages[currentStage - 1];
 
-      document.getElementById("title").textContent = stage.title;
-      document.getElementById("terminalMessage").textContent =
+      const stage =
+        stages[currentStage - 1];
+
+
+      document.getElementById(
+        "title"
+      ).textContent =
+        stage.title;
+
+
+      document.getElementById(
+        "terminalMessage"
+      ).textContent =
         stage.terminal;
-      document.getElementById("question").textContent =
+
+
+      document.getElementById(
+        "question"
+      ).textContent =
         stage.question;
-      document.getElementById("code").textContent =
+
+
+      document.getElementById(
+        "code"
+      ).textContent =
         stage.code;
-      document.getElementById("result").innerHTML = "";
 
-      document.getElementById("securityLevel").textContent =
-        "SECURITY LEVEL: 0" + currentStage;
 
-      document.getElementById("firewallStatus").textContent =
+      document.getElementById(
+        "result"
+      ).innerHTML =
+        "";
+
+
+      document.getElementById(
+        "securityLevel"
+      ).textContent =
+        "SECURITY LEVEL: 0" +
+        currentStage;
+
+
+      document.getElementById(
+        "firewallStatus"
+      ).textContent =
         currentStage === 2
           ? "FIREWALL: SCANNING"
           : "FIREWALL: ACTIVE";
 
-      document.getElementById("progress1").classList.toggle(
+
+      document.getElementById(
+        "progress1"
+      ).classList.toggle(
         "active",
         currentStage >= 1
       );
 
-      document.getElementById("progress2").classList.toggle(
+
+      document.getElementById(
+        "progress2"
+      ).classList.toggle(
         "active",
         currentStage >= 2
       );
 
-      document.getElementById("progress3").classList.toggle(
+
+      document.getElementById(
+        "progress3"
+      ).classList.toggle(
         "active",
         currentStage >= 3
       );
 
-      const options = document.getElementById("options");
 
-      options.innerHTML = "";
+      const options =
+        document.getElementById(
+          "options"
+        );
 
-      stage.options.forEach((option, index) => {
-        const button = document.createElement("button");
 
-        button.textContent = option;
-        button.onclick = () => checkAnswer(index);
+      options.innerHTML =
+        "";
 
-        options.appendChild(button);
-      });
+
+      stage.options.forEach(
+        (option, index) => {
+
+          const button =
+            document.createElement(
+              "button"
+            );
+
+
+          button.textContent =
+            option;
+
+
+          button.onclick =
+            () => checkAnswer(index);
+
+
+          options.appendChild(
+            button
+          );
+
+        }
+      );
+
     }
+
   </script>
 
 </body>
