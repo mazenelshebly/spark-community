@@ -289,7 +289,7 @@
     }
 
     .final-word {
-      color: var(--pink);
+      color: var(--cyan);
       font-size: clamp(42px, 10vw, 75px);
       font-weight: bold;
       letter-spacing: 8px;
@@ -438,11 +438,12 @@
         and prepared the campaign.
       </p>
 
-      <!-- FINAL CLUE: TOGETHER -->
-      <div class="final-word">TOGETHER</div>
+      <div class="final-word" id="finalCode">
+        GENERATING...
+      </div>
 
       <p>
-        Your final clue is ready.
+        Your final code is ready.
         Now build something people care about.
       </p>
 
@@ -462,6 +463,22 @@
   </main>
 
   <script>
+
+    /* ================================
+       SUPABASE
+    ================================= */
+
+    const SUPABASE_URL =
+      "https://kyiyxkprrqdgosmhabjv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
+
+
+    /* ================================
+       STAGES
+    ================================= */
+
     const stages = [
       {
         title: "STAGE 01 / TARGET AUDIENCE",
@@ -514,8 +531,19 @@
       }
     ];
 
+
+    /* ================================
+       GAME VARIABLES
+    ================================= */
+
     let currentStage = 0;
     let completedStages = 0;
+    let finalCodeGenerated = false;
+
+
+    /* ================================
+       ELEMENTS
+    ================================= */
 
     const stageElement =
       document.getElementById("stage");
@@ -541,54 +569,199 @@
     const finalScreen =
       document.getElementById("finalScreen");
 
-    function loadStage() {
-      const stage = stages[currentStage];
+    const finalCodeElement =
+      document.getElementById("finalCode");
 
-      stageElement.textContent = stage.title;
-      questionElement.textContent = stage.question;
+
+    /* ================================
+       GENERATE FINAL CODE
+    ================================= */
+
+    async function generateFinalCode() {
+
+      if (finalCodeGenerated) return;
+
+      finalCodeGenerated = true;
+
+      finalCodeElement.textContent =
+        "GENERATING...";
+
+      try {
+
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/rpc/issue_final_token`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`
+            },
+
+            body: JSON.stringify({
+              p_track: "marketing"
+            })
+          }
+        );
+
+
+        if (!response.ok) {
+
+          const errorText =
+            await response.text();
+
+          console.error(
+            "Supabase error:",
+            errorText
+          );
+
+          finalCodeElement.textContent =
+            "ERROR";
+
+          finalCodeGenerated = false;
+
+          return;
+        }
+
+
+        const data =
+          await response.json();
+
+        console.log(
+          "Marketing final token:",
+          data
+        );
+
+
+        if (
+          Array.isArray(data) &&
+          data.length > 0 &&
+          data[0].token
+        ) {
+
+          finalCodeElement.textContent =
+            data[0].token;
+
+        } else {
+
+          finalCodeElement.textContent =
+            "ERROR";
+
+          finalCodeGenerated = false;
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Token generation failed:",
+          error
+        );
+
+        finalCodeElement.textContent =
+          "ERROR";
+
+        finalCodeGenerated = false;
+      }
+    }
+
+
+    /* ================================
+       LOAD STAGE
+    ================================= */
+
+    function loadStage() {
+
+      const stage =
+        stages[currentStage];
+
+      stageElement.textContent =
+        stage.title;
+
+      questionElement.textContent =
+        stage.question;
+
       resultElement.innerHTML = "";
+
       optionsElement.innerHTML = "";
 
-      stage.answers.forEach((answer, index) => {
-        const button = document.createElement("button");
 
-        button.textContent = answer;
+      stage.answers.forEach(
+        (answer, index) => {
 
-        button.onclick = function () {
-          checkAnswer(index, button);
-        };
+          const button =
+            document.createElement("button");
 
-        optionsElement.appendChild(button);
-      });
+          button.textContent =
+            answer;
+
+          button.onclick =
+            function () {
+              checkAnswer(
+                index,
+                button
+              );
+            };
+
+          optionsElement.appendChild(
+            button
+          );
+        }
+      );
+
 
       updateProgress();
     }
+
+
+    /* ================================
+       CHECK ANSWER
+    ================================= */
 
     function checkAnswer(
       selectedIndex,
       selectedButton
     ) {
-      const stage = stages[currentStage];
 
-      if (selectedIndex === stage.correct) {
+      const stage =
+        stages[currentStage];
+
+
+      if (
+        selectedIndex ===
+        stage.correct
+      ) {
+
         completedStages++;
 
+
         document
-          .querySelectorAll("#options button")
+          .querySelectorAll(
+            "#options button"
+          )
           .forEach(button => {
             button.disabled = true;
           });
 
+
         document
-          .getElementById(`card${currentStage}`)
+          .getElementById(
+            `card${currentStage}`
+          )
           .classList.add("active");
 
+
         document
-          .getElementById(`card${currentStage}`)
+          .getElementById(
+            `card${currentStage}`
+          )
           .querySelector(".status")
-          .textContent = "UNLOCKED";
+          .textContent =
+            "UNLOCKED";
+
 
         resultElement.innerHTML = `
+
           <div class="correct">
             ${stage.message}
           </div>
@@ -602,17 +775,22 @@
             onclick="nextStage()"
           >
             ${
-              currentStage === stages.length - 1
+              currentStage ===
+              stages.length - 1
                 ? "COMPLETE MARKETING →"
                 : "NEXT STAGE →"
             }
           </button>
+
         `;
+
 
         updateProgress();
 
       } else {
+
         resultElement.innerHTML = `
+
           <div class="wrong">
             NOT THIS ONE.
           </div>
@@ -620,33 +798,61 @@
           <div>
             THINK LIKE A MARKETER. TRY AGAIN.
           </div>
+
         `;
+
 
         selectedButton.style.borderColor =
           "#FF7A18";
       }
     }
 
-    function nextStage() {
-      if (
-        currentStage === stages.length - 1
-      ) {
-        quizBox.style.display = "none";
-        finalScreen.style.display = "block";
 
-        progressFill.style.width = "100%";
-        progressText.textContent = "4 / 4";
+    /* ================================
+       NEXT STAGE
+    ================================= */
+
+    async function nextStage() {
+
+      if (
+        currentStage ===
+        stages.length - 1
+      ) {
+
+        quizBox.style.display =
+          "none";
+
+        finalScreen.style.display =
+          "block";
+
+        progressFill.style.width =
+          "100%";
+
+        progressText.textContent =
+          "4 / 4";
+
+
+        await generateFinalCode();
 
         return;
       }
 
+
       currentStage++;
+
       loadStage();
     }
 
+
+    /* ================================
+       UPDATE PROGRESS
+    ================================= */
+
     function updateProgress() {
+
       const percentage =
-        (completedStages / stages.length) * 100;
+        (completedStages /
+          stages.length) * 100;
 
       progressFill.style.width =
         `${percentage}%`;
@@ -655,26 +861,54 @@
         `${completedStages} / ${stages.length}`;
     }
 
+
+    /* ================================
+       RESTART
+    ================================= */
+
     function restartQuiz() {
+
       currentStage = 0;
       completedStages = 0;
+      finalCodeGenerated = false;
+
+      finalCodeElement.textContent =
+        "GENERATING...";
+
 
       document
         .querySelectorAll(".profile-card")
         .forEach(card => {
-          card.classList.remove("active");
-          card.querySelector(".status")
-            .textContent = "LOCKED";
+
+          card.classList.remove(
+            "active"
+          );
+
+          card
+            .querySelector(".status")
+            .textContent =
+              "LOCKED";
         });
 
-      quizBox.style.display = "block";
-      finalScreen.style.display = "none";
+
+      quizBox.style.display =
+        "block";
+
+      finalScreen.style.display =
+        "none";
+
 
       loadStage();
     }
 
+
+    /* ================================
+       START
+    ================================= */
+
     loadStage();
+
   </script>
 
 </body>
-  </html>
+</html>
