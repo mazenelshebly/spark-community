@@ -115,12 +115,12 @@
       margin-top: 15px;
       font-size: 32px;
       font-weight: bold;
-      color: #ff5a2a;
+      color: #7be8f6;
       letter-spacing: 4px;
       text-shadow:
-        0 0 8px #ff5a2a,
-        0 0 18px #ff5a2a,
-        0 0 35px rgba(255, 90, 42, 0.8);
+        0 0 8px #7be8f6,
+        0 0 18px #7be8f6,
+        0 0 35px rgba(123, 232, 246, 0.8);
       animation: clueGlow 1.8s ease-in-out infinite alternate;
     }
 
@@ -204,15 +204,15 @@
     @keyframes clueGlow {
       from {
         text-shadow:
-          0 0 6px #ff5a2a,
-          0 0 15px rgba(255, 90, 42, 0.6);
+          0 0 6px #7be8f6,
+          0 0 15px rgba(123, 232, 246, 0.6);
       }
 
       to {
         text-shadow:
-          0 0 12px #ff5a2a,
-          0 0 28px #ff5a2a,
-          0 0 45px rgba(255, 90, 42, 0.9);
+          0 0 12px #7be8f6,
+          0 0 28px #7be8f6,
+          0 0 45px rgba(123, 232, 246, 0.9);
       }
     }
 
@@ -295,11 +295,24 @@
   </div>
 
   <script>
+
+    /* =========================================
+       SUPABASE
+    ========================================= */
+
+    const SUPABASE_URL =
+      "https://kyiyxkprrqdgosmhabjv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
+
+
     const canvas = document.getElementById("dnaCanvas");
     const ctx = canvas.getContext("2d");
 
     let dnaColor = "#7BE8F6";
     let dnaGlow = "#7BE8F6";
+
 
     function resizeCanvas() {
       canvas.width = window.innerWidth;
@@ -309,109 +322,412 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
 
+
     function drawDNA(time) {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+      );
 
       const centerX = canvas.width / 2;
-      const dnaWidth = Math.min(canvas.width * 0.72, 560);
-      const startX = centerX - dnaWidth / 2;
+
+      const dnaWidth =
+        Math.min(
+          canvas.width * 0.72,
+          560
+        );
+
+      const startX =
+        centerX - dnaWidth / 2;
+
       const amplitude = 75;
+
       const spacing = 27;
-      const rows = Math.ceil(canvas.height / spacing) + 4;
+
+      const rows =
+        Math.ceil(
+          canvas.height / spacing
+        ) + 4;
+
 
       ctx.lineWidth = 2.2;
+
       ctx.shadowBlur = 14;
+
       ctx.shadowColor = dnaGlow;
 
-      for (let i = 0; i < rows; i++) {
-        const y = i * spacing - 20;
-        const wave = (time * 0.0015) + i * 0.18;
 
-        const x1 = startX + Math.sin(wave) * amplitude;
-        const x2 = startX + dnaWidth + Math.sin(wave + Math.PI) * amplitude;
+      for (
+        let i = 0;
+        i < rows;
+        i++
+      ) {
 
-        const baseNames = ["A", "T", "G", "C"];
-        const base = baseNames[i % baseNames.length];
+        const y =
+          i * spacing - 20;
 
-        ctx.strokeStyle = dnaColor;
-        ctx.globalAlpha = 0.55;
+        const wave =
+          (time * 0.0015) +
+          i * 0.18;
+
+
+        const x1 =
+          startX +
+          Math.sin(wave) *
+          amplitude;
+
+
+        const x2 =
+          startX +
+          dnaWidth +
+          Math.sin(
+            wave + Math.PI
+          ) *
+          amplitude;
+
+
+        const baseNames =
+          ["A", "T", "G", "C"];
+
+
+        const base =
+          baseNames[
+            i % baseNames.length
+          ];
+
+
+        ctx.strokeStyle =
+          dnaColor;
+
+        ctx.globalAlpha =
+          0.55;
+
 
         ctx.beginPath();
-        ctx.moveTo(x1, y);
-        ctx.lineTo(x2, y);
+
+        ctx.moveTo(
+          x1,
+          y
+        );
+
+        ctx.lineTo(
+          x2,
+          y
+        );
+
         ctx.stroke();
 
-        ctx.globalAlpha = 0.9;
 
-        ctx.fillStyle = dnaColor;
+        ctx.globalAlpha =
+          0.9;
+
+
+        ctx.fillStyle =
+          dnaColor;
+
 
         ctx.beginPath();
-        ctx.arc(x1, y, 4, 0, Math.PI * 2);
+
+        ctx.arc(
+          x1,
+          y,
+          4,
+          0,
+          Math.PI * 2
+        );
+
         ctx.fill();
+
 
         ctx.beginPath();
-        ctx.arc(x2, y, 4, 0, Math.PI * 2);
+
+        ctx.arc(
+          x2,
+          y,
+          4,
+          0,
+          Math.PI * 2
+        );
+
         ctx.fill();
 
-        ctx.font = "bold 13px Arial";
-        ctx.textAlign = "center";
 
-        ctx.fillStyle = dnaColor;
-        ctx.fillText(base, (x1 + x2) / 2 - 13, y - 5);
+        ctx.font =
+          "bold 13px Arial";
+
+        ctx.textAlign =
+          "center";
+
+
+        ctx.fillStyle =
+          dnaColor;
+
+
+        ctx.fillText(
+          base,
+          (x1 + x2) / 2 - 13,
+          y - 5
+        );
+
 
         const pair = {
+
           A: "T",
           T: "A",
           G: "C",
           C: "G"
+
         };
 
-        ctx.fillText(pair[base], (x1 + x2) / 2 + 13, y + 15);
+
+        ctx.fillText(
+          pair[base],
+          (x1 + x2) / 2 + 13,
+          y + 15
+        );
+
       }
+
 
       ctx.globalAlpha = 1;
-      requestAnimationFrame(drawDNA);
+
+      requestAnimationFrame(
+        drawDNA
+      );
+
     }
 
-    requestAnimationFrame(drawDNA);
 
-    function checkAnswer(button, correct) {
-      const result = document.getElementById("result");
-      const spark = document.getElementById("spark");
+    requestAnimationFrame(
+      drawDNA
+    );
 
-      spark.classList.remove("happy", "sad");
+
+    /* =========================================
+       GENERATE FINAL CODE
+    ========================================= */
+
+    async function generateFinalCode() {
+
+      const result =
+        document.getElementById("result");
+
+
+      result.innerHTML = `
+
+        <div class="correct">
+          CORRECT.
+        </div>
+
+        <div>
+          GENERATING YOUR FINAL CODE...
+        </div>
+
+      `;
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${SUPABASE_URL}/rest/v1/rpc/issue_final_token`,
+            {
+
+              method: "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  `Bearer ${SUPABASE_KEY}`
+
+              },
+
+              body:
+                JSON.stringify({
+                  p_track:
+                    "bioinformatics"
+                })
+
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data?.message ||
+            data?.error ||
+            "Failed to generate code."
+          );
+
+        }
+
+
+        const token =
+          Array.isArray(data)
+            ? data[0]?.token
+            : data?.token;
+
+
+        if (!token) {
+
+          throw new Error(
+            "No final code was returned."
+          );
+
+        }
+
+
+        result.innerHTML = `
+
+          <div class="correct">
+            BIOINFORMATICS COMPLETE.
+          </div>
+
+          <div>
+            YOUR FINAL CODE IS:
+          </div>
+
+          <div class="clue">
+            ${token}
+          </div>
+
+          <div style="
+            margin-top:18px;
+            color:#777;
+            font-size:12px;
+            letter-spacing:1px;
+          ">
+            SAVE THIS CODE. YOU WILL NEED IT TO UNLOCK THE FINAL.
+          </div>
+
+        `;
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        result.innerHTML = `
+
+          <div class="wrong">
+            FAILED TO GENERATE YOUR CODE.
+          </div>
+
+          <div>
+            PLEASE REFRESH AND TRY AGAIN.
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =========================================
+       ANSWER
+    ========================================= */
+
+    function checkAnswer(
+      button,
+      correct
+    ) {
+
+      const result =
+        document.getElementById(
+          "result"
+        );
+
+      const spark =
+        document.getElementById(
+          "spark"
+        );
+
+
+      spark.classList.remove(
+        "happy",
+        "sad"
+      );
+
 
       if (correct) {
-        result.innerHTML = `
-          <div class="correct">CORRECT.</div>
-          <div>YOUR CLUE IS:</div>
-          <div class="clue">TOGETHER</div>
-        `;
 
-        dnaColor = "#7BE8F6";
-        dnaGlow = "#7BE8F6";
+        dnaColor =
+          "#7BE8F6";
 
-        document.querySelectorAll("button").forEach(btn => {
-          btn.disabled = true;
-        });
+        dnaGlow =
+          "#7BE8F6";
+
+
+        document
+          .querySelectorAll("button")
+          .forEach(
+            btn => {
+
+              btn.disabled = true;
+
+            }
+          );
+
 
         void spark.offsetWidth;
-        spark.classList.add("happy");
+
+        spark.classList.add(
+          "happy"
+        );
+
+
+        generateFinalCode();
+
 
       } else {
+
         result.innerHTML = `
-          <div class="wrong">NOT THIS ONE.</div>
-          <div>TRY AGAIN.</div>
+
+          <div class="wrong">
+            NOT THIS ONE.
+          </div>
+
+          <div>
+            TRY AGAIN.
+          </div>
+
         `;
 
-        dnaColor = "#FF5A2A";
-        dnaGlow = "#FF5A2A";
+
+        dnaColor =
+          "#FF5A2A";
+
+        dnaGlow =
+          "#FF5A2A";
+
 
         void spark.offsetWidth;
-        spark.classList.add("sad");
+
+        spark.classList.add(
+          "sad"
+        );
+
       }
+
     }
+
   </script>
 
 </body>
-  </html>
+</html>
