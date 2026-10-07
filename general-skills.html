@@ -317,7 +317,7 @@
         Keep growing.
       </div>
 
-      <div class="clue">GROW</div>
+      <div class="clue" id="finalCode">GENERATING...</div>
 
       <button class="restart-btn" onclick="restartTrack()">
         PLAY AGAIN ↻
@@ -328,6 +328,22 @@
   </div>
 
   <script>
+
+    /* ================================
+       SUPABASE
+    ================================= */
+
+    const SUPABASE_URL =
+      "https://kyiyxkprrqdgosmhabjv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
+
+
+    /* ================================
+       STAGES
+    ================================= */
+
     const stages = [
       {
         label: "SKILL 01 / COMMUNICATION",
@@ -375,118 +391,331 @@
       }
     ];
 
+
+    /* ================================
+       GAME VARIABLES
+    ================================= */
+
     let currentStage = 0;
     let completedStages = 0;
     let stageAnswered = false;
+    let finalCodeGenerated = false;
 
-    const stageLabel = document.getElementById("stageLabel");
-    const questionTitle = document.getElementById("questionTitle");
-    const questionText = document.getElementById("questionText");
-    const optionsContainer = document.getElementById("optionsContainer");
-    const result = document.getElementById("result");
-    const nextButton = document.getElementById("nextButton");
-    const progressText = document.getElementById("progressText");
-    const progressFill = document.getElementById("progressFill");
-    const quizScreen = document.getElementById("quizScreen");
-    const finalScreen = document.getElementById("finalScreen");
+
+    /* ================================
+       ELEMENTS
+    ================================= */
+
+    const stageLabel =
+      document.getElementById("stageLabel");
+
+    const questionTitle =
+      document.getElementById("questionTitle");
+
+    const questionText =
+      document.getElementById("questionText");
+
+    const optionsContainer =
+      document.getElementById("optionsContainer");
+
+    const result =
+      document.getElementById("result");
+
+    const nextButton =
+      document.getElementById("nextButton");
+
+    const progressText =
+      document.getElementById("progressText");
+
+    const progressFill =
+      document.getElementById("progressFill");
+
+    const quizScreen =
+      document.getElementById("quizScreen");
+
+    const finalScreen =
+      document.getElementById("finalScreen");
+
+    const finalCodeElement =
+      document.getElementById("finalCode");
+
+
+    /* ================================
+       GENERATE FINAL CODE
+    ================================= */
+
+    async function generateFinalCode() {
+
+      if (finalCodeGenerated) return;
+
+      finalCodeGenerated = true;
+
+      finalCodeElement.textContent =
+        "GENERATING...";
+
+      try {
+
+        const response = await fetch(
+          `${SUPABASE_URL}/rest/v1/rpc/issue_final_token`,
+          {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+              "apikey": SUPABASE_KEY,
+              "Authorization": `Bearer ${SUPABASE_KEY}`
+            },
+
+            body: JSON.stringify({
+              p_track: "general-skills"
+            })
+          }
+        );
+
+
+        if (!response.ok) {
+
+          const errorText =
+            await response.text();
+
+          console.error(
+            "Supabase error:",
+            errorText
+          );
+
+          finalCodeElement.textContent =
+            "ERROR";
+
+          finalCodeGenerated = false;
+
+          return;
+        }
+
+
+        const data =
+          await response.json();
+
+        console.log(
+          "General Skills final token:",
+          data
+        );
+
+
+        if (
+          Array.isArray(data) &&
+          data.length > 0 &&
+          data[0].token
+        ) {
+
+          finalCodeElement.textContent =
+            data[0].token;
+
+        } else {
+
+          finalCodeElement.textContent =
+            "ERROR";
+
+          finalCodeGenerated = false;
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Token generation failed:",
+          error
+        );
+
+        finalCodeElement.textContent =
+          "ERROR";
+
+        finalCodeGenerated = false;
+      }
+    }
+
+
+    /* ================================
+       LOAD STAGE
+    ================================= */
 
     function loadStage() {
 
-      const stage = stages[currentStage];
+      const stage =
+        stages[currentStage];
 
       stageAnswered = false;
 
-      stageLabel.textContent = stage.label;
-      questionTitle.textContent = stage.title;
-      questionText.textContent = stage.question;
+      stageLabel.textContent =
+        stage.label;
+
+      questionTitle.textContent =
+        stage.title;
+
+      questionText.textContent =
+        stage.question;
 
       result.innerHTML = "";
-      nextButton.style.display = "none";
+
+      nextButton.style.display =
+        "none";
 
       optionsContainer.innerHTML = "";
 
-      stage.options.forEach(option => {
 
-        const button = document.createElement("button");
+      stage.options.forEach(
+        option => {
 
-        button.textContent = option[0];
+          const button =
+            document.createElement("button");
 
-        button.onclick = function() {
-          checkAnswer(button, option[1]);
-        };
+          button.textContent =
+            option[0];
 
-        optionsContainer.appendChild(button);
+          button.onclick =
+            function() {
+              checkAnswer(
+                button,
+                option[1]
+              );
+            };
 
-      });
+          optionsContainer.appendChild(
+            button
+          );
+
+        }
+      );
+
 
       updateProgress();
-
     }
 
-    function checkAnswer(button, correct) {
+
+    /* ================================
+       CHECK ANSWER
+    ================================= */
+
+    function checkAnswer(
+      button,
+      correct
+    ) {
 
       if (stageAnswered) {
         return;
       }
 
+
       if (correct) {
 
         stageAnswered = true;
+
         completedStages++;
 
+
         result.innerHTML = `
-          <div class="correct">CORRECT. SKILL UNLOCKED ✓</div>
-          <div>YOU ARE READY FOR THE NEXT CHALLENGE.</div>
+          <div class="correct">
+            CORRECT. SKILL UNLOCKED ✓
+          </div>
+
+          <div>
+            YOU ARE READY FOR THE NEXT CHALLENGE.
+          </div>
         `;
 
-        document.querySelectorAll("#optionsContainer button").forEach(btn => {
-          btn.disabled = true;
-        });
 
-        if (currentStage === stages.length - 1) {
-          nextButton.textContent = "REVEAL FINAL CLUE →";
+        document
+          .querySelectorAll(
+            "#optionsContainer button"
+          )
+          .forEach(btn => {
+            btn.disabled = true;
+          });
+
+
+        if (
+          currentStage ===
+          stages.length - 1
+        ) {
+
+          nextButton.textContent =
+            "REVEAL FINAL CODE →";
+
         } else {
-          nextButton.textContent = "NEXT SKILL →";
+
+          nextButton.textContent =
+            "NEXT SKILL →";
         }
 
-        nextButton.style.display = "block";
+
+        nextButton.style.display =
+          "block";
+
 
         updateProgress();
+
 
       } else {
 
         result.innerHTML = `
-          <div class="wrong">NOT THIS ONE.</div>
-          <div>TRY AGAIN.</div>
+          <div class="wrong">
+            NOT THIS ONE.
+          </div>
+
+          <div>
+            TRY AGAIN.
+          </div>
         `;
 
-        button.style.borderColor = "#FF5A2A";
 
+        button.style.borderColor =
+          "#FF5A2A";
       }
-
     }
 
-    function nextStage() {
+
+    /* ================================
+       NEXT STAGE
+    ================================= */
+
+    async function nextStage() {
 
       if (!stageAnswered) {
         return;
       }
 
-      if (currentStage === stages.length - 1) {
 
-        quizScreen.style.display = "none";
-        finalScreen.style.display = "block";
+      if (
+        currentStage ===
+        stages.length - 1
+      ) {
 
-        progressText.textContent = "SKILL PROGRESS: 4 / 4";
-        progressFill.style.width = "100%";
+        quizScreen.style.display =
+          "none";
+
+        finalScreen.style.display =
+          "block";
+
+        progressText.textContent =
+          "SKILL PROGRESS: 4 / 4";
+
+        progressFill.style.width =
+          "100%";
+
+
+        await generateFinalCode();
 
         return;
       }
 
-      currentStage++;
-      loadStage();
 
+      currentStage++;
+
+      loadStage();
     }
+
+
+    /* ================================
+       UPDATE PROGRESS
+    ================================= */
 
     function updateProgress() {
 
@@ -495,23 +724,41 @@
 
       progressFill.style.width =
         `${(completedStages / stages.length) * 100}%`;
-
     }
+
+
+    /* ================================
+       RESTART
+    ================================= */
 
     function restartTrack() {
 
       currentStage = 0;
       completedStages = 0;
       stageAnswered = false;
+      finalCodeGenerated = false;
 
-      quizScreen.style.display = "block";
-      finalScreen.style.display = "none";
+      finalCodeElement.textContent =
+        "GENERATING...";
+
+
+      quizScreen.style.display =
+        "block";
+
+      finalScreen.style.display =
+        "none";
+
 
       loadStage();
-
     }
 
+
+    /* ================================
+       START
+    ================================= */
+
     loadStage();
+
   </script>
 
 </body>
