@@ -97,10 +97,9 @@ h1{
   line-height:1.45;
 }
 
-.track-status{
+.final-status{
   width:100%;
   margin-top:4mm;
-
   padding-top:3mm;
 
   border-top:1px dashed rgba(141,219,255,.25);
@@ -113,6 +112,63 @@ h1{
   line-height:1.5;
 }
 
+
+/* =====================================
+   FINAL UNLOCK CARD
+===================================== */
+
+.final-card{
+  grid-column:1 / -1;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0b1830,
+      #101020
+    );
+
+  border:1px solid rgba(123,232,246,.35);
+
+  min-height:88mm;
+
+  margin-top:1mm;
+
+  box-shadow:
+    0 0 30px rgba(123,232,246,.07);
+}
+
+.final-card .track-number{
+  color:#C084FC;
+}
+
+.final-card .track-name{
+  font-size:22px;
+  letter-spacing:1.5px;
+}
+
+.final-card .track-qr{
+  margin:5mm 0 3mm;
+}
+
+.final-instruction{
+  color:#9BAEC2;
+  font-size:10px;
+  line-height:1.6;
+}
+
+.final-highlight{
+  margin-top:4mm;
+
+  color:#7BE8F6;
+
+  font-size:10px;
+
+  font-weight:bold;
+
+  letter-spacing:1.5px;
+}
+
+
 .print-button{
   display:block;
 
@@ -121,15 +177,18 @@ h1{
   padding:12px 24px;
 
   border:0;
+
   border-radius:8px;
 
   background:#1687FF;
+
   color:white;
 
   font-weight:bold;
 
   cursor:pointer;
 }
+
 
 @media print{
 
@@ -176,7 +235,7 @@ h1{
   </h1>
 
   <div class="subtitle">
-    8 Tracks · 8 Challenges · 8 Final Codes · 1 Final Unlock
+    8 Tracks · 8 Challenges · 8 Final Codes · Final Unlock
   </div>
 
 </header>
@@ -212,17 +271,9 @@ TRACKS
 ==================================================
 
 All 8 tracks participate
-in the final system.
+in the Final Unlock.
 
-Every track has:
-
-1. QR
-2. Challenge
-3. Final Code
-
-The Final Code is generated
-after successfully completing
-the track.
+Each QR opens its own challenge.
 */
 
 const tracks = [
@@ -292,11 +343,6 @@ document.getElementById("board");
 tracks.forEach(
   (track,index)=>{
 
-
-    /*
-    Create card
-    */
-
     const card =
     document.createElement("div");
 
@@ -305,26 +351,14 @@ tracks.forEach(
       "card";
 
 
-    /*
-    Track number
-    */
-
     const number =
       String(index+1)
       .padStart(2,"0");
 
 
-    /*
-    Track URL
-    */
-
     const trackUrl =
       BASE_URL + track.file;
 
-
-    /*
-    Card HTML
-    */
 
     card.innerHTML = `
 
@@ -349,7 +383,7 @@ tracks.forEach(
 
       </div>
 
-      <div class="track-status">
+      <div class="final-status">
 
         COMPLETE THE TRACK<br>
         RECEIVE YOUR FINAL CODE
@@ -358,10 +392,6 @@ tracks.forEach(
 
     `;
 
-
-    /*
-    Add card to board
-    */
 
     board.appendChild(card);
 
@@ -394,6 +424,104 @@ tracks.forEach(
     );
 
   }
+);
+
+
+
+/*
+==================================================
+FINAL UNLOCK QR
+==================================================
+
+This QR does NOT unlock the final by itself.
+
+It only opens:
+
+final-unlock.html
+
+The student must then enter
+the 8 Final Codes.
+==================================================
+*/
+
+
+const finalUnlockUrl =
+BASE_URL + "final-unlock.html";
+
+
+const finalCard =
+document.createElement("div");
+
+
+finalCard.className =
+  "card final-card";
+
+
+finalCard.innerHTML = `
+
+  <div class="track-number">
+    FINAL ACCESS
+  </div>
+
+  <div class="track-name">
+    FINAL UNLOCK
+  </div>
+
+  <div
+    class="track-qr"
+    id="qr-final-unlock">
+  </div>
+
+  <div class="final-instruction">
+
+    SCAN THIS QR TO OPEN<br>
+    THE FINAL UNLOCK SYSTEM
+
+  </div>
+
+  <div class="final-highlight">
+
+    ENTER ALL 8 FINAL CODES
+
+  </div>
+
+`;
+
+
+board.appendChild(
+  finalCard
+);
+
+
+
+/*
+==================================================
+GENERATE FINAL UNLOCK QR
+==================================================
+*/
+
+new QRCode(
+
+  document.getElementById(
+    "qr-final-unlock"
+  ),
+
+  {
+
+    text:
+      finalUnlockUrl,
+
+    width:180,
+    height:180,
+
+    colorDark:"#000000",
+    colorLight:"#ffffff",
+
+    correctLevel:
+      QRCode.CorrectLevel.H
+
+  }
+
 );
 
 
