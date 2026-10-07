@@ -1,6 +1,12 @@
-<!DOCTYPE html><html lang="en"><head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>WEB DEVELOPMENT | SPARK</title>  <style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>WEB DEVELOPMENT | SPARK</title>
+
+  <style>
 
     * {
       box-sizing: border-box;
@@ -618,55 +624,92 @@
 
     }
 
-  </style></head><body>  <!-- SPARK -->  <div id="spark-stage"><div id="spark-glow"></div>
+  </style>
+</head>
 
-<img
-  id="spark-character"
-  src="assets/spark-web.png"
-  alt="SPARK Web Development"
->
+<body>
 
-  </div>  <!-- CANVAS --><canvas id="spark-canvas"></canvas>
+  <!-- SPARK -->
 
-  <!-- ERROR FLASH -->  <div id="screen-flash"></div>  <!-- QUESTION -->  <div class="box"><div class="track">
-  TRACK 01 / WEB DEVELOPMENT
-</div>
+  <div id="spark-stage">
 
+    <div id="spark-glow"></div>
 
-<h1>
-  THE FIRST CLUE
-</h1>
+    <img
+      id="spark-character"
+      src="assets/spark-web.png"
+      alt="SPARK Web Development"
+    >
 
-
-<div class="question">
-  Which layer controls the structure of a webpage?
-</div>
+  </div>
 
 
-<div class="options">
+  <!-- CANVAS -->
 
-  <button onclick="checkAnswer(this, false)">
-    CSS
-  </button>
-
-  <button onclick="checkAnswer(this, true)">
-    HTML
-  </button>
-
-  <button onclick="checkAnswer(this, false)">
-    JavaScript
-  </button>
-
-  <button onclick="checkAnswer(this, false)">
-    SQL
-  </button>
-
-</div>
+  <canvas id="spark-canvas"></canvas>
 
 
-<div id="result"></div>
+  <!-- ERROR FLASH -->
 
-  </div>  <script>
+  <div id="screen-flash"></div>
+
+
+  <!-- QUESTION -->
+
+  <div class="box">
+
+    <div class="track">
+      TRACK 01 / WEB DEVELOPMENT
+    </div>
+
+
+    <h1>
+      THE FIRST CLUE
+    </h1>
+
+
+    <div class="question">
+      Which layer controls the structure of a webpage?
+    </div>
+
+
+    <div class="options">
+
+      <button onclick="checkAnswer(this, false)">
+        CSS
+      </button>
+
+      <button onclick="checkAnswer(this, true)">
+        HTML
+      </button>
+
+      <button onclick="checkAnswer(this, false)">
+        JavaScript
+      </button>
+
+      <button onclick="checkAnswer(this, false)">
+        SQL
+      </button>
+
+    </div>
+
+
+    <div id="result"></div>
+
+  </div>
+
+
+  <script>
+
+    /* =========================================
+       SUPABASE
+    ========================================= */
+
+    const SUPABASE_URL =
+      "https://kyiyxkprrqdgosmhabjv.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_hMnZrZlncivkcZFgO7nlwA_QOnAwlVJ";
 
 
     /* =========================================
@@ -993,6 +1036,139 @@
 
 
     /* =========================================
+       FINAL CODE
+    ========================================= */
+
+    async function generateFinalCode() {
+
+      const result =
+        document.getElementById("result");
+
+
+      result.innerHTML = `
+
+        <div class="correct">
+          CORRECT.
+        </div>
+
+        <div>
+          GENERATING YOUR FINAL CODE...
+        </div>
+
+      `;
+
+
+      try {
+
+        const response =
+          await fetch(
+            `${SUPABASE_URL}/rest/v1/rpc/issue_final_token`,
+            {
+
+              method: "POST",
+
+              headers: {
+
+                "Content-Type":
+                  "application/json",
+
+                "apikey":
+                  SUPABASE_KEY,
+
+                "Authorization":
+                  `Bearer ${SUPABASE_KEY}`
+
+              },
+
+              body:
+                JSON.stringify({
+                  p_track:
+                    "web-development"
+                })
+
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data?.message ||
+            data?.error ||
+            "Failed to generate code."
+          );
+
+        }
+
+
+        const token =
+          Array.isArray(data)
+            ? data[0]?.token
+            : data?.token;
+
+
+        if (!token) {
+
+          throw new Error(
+            "No final code was returned."
+          );
+
+        }
+
+
+        result.innerHTML = `
+
+          <div class="correct">
+            WEB DEVELOPMENT COMPLETE.
+          </div>
+
+          <div>
+            YOUR FINAL CODE IS:
+          </div>
+
+          <div class="clue">
+            ${token}
+          </div>
+
+          <div style="
+            margin-top:18px;
+            color:#777;
+            font-size:12px;
+            letter-spacing:1px;
+          ">
+            SAVE THIS CODE. YOU WILL NEED IT TO UNLOCK THE FINAL.
+          </div>
+
+        `;
+
+
+      } catch (error) {
+
+        console.error(error);
+
+
+        result.innerHTML = `
+
+          <div class="wrong">
+            FAILED TO GENERATE YOUR CODE.
+          </div>
+
+          <div>
+            PLEASE REFRESH AND TRY AGAIN.
+          </div>
+
+        `;
+
+      }
+
+    }
+
+
+    /* =========================================
        ANSWER SYSTEM
     ========================================= */
 
@@ -1021,23 +1197,6 @@
         happyParticles();
 
 
-        result.innerHTML = `
-
-          <div class="correct">
-            CORRECT.
-          </div>
-
-          <div>
-            YOUR CLUE IS:
-          </div>
-
-          <div class="clue">
-            BUILD
-          </div>
-
-        `;
-
-
         document
           .querySelectorAll("button")
           .forEach(
@@ -1047,6 +1206,9 @@
 
             }
           );
+
+
+        generateFinalCode();
 
 
         setTimeout(
@@ -1202,28 +1364,28 @@
 
           ctx.fillStyle =
             p.color;
+ctx.fillText(
+  p.symbol,
+  p.x,
+  p.y
+);
 
+}
 
-          ctx.fillText(
-            p.symbol,
-            p.x,
-            p.y
-          );
+);
 
-        }
-      );
+ctx.globalAlpha = 1;
 
+requestAnimationFrame(
+  animateSpark
+);
 
-      ctx.globalAlpha = 1;
+}
 
+animateSpark();
 
-      requestAnimationFrame(
-        animateSpark
-      );
+</script>
 
-    }
-
-
-    animateSpark();
-
-  </script></body></html>
+</body>
+</html>
+    
